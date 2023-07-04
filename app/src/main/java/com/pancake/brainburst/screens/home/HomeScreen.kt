@@ -72,7 +72,7 @@ private fun HomeContent(
                     .fillMaxWidth()
                     .paint(
                         painter = painterResource(R.drawable.background_home_shape),
-                        contentScale = ContentScale.FillWidth
+                        contentScale = ContentScale.Fit
                     )
                     .height(300.dp)
             ) {
@@ -84,10 +84,11 @@ private fun HomeContent(
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(16.dp)
+                            .padding(spacingMedium)
                     ) {
                         IconButtonSmall(
                             onClick = { },
+                            iconColor = MaterialTheme.colorScheme.onPrimary,
                             imageVector = Icons.Rounded.Star,
                             modifier = Modifier
                                 .align(Alignment.TopEnd)

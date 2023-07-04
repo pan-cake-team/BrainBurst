@@ -23,3 +23,5 @@ val fontSizesCaption: TextUnit = 12.sp
 val fontSizesSmall: TextUnit = 10.sp
 val fontSizesTitle: TextUnit = 24.sp
 val fontSizesTitleExtra: TextUnit = 32.sp
+
+val smallIconButton: Dp = 32.dp

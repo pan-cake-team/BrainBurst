@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">BrainBurst</string>
+    <string name="of">of</string>
+    <string name="question">Question</string>
 </resources>

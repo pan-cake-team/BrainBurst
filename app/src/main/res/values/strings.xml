@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">BrainBurst</string>
+
+    <string name="play_by_category">Play by Category</string>
+    <string name="choose_your_hobbies">Choose your hobbies</string>
+    <string name="select_and_play">select and play</string>
+    <string name="play_now">Play now</string>
+
+    <string name="people">People</string>
+    <string name="business">Business</string>
+    <string name="medicine">Medicine</string>
+
+    <string name="animals">Animals</string>
+    <string name="bands">Bands</string>
+    <string name="language">Language</string>
+
+    <string name="cities">Cities</string>
+    <string name="space">Space</string>
+    <string name="biology">Biology</string>
+
 </resources>

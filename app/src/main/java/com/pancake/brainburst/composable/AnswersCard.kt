@@ -1,5 +1,8 @@
 package com.pancake.brainburst.composable
 
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -32,7 +35,18 @@ fun AnswerCard(letter: String, answer: String, isCLicked: MutableState<Boolean>)
     var rightAnswer by remember {
         mutableStateOf(false)
     }
-    val color: Color = if (!isCLicked.value) White else if (rightAnswer) Green500 else Red500
+    val color: Color by animateColorAsState(
+        targetValue = if (!isCLicked.value) White
+        else if (rightAnswer) Green500
+        else Red500,
+        animationSpec = tween(
+            durationMillis = 500,
+            easing = FastOutSlowInEasing
+        )
+    )
+
+
+
 
     Box(
         modifier =
@@ -61,6 +75,8 @@ fun AnswerCard(letter: String, answer: String, isCLicked: MutableState<Boolean>)
 @Preview
 @Composable
 private fun Preview() {
-
-    AnswerCard(letter = "A", answer = "Jupiter")
+    val state = remember {
+        mutableStateOf(false)
+    }
+    AnswerCard(letter = "A", answer = "Jupiter", state)
 }

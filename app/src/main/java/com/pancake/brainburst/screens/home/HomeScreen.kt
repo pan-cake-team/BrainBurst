@@ -1,5 +1,6 @@
 package com.pancake.brainburst.screens.home
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -16,9 +17,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.paint
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
@@ -30,11 +31,16 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.calculateCurrentOffsetForPage
 import com.google.accompanist.pager.rememberPagerState
+import com.google.accompanist.systemuicontroller.SystemUiController
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.pancake.brainburst.R
+import com.pancake.brainburst.screens.composable.SpacerVertical32
 import com.pancake.brainburst.screens.home.composable.HeaderHobbies
 import com.pancake.brainburst.screens.home.composable.Hobbies
 import com.pancake.brainburst.screens.home.composable.IconButtonSmall
 import com.pancake.brainburst.screens.home.composable.ItemCategory
+import com.pancake.brainburst.ui.theme.lightBackgroundColor
+import com.pancake.brainburst.ui.theme.lightPrimary
 import com.pancake.brainburst.ui.theme.spacingMedium
 import com.pancake.brainburst.ui.theme.zero
 import kotlin.math.absoluteValue
@@ -44,10 +50,12 @@ import kotlin.math.absoluteValue
 @Composable
 fun HomeScreen() {
     val pagerState = rememberPagerState(initialPage = 0)
+    val systemUiController = rememberSystemUiController()
 
     HomeContent(
         state = HomeUiState(),
-        pagerState = pagerState
+        pagerState = pagerState,
+        systemUiController = systemUiController
     )
 }
 
@@ -55,13 +63,14 @@ fun HomeScreen() {
 @Composable
 private fun HomeContent(
     state: HomeUiState,
-    pagerState: PagerState
+    pagerState: PagerState,
+    systemUiController: SystemUiController,
 ) {
     Scaffold { padding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(MaterialTheme.colorScheme.background),
+                .background(lightBackgroundColor),
 
             horizontalAlignment = Alignment.Start,
             verticalArrangement = Arrangement.Top
@@ -70,17 +79,21 @@ private fun HomeContent(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .paint(
-                        painter = painterResource(R.drawable.background_home_shape),
-                        contentScale = ContentScale.Fit
-                    )
                     .height(300.dp)
             ) {
+                Image(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    painter = painterResource(id = R.drawable.background_home_shape),
+                    contentScale = ContentScale.FillWidth,
+                    contentDescription = null,
+                )
                 Column(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalAlignment = Alignment.Start,
                     verticalArrangement = Arrangement.Top
                 ) {
+
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -151,7 +164,7 @@ private fun HomeContent(
 
             }
 
-
+            SpacerVertical32()
             HeaderHobbies(
             ) {}
 
@@ -161,7 +174,11 @@ private fun HomeContent(
 
 
         }
-
+        SideEffect {
+            systemUiController.setStatusBarColor(
+                color = lightPrimary,
+            )
+        }
     }
 }
 
@@ -169,7 +186,10 @@ private fun HomeContent(
 @Preview
 @Composable
 private fun HomePreview() {
-    val pagerState = rememberPagerState(initialPage = 1)
 
-    HomeContent(pagerState = pagerState, state = HomeUiState())
+    HomeContent(
+        pagerState = rememberPagerState(initialPage = 0),
+        state = HomeUiState(),
+        systemUiController = rememberSystemUiController()
+    )
 }

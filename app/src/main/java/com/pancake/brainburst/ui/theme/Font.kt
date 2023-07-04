@@ -9,3 +9,7 @@ val Poppins = FontFamily(
     Font(R.font.poppins_regular, weight = FontWeight.Normal),
     Font(R.font.poppins_semi_bold, weight = FontWeight.SemiBold)
 )
+
+val NerkoOne = FontFamily(
+    Font(R.font.nerko_one_regular, weight = FontWeight.Normal),
+)

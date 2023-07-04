@@ -17,8 +17,7 @@ import androidx.core.view.WindowCompat
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.pancake.brainburst.screens.welecome.WelcomeScreen
 import com.pancake.brainburst.ui.theme.BrainBurstTheme
-import com.pancake.brainburst.ui.theme.TWhite
-import dagger.hilt.EntryPoint
+
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

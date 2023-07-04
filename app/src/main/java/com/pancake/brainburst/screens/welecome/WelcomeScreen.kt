@@ -18,15 +18,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-
 import com.pancake.brainburst.R
 import com.pancake.brainburst.ui.theme.BrainBurstTheme
-import com.pancake.brainburst.ui.theme.ButtonColor
+import com.pancake.brainburst.ui.theme.Cyan500
+import com.pancake.brainburst.ui.theme.NerkoOne
 
 @Preview
 @Composable
@@ -38,7 +39,7 @@ fun WelcomeScreen(viewModel: WelcomeScreenViewModel = hiltViewModel()) {
     ) {
         CustomSpacer(height = 72.dp)
         CustomImage(resourceId = R.drawable.crown_star, contentDesc = "crown")
-        CustomText(text = state.heightsScore.toString(), size = 32)
+        CustomText(text = state.heightsScore.toString(), size = 32,fontFamily = NerkoOne)
         CustomSpacer(height = 14.dp)
         CustomText(text = "Your heights score", size = 14)
         CustomSpacer(height = 56.dp)
@@ -67,10 +68,11 @@ fun CustomImage(@DrawableRes resourceId: Int, contentDesc: String) {
 }
 
 @Composable
-fun CustomText(text: String, size: Int) {
+fun CustomText(text: String, size: Int, fontFamily: FontFamily = FontFamily.Default) {
     Text(
         text = text,
         fontSize = size.sp,
+        fontFamily = fontFamily
     )
 }
 
@@ -83,7 +85,7 @@ fun PlayButton() {
             .height(56.dp),
         onClick = { },
         colors = ButtonDefaults.buttonColors(
-            containerColor = ButtonColor,
+            containerColor = Cyan500,
         ),
     ) {
         Text(

@@ -19,7 +19,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
@@ -36,6 +35,8 @@ import com.pancake.brainburst.screens.home.composable.HeaderHobbies
 import com.pancake.brainburst.screens.home.composable.Hobbies
 import com.pancake.brainburst.screens.home.composable.IconButtonSmall
 import com.pancake.brainburst.screens.home.composable.ItemCategory
+import com.pancake.brainburst.ui.theme.spacingMedium
+import com.pancake.brainburst.ui.theme.zero
 import kotlin.math.absoluteValue
 
 
@@ -69,11 +70,11 @@ private fun HomeContent(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(300.dp)
                     .paint(
                         painter = painterResource(R.drawable.background_home_shape),
                         contentScale = ContentScale.FillWidth
                     )
+                    .height(300.dp)
             ) {
                 Column(
                     modifier = Modifier.fillMaxWidth(),
@@ -83,9 +84,7 @@ private fun HomeContent(
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(
-                                16.dp
-                            )
+                            .padding(16.dp)
                     ) {
                         IconButtonSmall(
                             onClick = { },
@@ -96,12 +95,15 @@ private fun HomeContent(
                     }
 
                     Text(
+                        modifier = Modifier.padding(spacingMedium, zero, zero, spacingMedium),
                         text = stringResource(id = R.string.play_by_category),
                         style = MaterialTheme.typography.titleMedium,
                     )
 
                     Box(
-                        modifier = Modifier.fillMaxSize()
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .height(200.dp)
                     ) {
                         val cardList = listOf(
                             "Card 1",
@@ -113,7 +115,7 @@ private fun HomeContent(
                             "Card 37",
                         )
                         val horizontalPadding = 16.dp
-                        val itemWidth = 140.dp
+                        val itemWidth = 200.dp
                         val screenWidth = LocalConfiguration.current.screenWidthDp
                         val contentPadding = PaddingValues(
                             start = horizontalPadding,
@@ -127,13 +129,15 @@ private fun HomeContent(
                                 .padding(0.dp)
                                 .fillMaxWidth()
                                 .padding(0.dp)
-                                .background(Color.Cyan),
+//                                .background(Color.Cyan)
+                            ,
+                            verticalAlignment = Alignment.Bottom,
                             contentPadding = contentPadding,
-                            itemSpacing = 0.dp
+                            itemSpacing = 8.dp
                         ) { pageIndex ->
-
                             val pageOffset = calculateCurrentOffsetForPage(pageIndex).absoluteValue
                             ItemCategory(
+                                state = pagerState,
                                 content = cardList[pageIndex],
                                 pageIndex = pageIndex,
                                 pageOffset = pageOffset

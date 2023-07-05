@@ -68,3 +68,54 @@ val GooglePoppinsTypography = Typography(
     )
 
 )
+
+object Type {
+    val Caption = TextStyle(
+        fontFamily = Poppins,
+        fontWeight = FontWeight.Normal,
+        fontSize = 12.sp,
+        letterSpacing = 0.sp
+    )
+
+    val Body = TextStyle(
+        fontFamily = Poppins,
+        fontWeight = FontWeight.Normal,
+        fontSize = 14.sp,
+        letterSpacing = 0.sp
+    )
+
+    val Title = TextStyle(
+        fontFamily = Poppins,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 14.sp,
+        letterSpacing = 0.sp
+    )
+
+    val Headline = TextStyle(
+        fontFamily = Poppins,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 16.sp,
+        letterSpacing = 0.sp
+    )
+
+    val Large = TextStyle(
+        fontFamily = Poppins,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 24.sp,
+        letterSpacing = 0.sp
+    )
+
+    val GraphicTextNormal = TextStyle(
+        fontFamily = NerkoOne,
+        fontWeight = FontWeight.Normal,
+        fontSize = 24.sp,
+        letterSpacing = 0.sp
+    )
+
+    val GraphicTextLarge = TextStyle(
+        fontFamily = NerkoOne,
+        fontWeight = FontWeight.Normal,
+        fontSize = 32.sp,
+        letterSpacing = 0.sp
+    )
+}

@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">BrainBurst</string>
+    <string name="win_image">Win Image</string>
+    <string name="you_win">You Win</string>
+    <string name="next_level">Next Level</string>
+    <string name="exit">Exit</string>
 </resources>

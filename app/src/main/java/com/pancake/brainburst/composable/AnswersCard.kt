@@ -6,12 +6,9 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -24,10 +21,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.pancake.brainburst.ui.theme.BrandB500
+import com.pancake.brainburst.ui.theme.Brand500
 import com.pancake.brainburst.ui.theme.Green500
 import com.pancake.brainburst.ui.theme.Red500
-import com.pancake.brainburst.ui.theme.White
+import com.pancake.brainburst.ui.theme.Type.Caption
+import com.pancake.brainburst.ui.theme.LightWhite500
 
 @Composable
 fun AnswerCard(letter: String, answer: String, isCLicked: MutableState<Boolean>) {
@@ -36,7 +34,7 @@ fun AnswerCard(letter: String, answer: String, isCLicked: MutableState<Boolean>)
         mutableStateOf(false)
     }
     val color: Color by animateColorAsState(
-        targetValue = if (!isCLicked.value) White
+        targetValue = if (!isCLicked.value) LightWhite500
         else if (rightAnswer) Green500
         else Red500,
         animationSpec = tween(
@@ -44,10 +42,6 @@ fun AnswerCard(letter: String, answer: String, isCLicked: MutableState<Boolean>)
             easing = FastOutSlowInEasing
         )
     )
-
-
-
-
     Box(
         modifier =
         Modifier
@@ -66,8 +60,8 @@ fun AnswerCard(letter: String, answer: String, isCLicked: MutableState<Boolean>)
         Text(
             text = answer,
             modifier = Modifier.align(Alignment.Center),
-            style = MaterialTheme.typography.titleSmall,
-            color = BrandB500
+            style = Caption,
+            color = Brand500
         )
     }
 }

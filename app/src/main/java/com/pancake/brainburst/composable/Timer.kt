@@ -23,8 +23,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.pancake.brainburst.ui.theme.BrandB500
-import com.pancake.brainburst.ui.theme.White
+import com.pancake.brainburst.ui.theme.Brand500
+import com.pancake.brainburst.ui.theme.LightWhite500
 import kotlinx.coroutines.delay
 
 @Composable
@@ -53,9 +53,7 @@ fun GameTimer(
             currentTime -= 100L
             percentage = currentTime / totalTime.toFloat()
         }
-
     }
-
     Box(
         modifier = modifier
             .onSizeChanged {
@@ -77,7 +75,7 @@ fun GameTimer(
             text = (currentTime / 1000L).toString(),
             style = MaterialTheme.typography.titleSmall,
             fontSize = 24.sp,
-            color = White
+            color = LightWhite500
         )
 
     }
@@ -89,7 +87,7 @@ private fun Preview() {
 
     GameTimer(
         totalTime = 30L * 1000L,
-        activeBarColor = BrandB500,
+        activeBarColor = Brand500,
         modifier = Modifier.size(200.dp)
     )
 

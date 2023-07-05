@@ -1,17 +1,14 @@
 package com.pancake.brainburst.composable
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -19,27 +16,27 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pancake.brainburst.R
-import com.pancake.brainburst.ui.theme.White
-import com.pancake.brainburst.ui.theme.white38
+import com.pancake.brainburst.ui.theme.LightWhite500
+import com.pancake.brainburst.ui.theme.LightWhite300
 
 @Composable
 fun Icon32(painter: Int, action: () -> Unit) {
     Box(
         modifier = Modifier
             .size(32.dp, 32.dp)
-            .background(color = white38, shape = CircleShape),
+            .background(color = LightWhite300, shape = CircleShape),
         contentAlignment = Alignment.Center
     ) {
         Button(
             onClick = { action }, modifier = Modifier.fillMaxSize(),
             shape = CircleShape,
             contentPadding = PaddingValues(0.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = white38)
+            colors = ButtonDefaults.buttonColors(containerColor = LightWhite300)
         ) {
             Icon(
                 painter = painterResource(id = painter),
                 contentDescription = null,
-                tint = White
+                tint = LightWhite500
             )
         }
 

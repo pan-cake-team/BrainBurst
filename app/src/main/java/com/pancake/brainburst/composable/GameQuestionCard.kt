@@ -1,7 +1,6 @@
 package com.pancake.brainburst.composable
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,14 +18,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pancake.brainburst.R
-import com.pancake.brainburst.ui.theme.BrandB500
-import com.pancake.brainburst.ui.theme.GooglePoppinsTypography
-import com.pancake.brainburst.ui.theme.White
+import com.pancake.brainburst.ui.theme.Brand500
+import com.pancake.brainburst.ui.theme.LightWhite500
 
 @Composable
 fun GameQuestionCard(question: String) {
@@ -36,7 +32,7 @@ fun GameQuestionCard(question: String) {
             .height(306.dp)
             .background(
                 shape = RoundedCornerShape(16.dp),
-                color = BrandB500
+                color = Brand500
             ),
         contentAlignment = Alignment.Center
     ) {
@@ -44,8 +40,7 @@ fun GameQuestionCard(question: String) {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(16.dp),
-
-            ) {
+        ) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -57,35 +52,29 @@ fun GameQuestionCard(question: String) {
                 SpacerVertical16()
                 GameTimer(
                     totalTime = 30L * 1000L,
-                    activeBarColor = White,
+                    activeBarColor = LightWhite500,
                     modifier = Modifier.size(80.dp)
                 )
-
-
             }
             Spacer(modifier = Modifier.weight(1f))
             Text(
                 text = question,
                 style = MaterialTheme.typography.titleMedium,
-                color = White
-
+                color = LightWhite500
             )
             Spacer(modifier = Modifier.weight(1f))
             Row(
                 modifier = Modifier
                     .fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center
-
             ) {
                 Icon40(painter = R.drawable.arrows_icon, {})
                 Spacer(modifier = Modifier.width(16.dp))
                 Icon40(painter = R.drawable.help_icon, {})
                 Spacer(modifier = Modifier.width(16.dp))
                 Icon40(painter = R.drawable.chat_icon, {})
-
             }
         }
-
     }
 }
 

@@ -16,13 +16,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.pancake.brainburst.composable.AnswerCard
 import com.pancake.brainburst.composable.GameQuestionCard
 import com.pancake.brainburst.composable.SpacerVertical16
 import com.pancake.brainburst.composable.SpacerVertical24
 import com.pancake.brainburst.screens.constants.question
-import com.pancake.brainburst.ui.theme.BackGroundColor
+import com.pancake.brainburst.ui.theme.LightBackground
 
 @Composable
 fun GameScreen() {
@@ -33,7 +32,7 @@ fun GameScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = BackGroundColor)
+            .background(color = LightBackground)
             .padding(horizontal = 16.dp, vertical = 24.dp)
     ) {
         Column(

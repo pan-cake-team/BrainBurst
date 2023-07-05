@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">BrainBurst</string>
+    <string name="you_lose">You Lose</string>
+    <string name="your_score">your score</string>
+    <string name="try_again">Try again</string>
+    <string name="exit">Exit</string>
 </resources>

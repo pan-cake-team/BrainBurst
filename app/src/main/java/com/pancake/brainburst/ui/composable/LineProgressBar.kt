@@ -2,23 +2,19 @@ package com.pancake.brainburst.ui.composable
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
-import com.pancake.brainburst.ui.theme.Background
 import com.pancake.brainburst.ui.theme.Brand500
-import com.pancake.brainburst.ui.theme.White
+import com.pancake.brainburst.ui.theme.LightWhite500
 
 @Composable
 fun LineProgressBar(
     maxTarget: Int,
     currentTarget: Int = 0,
-    color: Color = White,
+    color: Color = LightWhite500,
     backgroundColor: Color = Brand500,
     animationDuration: Int = 1000,
     animationDelay: Int = 1000
@@ -33,7 +29,7 @@ fun LineProgressBar(
 
     LinearProgressIndicator(
         progress = currentPercentage.value,
-        modifier = Modifier.fillMaxWidth().background(shape = RoundedCornerShape(4.dp), color = Background),
+        modifier = Modifier.fillMaxWidth(),
         trackColor = color,
         color = backgroundColor,
     )

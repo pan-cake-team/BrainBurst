@@ -6,14 +6,14 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.Dp
 
 @Composable
-fun SpacerVertical(space: Int) {
-    Spacer(modifier = Modifier.height(space.dp))
+fun SpacerVertical(space: Dp) {
+    Spacer(modifier = Modifier.height(space))
 }
 
 @Composable
-fun SpacerHorizontal(space: Int) {
-    Spacer(modifier = Modifier.width(space.dp))
+fun SpacerHorizontal(space: Dp) {
+    Spacer(modifier = Modifier.width(space))
 }

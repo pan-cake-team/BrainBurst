@@ -13,26 +13,39 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.pancake.brainburst.ui.theme.White
-import com.pancake.brainburst.ui.theme.White300
+import com.pancake.brainburst.ui.theme.LightWhite500
+import com.pancake.brainburst.ui.theme.LightWhite300
+import com.pancake.brainburst.ui.theme.space0
+import com.pancake.brainburst.ui.theme.space40
 
 @Composable
-fun CircularIconButton(modifier: Modifier = Modifier, size: Dp = 40.dp, drawableRes: Painter, onClick: () -> Unit) {
+fun CircularIconButton(
+    modifier: Modifier = Modifier,
+    size: Dp = space40,
+    drawableRes: Painter,
+    onClick: () -> Unit
+) {
     FloatingActionButton(
         onClick = { onClick() },
         contentColor = Color.White,
-        containerColor = White300,
+        containerColor = LightWhite300,
         shape = CircleShape,
         modifier = modifier
             .size(size),
         elevation = FloatingActionButtonDefaults.elevation(
-            defaultElevation = 0.dp,
-            pressedElevation = 0.dp,
-            focusedElevation = 0.dp,
-            hoveredElevation = 0.dp,)
+            defaultElevation = space0,
+            pressedElevation = space0,
+            focusedElevation = space0,
+            hoveredElevation = space0,
+        )
     ) {
         Icon(
-            painter = drawableRes, contentDescription = null, tint = White, modifier = modifier.padding(8.dp).fillMaxSize()
+            painter = drawableRes,
+            contentDescription = null,
+            tint = LightWhite500,
+            modifier = modifier
+                .padding(8.dp)
+                .fillMaxSize()
         )
     }
 }

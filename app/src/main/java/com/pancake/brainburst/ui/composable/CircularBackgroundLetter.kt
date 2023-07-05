@@ -9,14 +9,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.pancake.brainburst.ui.theme.Brand100
 import com.pancake.brainburst.ui.theme.Brand500
-import com.pancake.brainburst.ui.theme.Poppins
+import com.pancake.brainburst.ui.theme.Type
+import com.pancake.brainburst.ui.theme.space24
 
 @Composable
 fun CircularBackgroundLetter(
@@ -28,22 +25,14 @@ fun CircularBackgroundLetter(
     Box(
         modifier = modifier
             .background(Brand100, shape = CircleShape)
-            .size(24.dp),
+            .size(space24),
         contentAlignment = Alignment.Center,
     ) {
         Text(
             text = letter,
-            fontWeight = FontWeight.SemiBold,
-            fontSize = 14.sp,
-            fontFamily = Poppins,
+            style = Type.Title,
             color = letterBackground,
             textAlign = TextAlign.Center,
         )
     }
-}
-
-@Preview
-@Composable
-fun testt() {
-    CircularBackgroundLetter("A")
 }

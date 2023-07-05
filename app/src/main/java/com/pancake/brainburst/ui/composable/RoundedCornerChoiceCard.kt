@@ -1,9 +1,7 @@
 package com.pancake.brainburst.ui.composable
 
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -12,31 +10,27 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
-import com.pancake.brainburst.ui.theme.Brand100
 import com.pancake.brainburst.ui.theme.Brand500
-import com.pancake.brainburst.ui.theme.Poppins
-import com.pancake.brainburst.ui.theme.White
+import com.pancake.brainburst.ui.theme.LightWhite500
+import com.pancake.brainburst.ui.theme.Type
+import com.pancake.brainburst.ui.theme.space16
+import com.pancake.brainburst.ui.theme.space8
 
 @Composable
 fun RoundedCornerChoiceCard(
     choiceText: String,
     choiceNumber: String,
     contentColor: Color = Brand500,
-    containerColor: Color = White,
+    containerColor: Color = LightWhite500,
     letterBackground: Color = Brand500,
     modifier: Modifier = Modifier
 ) {
     Card(
-        modifier = modifier
-            .width(160.dp)
-            .height(140.dp)
-            .clip(RoundedCornerShape(16.dp)),
+        modifier = modifier.fillMaxSize()
+            .clip(RoundedCornerShape(space16)),
         colors = CardDefaults.cardColors(
             containerColor = containerColor,
             contentColor = contentColor
@@ -45,7 +39,7 @@ fun RoundedCornerChoiceCard(
         ConstraintLayout(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(8.dp)
+                .padding(space8)
         ) {
             val (letter, cardText) = createRefs()
 
@@ -60,9 +54,7 @@ fun RoundedCornerChoiceCard(
 
             Text(
                 text = choiceText,
-                fontWeight = FontWeight.SemiBold,
-                fontSize = 14.sp,
-                fontFamily = Poppins,
+                style = Type.Title,
                 color = contentColor,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.constrainAs(cardText) {
@@ -76,3 +68,8 @@ fun RoundedCornerChoiceCard(
     }
 }
 
+@Preview
+@Composable
+fun ttt() {
+    RoundedCornerChoiceCard(choiceText = "Saturn", choiceNumber = "C")
+}

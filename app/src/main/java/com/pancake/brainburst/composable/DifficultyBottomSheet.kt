@@ -1,8 +1,10 @@
 package com.pancake.brainburst.composable
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -17,7 +19,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.pancake.brainburst.R
 import com.pancake.brainburst.ui.theme.Brand100
 import com.pancake.brainburst.ui.theme.Brand500
@@ -33,43 +34,35 @@ import com.pancake.brainburst.ui.theme.space8
 @Composable
 fun BottomSheet() {
     Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(444.dp),
+        modifier = Modifier.fillMaxWidth(1f).fillMaxHeight(.8f),
         colors = CardDefaults.cardColors(Brand100),
-        shape = RoundedCornerShape(topStart = 32.dp, topEnd = 32.dp)
+        shape = RoundedCornerShape(topStart = space32, topEnd = space32),
     ) {
         Column(
             modifier = Modifier
-                .padding(top = space32)
-                .align(Alignment.CenterHorizontally),
+                .fillMaxSize()
+                .padding(horizontal = space16, vertical = space32),
             horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
         ) {
             Image(
                 modifier = Modifier.align(Alignment.CenterHorizontally),
                 painter = painterResource(id = R.drawable.crown_star),
-                contentDescription = "crown star"
+                contentDescription = stringResource(R.string.crown_star)
             )
             Text(text = "1502", style = Type.GraphicTextLarge)
             Text(
                 text = stringResource(R.string.your_highest_score),
-                fontFamily = Poppins,
+                style = Type.Body,
                 color = LightSecondary,
             )
+            Spacer(modifier = Modifier.height(space16))
+            DifficultyCard(title = stringResource(R.string.easy), color = Green500) {}
+            Spacer(modifier = Modifier.height(space8))
+            DifficultyCard(title = stringResource(R.string.medium), color = Brand500) {}
+            Spacer(modifier = Modifier.height(space8))
+            DifficultyCard(title = stringResource(R.string.difficult), color = Red500) {}
         }
-    }
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = space16)
-            .padding(top = 228.dp, bottom = space32),
-    )
-    {
-        DifficultyCard(title = stringResource(R.string.easy), color = Green500) {}
-        Spacer(modifier = Modifier.height(space8))
-        DifficultyCard(title = stringResource(R.string.medium), color = Brand500) {}
-        Spacer(modifier = Modifier.height(space8))
-        DifficultyCard(title = stringResource(R.string.difficult), color = Red500) {}
     }
 }
 

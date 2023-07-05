@@ -20,6 +20,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.pancake.brainburst.R
+import com.pancake.brainburst.ui.theme.Brand500
+import com.pancake.brainburst.ui.theme.LightTertiary
 
 
 @Composable
@@ -43,7 +45,7 @@ fun NoInternetView() {
         Text(
             text = "Connection failed",
             fontSize = 12.sp,
-            color = Color(R.color.tertiary),
+            color =    LightTertiary,
             textAlign = TextAlign.Center,
             modifier = Modifier.align(CenterHorizontally)
         )
@@ -52,12 +54,12 @@ fun NoInternetView() {
 
         OutlinedButton(
             onClick = { /*TODO*/ },
-            border = BorderStroke(1.dp, Color(R.color.blue_Brand_500)),
+            border = BorderStroke(1.dp, Brand500),
             modifier = Modifier
                 .padding(8.dp)
                 .align(CenterHorizontally)
         ) {
-            Text(text = "Outlined", color = Color(R.color.blue_Brand_500))
+            Text(text = "Outlined", color = Brand500)
         }
     }
 

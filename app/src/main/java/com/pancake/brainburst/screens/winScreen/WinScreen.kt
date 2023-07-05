@@ -31,12 +31,15 @@ import com.pancake.brainburst.screens.winScreen.state.WinUiState
 import com.pancake.brainburst.ui.theme.Brand500
 import com.pancake.brainburst.ui.theme.LightBackground
 import com.pancake.brainburst.ui.theme.LightPrimary
+import com.pancake.brainburst.ui.theme.LightTertiary
 import com.pancake.brainburst.ui.theme.LightWhite500
+import com.pancake.brainburst.ui.theme.Type.Caption
 import com.pancake.brainburst.ui.theme.Type.GraphicTextLarge
 import com.pancake.brainburst.ui.theme.space16
 import com.pancake.brainburst.ui.theme.space24
 import com.pancake.brainburst.ui.theme.space40
 import com.pancake.brainburst.ui.theme.space56
+import com.pancake.brainburst.ui.theme.space8
 
 @Composable
 fun WinScreen(
@@ -84,7 +87,13 @@ private fun WinContent(
                     text = state.score,
                     style = GraphicTextLarge,
                     color = LightPrimary,
-                    modifier = Modifier.padding(top = space16, bottom = space24)
+                    modifier = Modifier.padding(top = space16)
+                )
+                Text(
+                    text = stringResource(id = R.string.your_score),
+                    style = Caption,
+                    color = LightTertiary,
+                    modifier = Modifier.padding(top = space8, bottom = space24)
                 )
             }
         }

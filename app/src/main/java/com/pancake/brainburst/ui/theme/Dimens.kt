@@ -4,6 +4,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 //region Space Dimensions
+val zero = 0.dp
+
+
 val space2 = 2.dp
 val space4 = 4.dp
 val space8 = 8.dp
@@ -24,3 +27,11 @@ val textSize16 = 16.sp
 val textSize24 = 24.sp
 val textSize32 = 32.sp
 //endregion
+
+//region Border Size Dimensions
+val border1 = 1.sp
+
+//endregion
+
+val smallIconButton = 32.dp
+

@@ -19,8 +19,6 @@ fun Hobbies(
     ) {
 
         items(state.hobbies.size) { index ->
-            Log.v("ameerxyz","$index ${state.hobbies[index].name} ${state.hobbiesSelected} ${state.hobbiesSelected.contains(state.hobbies[index].name)} ")
-
             ItemHobby(
                 state.hobbies[index],
                 state.hobbiesSelected.contains(state.hobbies[index].name),

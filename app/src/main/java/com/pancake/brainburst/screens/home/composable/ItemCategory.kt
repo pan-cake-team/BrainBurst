@@ -25,8 +25,10 @@ import androidx.compose.ui.util.lerp
 import com.pancake.brainburst.R
 import com.pancake.brainburst.screens.home.CategoryUiState
 import com.pancake.brainburst.ui.theme.Purple500
+import com.pancake.brainburst.ui.theme.Shapes
 import com.pancake.brainburst.ui.theme.Type
 import com.pancake.brainburst.ui.theme.space16
+import com.pancake.brainburst.ui.theme.zero
 
 @Composable
 fun ItemCategory(
@@ -38,7 +40,7 @@ fun ItemCategory(
     Card(
         modifier = modifier
             .fillMaxSize()
-            .padding(0.dp)
+            .padding(zero)
             .graphicsLayer {
                 lerp(
                     start = 0.85f,
@@ -56,20 +58,20 @@ fun ItemCategory(
                 .fillMaxSize()
                 .background(color = state.color)
                 .clickable { onClickItem() }
-                .clip(RoundedCornerShape(20.dp))
+                .clip(Shapes.large)
         ) {
             Column(
                 modifier = modifier
                     .fillMaxSize()
                     .background(color = state.color)
-                    .clip(RoundedCornerShape(20.dp))
+                    .clip(Shapes.large)
 
             ) {
 
                 Column(
                     Modifier
                         .fillMaxSize()
-                        .padding(space16, 0.dp, space16, 0.dp),
+                        .padding(space16, zero, space16, zero),
                     verticalArrangement = Arrangement.Bottom
                 ) {
 

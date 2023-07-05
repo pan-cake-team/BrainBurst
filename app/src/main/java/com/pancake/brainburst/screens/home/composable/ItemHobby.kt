@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import com.pancake.brainburst.R
 import com.pancake.brainburst.screens.home.Hobby
 import com.pancake.brainburst.ui.theme.Brand500
+import com.pancake.brainburst.ui.theme.Shapes
 import com.pancake.brainburst.ui.theme.space4
 
 
@@ -31,18 +31,18 @@ import com.pancake.brainburst.ui.theme.space4
 fun ItemHobby(
     item: Hobby,
     isSelected: Boolean,
-    onClickHobby: (bobby: String) -> Unit,
+    onClickHobby: (hobby: String) -> Unit,
 ) {
     val title = stringResource(id = item.idTitleResource)
     Card(
         modifier = Modifier
             .height(112.dp)
             .padding(space4)
-            .clip(RoundedCornerShape(16.dp))
+            .clip(Shapes.medium)
             .border(
                 1.dp,
                 if (isSelected) Brand500 else Color.Transparent,
-                shape = RoundedCornerShape(16.dp)
+                shape = Shapes.medium
             )
             .clickable {
                 onClickHobby(title)

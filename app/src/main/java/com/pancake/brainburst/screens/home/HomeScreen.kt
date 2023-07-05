@@ -44,6 +44,8 @@ import com.pancake.brainburst.screens.home.composable.ItemCategory
 import com.pancake.brainburst.ui.theme.Brand500
 import com.pancake.brainburst.ui.theme.lightBackgroundColor
 import com.pancake.brainburst.ui.theme.space16
+import com.pancake.brainburst.ui.theme.space8
+import com.pancake.brainburst.ui.theme.zero
 import kotlin.math.absoluteValue
 
 
@@ -113,7 +115,7 @@ private fun HomeContent(
                     }
 
                     Text(
-                        modifier = Modifier.padding(space16, 0.dp, 0.dp, space16),
+                        modifier = Modifier.padding(space16, zero, zero, space16),
                         text = stringResource(id = R.string.play_by_category),
                         style = MaterialTheme.typography.titleMedium,
                     )
@@ -124,7 +126,7 @@ private fun HomeContent(
                             .height(200.dp)
                     ) {
 
-                        val horizontalPadding = 16.dp
+                        val horizontalPadding = space16
                         val itemWidth = 200.dp
                         val screenWidth = LocalConfiguration.current.screenWidthDp
                         val contentPadding = PaddingValues(
@@ -136,12 +138,11 @@ private fun HomeContent(
                             count = state.categories.size,
                             state = pagerState,
                             modifier = Modifier
-                                .padding(0.dp)
-                                .fillMaxWidth()
-                                .padding(0.dp),
+                                .padding(zero)
+                                .fillMaxWidth(),
                             verticalAlignment = Alignment.Bottom,
                             contentPadding = contentPadding,
-                            itemSpacing = 8.dp
+                            itemSpacing = space8
                         ) { pageIndex ->
                             val pageOffset = calculateCurrentOffsetForPage(pageIndex).absoluteValue
                             ItemCategory(

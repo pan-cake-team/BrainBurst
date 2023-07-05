@@ -55,9 +55,9 @@ fun RoundedCornerChoiceCard(
             letterBackgroundState = LightWhite300
             contentColorState = LightWhite500
         } else {
-            cardBackgroundState = Red500
-            letterBackgroundState = LightWhite300
-            contentColorState = LightWhite500
+//            cardBackgroundState = Red500
+//            letterBackgroundState = LightWhite300
+//            contentColorState = LightWhite500
         }
     }
     Card(

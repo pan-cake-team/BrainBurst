@@ -59,7 +59,7 @@ fun DifficultyCard(
 
 @Preview(showBackground = true)
 @Composable
-fun preview() {
+fun PreviewCard() {
     DifficultyCard(title = "Rrrrr", Brand500, {})
 
 }

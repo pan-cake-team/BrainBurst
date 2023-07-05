@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pancake.brainburst.R
@@ -51,7 +52,7 @@ fun BottomSheet() {
             )
             Text(text = "1502", style = Type.GraphicTextLarge)
             Text(
-                text = "Your highest score",
+                text = stringResource(R.string.your_highest_score),
                 fontFamily = Poppins,
                 color = LightSecondary,
             )
@@ -64,11 +65,11 @@ fun BottomSheet() {
             .padding(top = 228.dp, bottom = space32),
     )
     {
-        DifficultyCard(title = "Easy", color = Green500) {}
+        DifficultyCard(title = stringResource(R.string.easy), color = Green500) {}
         Spacer(modifier = Modifier.height(space8))
-        DifficultyCard(title = "Medium", color = Brand500) {}
+        DifficultyCard(title = stringResource(R.string.medium), color = Brand500) {}
         Spacer(modifier = Modifier.height(space8))
-        DifficultyCard(title = "Difficult", color = Red500) {}
+        DifficultyCard(title = stringResource(R.string.difficult), color = Red500) {}
     }
 }
 

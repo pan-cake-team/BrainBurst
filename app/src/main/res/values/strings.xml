@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">BrainBurst</string>
+    <string name="easy">Easy</string>
+    <string name="medium">Medium</string>
+    <string name="difficult">Difficult</string>
+    <string name="your_highest_score">Your highest score</string>
 </resources>

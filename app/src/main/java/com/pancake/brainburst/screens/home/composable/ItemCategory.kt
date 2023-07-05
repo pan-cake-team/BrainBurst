@@ -1,12 +1,11 @@
 package com.pancake.brainburst.screens.home.composable
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -17,27 +16,23 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.paint
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
-import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.accompanist.pager.PagerState
 import com.pancake.brainburst.R
-import com.pancake.brainburst.ui.theme.lightBackgroundColor
+import com.pancake.brainburst.screens.home.CategoryUiState
+import com.pancake.brainburst.ui.theme.Purple500
+import com.pancake.brainburst.ui.theme.Type
 import com.pancake.brainburst.ui.theme.space16
 
-@OptIn(ExperimentalPagerApi::class)
 @Composable
 fun ItemCategory(
-    content: String = "ameer",
-    state: PagerState,
-    pageIndex: Int,
+    state: CategoryUiState,
     pageOffset: Float,
+    onClickItem: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -55,64 +50,44 @@ fun ItemCategory(
                 }
             }
 
-
     ) {
         Card(
             modifier = modifier
-                .background(
-                    color = lightBackgroundColor
-                )
                 .fillMaxSize()
-                .background(
-                    color = lightBackgroundColor
-                ).clip(RoundedCornerShape(20.dp))
+                .background(color = state.color)
+                .clickable { onClickItem() }
+                .clip(RoundedCornerShape(20.dp))
         ) {
             Column(
                 modifier = modifier
-                    .background(
-                        color = lightBackgroundColor
-                    )
-                    .fillMaxSize().clip(RoundedCornerShape(20.dp))
-                    .background(
-                        color = lightBackgroundColor
-                    ).clip(RoundedCornerShape(20.dp))
+                    .fillMaxSize()
+                    .background(color = state.color)
+                    .clip(RoundedCornerShape(20.dp))
+
             ) {
-//                val h = ((state.currentPage + pageOffset * 30)).toInt()
-//                if (state.currentPage != pageIndex)
-//                    Spacer(
-//                        modifier = Modifier
-//                            .height(h.dp)
-//
-//                    )
 
-
-                Box(
-                    modifier = Modifier
+                Column(
+                    Modifier
                         .fillMaxSize()
-                        .paint(
-                            painter = painterResource(R.drawable.background_home_shape),
-                            contentScale = ContentScale.Crop
-                        ).clip(RoundedCornerShape(20.dp))
+                        .padding(space16, 0.dp, space16, 0.dp),
+                    verticalArrangement = Arrangement.Bottom
                 ) {
-                    Column(
-                        Modifier
-                            .fillMaxSize()
-                            .padding(space16),
-                        verticalArrangement = Arrangement.Bottom
-                    ) {
 
-                        Text(
-                            text = content,
-                            style = MaterialTheme.typography.titleMedium,
-                        )
-                        IconButtonSmall(
-                            onClick = { },
-                            imageVector = Icons.Rounded.PlayArrow,
-                            iconColor = MaterialTheme.colorScheme.onPrimary,
-                            modifier = Modifier
+                    Text(
+                        text = stringResource(id = state.idTitleResource),
+                        style = Type.GraphicTextNormal,
+                    )
+                    IconButtonSmall(
+                        onClick = { },
+                        imageVector = Icons.Rounded.PlayArrow,
+                        iconColor = MaterialTheme.colorScheme.onPrimary,
+                        modifier = Modifier
 
-                        )
-                    }
+                    )
+                    Image(
+                        painter = painterResource(id = state.idIconResource),
+                        contentDescription = null,
+                    )
                 }
             }
         }
@@ -124,7 +99,9 @@ fun ItemCategory(
 @Preview
 @Composable
 fun ItemCategoryPreview() {
-//    ItemCategory(
-//        pageIndex = 0, pageOffset = 0f
-//    )
+    ItemCategory(
+        state = CategoryUiState(R.string.science, R.drawable.ic_science, Purple500),
+        pageOffset = 0f,
+        onClickItem = {}
+    )
 }

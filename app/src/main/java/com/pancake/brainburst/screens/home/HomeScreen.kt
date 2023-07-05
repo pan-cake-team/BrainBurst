@@ -123,15 +123,7 @@ private fun HomeContent(
                             .fillMaxSize()
                             .height(200.dp)
                     ) {
-                        val cardList = listOf(
-                            "Card 1",
-                            "Card 2",
-                            "Card 3",
-                            "Card 4",
-                            "Card 5",
-                            "Card 6",
-                            "Card 37",
-                        )
+
                         val horizontalPadding = 16.dp
                         val itemWidth = 200.dp
                         val screenWidth = LocalConfiguration.current.screenWidthDp
@@ -141,24 +133,22 @@ private fun HomeContent(
                         )
 
                         HorizontalPager(
-                            count = cardList.size,
+                            count = state.categories.size,
                             state = pagerState,
                             modifier = Modifier
                                 .padding(0.dp)
                                 .fillMaxWidth()
-                                .padding(0.dp)
-//                                .background(Color.Cyan)
-                            ,
+                                .padding(0.dp),
                             verticalAlignment = Alignment.Bottom,
                             contentPadding = contentPadding,
                             itemSpacing = 8.dp
                         ) { pageIndex ->
                             val pageOffset = calculateCurrentOffsetForPage(pageIndex).absoluteValue
                             ItemCategory(
-                                state = pagerState,
-                                content = cardList[pageIndex],
-                                pageIndex = pageIndex,
-                                pageOffset = pageOffset
+                                state = state.categories[pageIndex],
+                                pageOffset = pageOffset,
+                                onClickItem = {}
+
                             )
 
                         }

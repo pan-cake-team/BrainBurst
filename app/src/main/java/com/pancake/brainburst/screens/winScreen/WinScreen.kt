@@ -51,7 +51,7 @@ fun WinScreen(
 }
 
 @Composable
-fun WinContent(
+private fun WinContent(
     state: WinUiState,
     onClickNext: () -> Unit,
     onClickExit: () -> Unit

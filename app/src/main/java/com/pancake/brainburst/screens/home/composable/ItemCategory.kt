@@ -65,8 +65,7 @@ fun ItemCategory(
                 modifier = modifier
                     .fillMaxSize()
                     .background(color = state.color)
-                    .padding(space16, space16, space16, zero)
-                    .clip(Shapes.large),
+                    .padding(space16, space16, space16, zero),
                 verticalArrangement = Arrangement.Bottom,
 
                 ) {

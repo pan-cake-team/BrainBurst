@@ -12,22 +12,22 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Star
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
@@ -49,32 +49,35 @@ import kotlin.math.absoluteValue
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun HomeScreen() {
+fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
+    val state by viewModel.state.collectAsState()
     val pagerState = rememberPagerState(initialPage = 0)
     val systemUiController = rememberSystemUiController()
 
     HomeContent(
-        state = HomeUiState(),
+        state = state,
         pagerState = pagerState,
-        systemUiController = systemUiController
+        systemUiController = systemUiController,
+        onClickHobby = viewModel::onClickHobby
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalPagerApi::class)
+@OptIn(ExperimentalPagerApi::class)
 @Composable
 private fun HomeContent(
     state: HomeUiState,
     pagerState: PagerState,
     systemUiController: SystemUiController,
-) {
+    onClickHobby: (bobby: String) -> Unit,
+
+    ) {
     Surface {
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .background(lightBackgroundColor),
 
-            horizontalAlignment = Alignment.Start,
-            verticalArrangement = Arrangement.Top
+            horizontalAlignment = Alignment.Start, verticalArrangement = Arrangement.Top
         ) {
 
             Box(
@@ -170,14 +173,14 @@ private fun HomeContent(
             ) {}
 
             Hobbies(
-                state = state.hobbies
+                state = state, onClickHobby = onClickHobby
             )
 
 
         }
         SideEffect {
             systemUiController.setStatusBarColor(
-                color = Color.Transparent,
+                color = Brand500,
             )
         }
     }
@@ -188,9 +191,8 @@ private fun HomeContent(
 @Composable
 private fun HomePreview() {
 
-    HomeContent(
-        pagerState = rememberPagerState(initialPage = 0),
+    HomeContent(pagerState = rememberPagerState(initialPage = 0),
         state = HomeUiState(),
-        systemUiController = rememberSystemUiController()
-    )
+        systemUiController = rememberSystemUiController(),
+        onClickHobby = {})
 }

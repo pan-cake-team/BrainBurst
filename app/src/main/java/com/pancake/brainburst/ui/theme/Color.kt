@@ -13,7 +13,7 @@ val Pink40 = Color(0xFF7D5260)
 //light
 val lightBackgroundColor = Color(0xFFF0F5FD)
 
-val lightPrimary: Color = Color(0xFF77AAFE)
+//val lightPrimary: Color = Color(0xFF77AAFE)
 
 
 //region Brand

@@ -14,8 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import com.pancake.brainburst.R
-import com.pancake.brainburst.ui.theme.lightPrimary
-import com.pancake.brainburst.ui.theme.spacingMedium
+import com.pancake.brainburst.ui.theme.Brand500
+import com.pancake.brainburst.ui.theme.space16
 
 @Composable
 fun HeaderHobbies(
@@ -24,7 +24,7 @@ fun HeaderHobbies(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = spacingMedium),
+            .padding(horizontal = space16),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Column {
@@ -40,7 +40,7 @@ fun HeaderHobbies(
 
         Button(
             onClick = { onClickPlayNow() },
-            colors = ButtonDefaults.buttonColors(containerColor =  lightPrimary)
+            colors = ButtonDefaults.buttonColors(containerColor =  Brand500)
         ) {
             Text(
                 text = stringResource(id = R.string.play_now),

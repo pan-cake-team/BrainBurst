@@ -16,7 +16,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.pancake.brainburst.ui.theme.smallIconButton
 
 
 @Composable
@@ -31,8 +30,8 @@ fun IconButtonSmall(
         modifier = modifier
             .clip(CircleShape)
             .background(iconColor.copy(alpha = 0.2f))
-            .height(smallIconButton)
-            .width(smallIconButton),
+            .height(32.dp)
+            .width(32.dp),
     ) {
         Icon(
             imageVector = imageVector,

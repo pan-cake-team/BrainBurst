@@ -25,14 +25,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pancake.brainburst.screens.home.Hobby
 import com.pancake.brainburst.screens.home.HomeUiState
-import com.pancake.brainburst.ui.theme.spacing
-import com.pancake.brainburst.ui.theme.spacingMedium
+import com.pancake.brainburst.ui.theme.space16
+import com.pancake.brainburst.ui.theme.space4
 
 @Composable
 fun Hobbies(state: List<Hobby>) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(3),
-        contentPadding = PaddingValues(spacingMedium)
+        contentPadding = PaddingValues(space16)
     ) {
         items(state.size) { index ->
             ItemHobbies(state[index])
@@ -45,7 +45,7 @@ fun ItemHobbies(item: Hobby) {
     Card(
         modifier = Modifier
             .height(112.dp)
-            .padding(spacing)
+            .padding(space4)
             .clip(RoundedCornerShape(16.dp))
             .clickable {
                 print("Ameer")

@@ -29,7 +29,7 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.PagerState
 import com.pancake.brainburst.R
 import com.pancake.brainburst.ui.theme.lightBackgroundColor
-import com.pancake.brainburst.ui.theme.spacingMedium
+import com.pancake.brainburst.ui.theme.space16
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
@@ -97,7 +97,7 @@ fun ItemCategory(
                     Column(
                         Modifier
                             .fillMaxSize()
-                            .padding(spacingMedium),
+                            .padding(space16),
                         verticalArrangement = Arrangement.Bottom
                     ) {
 

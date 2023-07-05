@@ -15,11 +15,13 @@ import androidx.compose.material.icons.rounded.Star
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
@@ -39,10 +41,9 @@ import com.pancake.brainburst.screens.home.composable.HeaderHobbies
 import com.pancake.brainburst.screens.home.composable.Hobbies
 import com.pancake.brainburst.screens.home.composable.IconButtonSmall
 import com.pancake.brainburst.screens.home.composable.ItemCategory
+import com.pancake.brainburst.ui.theme.Brand500
 import com.pancake.brainburst.ui.theme.lightBackgroundColor
-import com.pancake.brainburst.ui.theme.lightPrimary
-import com.pancake.brainburst.ui.theme.spacingMedium
-import com.pancake.brainburst.ui.theme.zero
+import com.pancake.brainburst.ui.theme.space16
 import kotlin.math.absoluteValue
 
 
@@ -66,7 +67,7 @@ private fun HomeContent(
     pagerState: PagerState,
     systemUiController: SystemUiController,
 ) {
-    Scaffold { padding ->
+    Surface {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -97,7 +98,7 @@ private fun HomeContent(
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(spacingMedium)
+                            .padding(space16)
                     ) {
                         IconButtonSmall(
                             onClick = { },
@@ -109,7 +110,7 @@ private fun HomeContent(
                     }
 
                     Text(
-                        modifier = Modifier.padding(spacingMedium, zero, zero, spacingMedium),
+                        modifier = Modifier.padding(space16, 0.dp, 0.dp, space16),
                         text = stringResource(id = R.string.play_by_category),
                         style = MaterialTheme.typography.titleMedium,
                     )
@@ -176,7 +177,7 @@ private fun HomeContent(
         }
         SideEffect {
             systemUiController.setStatusBarColor(
-                color = lightPrimary,
+                color = Color.Transparent,
             )
         }
     }

@@ -5,6 +5,7 @@ import androidx.compose.ui.graphics.Color
 import com.pancake.brainburst.R
 import com.pancake.brainburst.base.BaseUiState
 import com.pancake.brainburst.ui.theme.Cyan500
+import com.pancake.brainburst.ui.theme.FoodCard
 import com.pancake.brainburst.ui.theme.Green500
 import com.pancake.brainburst.ui.theme.Orange500
 import com.pancake.brainburst.ui.theme.Pink300
@@ -17,8 +18,7 @@ data class HomeUiState(
         CategoryUiState(R.string.science, R.drawable.ic_science, Purple500),
         CategoryUiState(R.string.food, R.drawable.ic_food, Pink300),
         CategoryUiState(R.string.sports, R.drawable.ic_sports, Green500),
-        CategoryUiState(R.string.music, R.drawable.ic_music, Cyan500),
-        CategoryUiState(R.string.music, R.drawable.ic_music, Pink300),
+        CategoryUiState(R.string.music, R.drawable.ic_music, FoodCard),
         CategoryUiState(R.string.history, R.drawable.ic_history, Yellow500),
         CategoryUiState(R.string.art, R.drawable.ic_art, Red500),
         CategoryUiState(R.string.films, R.drawable.ic_films, Cyan500),

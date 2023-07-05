@@ -5,9 +5,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.PlayArrow
 import androidx.compose.material3.Card
@@ -20,9 +21,9 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
 import com.pancake.brainburst.R
+import com.pancake.brainburst.screens.composable.SpacerVertical8
 import com.pancake.brainburst.screens.home.CategoryUiState
 import com.pancake.brainburst.ui.theme.Purple500
 import com.pancake.brainburst.ui.theme.Shapes
@@ -64,33 +65,32 @@ fun ItemCategory(
                 modifier = modifier
                     .fillMaxSize()
                     .background(color = state.color)
-                    .clip(Shapes.large)
+                    .padding(space16, space16, space16, zero)
+                    .clip(Shapes.large),
+                verticalArrangement = Arrangement.Bottom,
 
-            ) {
-
-                Column(
-                    Modifier
-                        .fillMaxSize()
-                        .padding(space16, zero, space16, zero),
-                    verticalArrangement = Arrangement.Bottom
                 ) {
 
-                    Text(
-                        text = stringResource(id = state.idTitleResource),
-                        style = Type.GraphicTextNormal,
-                    )
-                    IconButtonSmall(
-                        onClick = { },
-                        imageVector = Icons.Rounded.PlayArrow,
-                        iconColor = MaterialTheme.colorScheme.onPrimary,
-                        modifier = Modifier
+                Text(
+                    text = stringResource(id = state.idTitleResource),
+                    style = Type.GraphicTextNormal,
+                )
+                SpacerVertical8()
+                IconButtonSmall(
+                    onClick = { },
+                    imageVector = Icons.Rounded.PlayArrow,
+                    iconColor = MaterialTheme.colorScheme.onPrimary,
+                    modifier = Modifier
 
-                    )
-                    Image(
-                        painter = painterResource(id = state.idIconResource),
-                        contentDescription = null,
-                    )
-                }
+                )
+                Spacer(modifier = Modifier.weight(1f))
+                Image(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    painter = painterResource(id = state.idIconResource),
+                    contentDescription = null,
+                )
+
             }
         }
 

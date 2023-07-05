@@ -28,67 +28,10 @@ import com.pancake.brainburst.ui.theme.QuestionCounterSize
 import com.pancake.brainburst.ui.theme.Type
 import com.pancake.brainburst.ui.theme.timerStrokeWidth
 import kotlinx.coroutines.delay
-/*
+
 @Composable
 fun QuestionTimer(
-    totalTime: Long = 3000,
-    inactiveBarColor: Color = Brand500,
-    activeBarColor: Color = LightWhite500,
-    modifier: Modifier = Modifier,
-    initialValue: Float = 30f,
-    strokeWidth: Dp = timerStrokeWidth
-) {
-    var size by remember { mutableStateOf(IntSize.Zero) }
-    var value by remember { mutableStateOf(initialValue) }
-    var currentTime by remember { mutableStateOf(totalTime) }
-    var isTimerRunning by remember { mutableStateOf(false) }
-
-    LaunchedEffect(key1 = currentTime, key2 = isTimerRunning){
-        if(currentTime > 0 && isTimerRunning){
-            delay(1000L)
-            currentTime -= 1000L
-            value = currentTime / totalTime.toFloat()
-        }
-    }
-
-    Box(
-        contentAlignment = Alignment.Center,
-        modifier = Modifier.onSizeChanged {
-            size = it
-        }){
-
-        Canvas(modifier = modifier) {
-            drawArc(
-                color = inactiveBarColor,
-                startAngle = -90f,
-                sweepAngle = 270f,
-                useCenter = false,
-                style = Stroke(strokeWidth.toPx(), cap = StrokeCap.Round)
-
-            )
-            drawArc(
-                color = activeBarColor,
-                startAngle = -90f,
-                sweepAngle = 270f * value,
-                useCenter = false,
-                style = Stroke(strokeWidth.toPx(), cap = StrokeCap.Round)
-
-            )
-        }
-
-        Text(
-            text = (currentTime / 1000L).toString(),
-            style = Type.Large,
-            color = LightWhite500,
-            textAlign = TextAlign.Center,
-        )
-    }
-}
-
-*/
-@Composable
-fun QuestionTimer(
-    totalTime: Long = 30000L,
+    totalTime: Long = 3000L,
     inactiveBarColor: Color = Brand500,
     activeBarColor: Color = LightWhite500,
     modifier: Modifier = Modifier,

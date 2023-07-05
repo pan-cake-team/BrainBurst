@@ -18,20 +18,21 @@ import com.pancake.brainburst.ui.theme.space24
 @Composable
 fun CircularBackgroundLetter(
     letter: String,
-    letterBackground: Color = Brand500,
+    letterColor: Color = Brand500,
+    letterBackground: Color = Brand100,
     modifier: Modifier = Modifier
 ) {
 
     Box(
         modifier = modifier
-            .background(Brand100, shape = CircleShape)
+            .background(letterBackground, shape = CircleShape)
             .size(space24),
         contentAlignment = Alignment.Center,
     ) {
         Text(
             text = letter,
             style = Type.Title,
-            color = letterBackground,
+            color = letterColor,
             textAlign = TextAlign.Center,
         )
     }

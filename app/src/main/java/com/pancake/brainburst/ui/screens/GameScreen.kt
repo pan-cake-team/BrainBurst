@@ -1,5 +1,6 @@
 package com.pancake.brainburst.ui.screens
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -15,6 +16,10 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -45,6 +50,12 @@ import com.pancake.brainburst.ui.theme.space8
 @Preview
 @Composable
 fun GameScreen() {
+    var isAnsweredOrTimeFinished by rememberSaveable { mutableStateOf(false) }
+    var answers by rememberSaveable { mutableStateOf(listOf(false, false, false, false)) }
+    val correctAnswers by rememberSaveable { mutableStateOf(listOf(true, false, false, false)) }
+    var selectedChoice by rememberSaveable { mutableStateOf(listOf(false, false, false, false)) }
+    //var selectedChoice by remember { mutableStateOf("") }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -52,17 +63,18 @@ fun GameScreen() {
             .padding(horizontal = space16, vertical = space24),
         horizontalAlignment = Alignment.CenterHorizontally,
 
-    ) {
+        ) {
         TextWithTwoColor(
             currentQuestionNumber = stringResource(R.string.test_4),
-            totalQuestionNumber = stringResource(R.string.test_20
+            totalQuestionNumber = stringResource(
+                R.string.test_20
             )
         )
 
         SpacerVertical(space = space16)
         LineProgressBar(20, currentTarget = 4)
 
-/************************************ Question Card ********************/
+        /************************************ Question Card ********************/
         SpacerVertical(space = space24)
         Row(
             modifier = Modifier
@@ -101,7 +113,11 @@ fun GameScreen() {
 
                     SpacerVertical(space = space16)
                     Box(contentAlignment = Alignment.Center) {
-                        QuestionTimer(){
+                        QuestionTimer() {
+                            //todo: action when the timer is finished
+                            answers = correctAnswers
+                            isAnsweredOrTimeFinished = true
+                            Log.e("TAG", "Time Ouuuuuuuuuuuuuuuuuuuuuut${answers.toString()}")
 
                         }
                     }
@@ -118,7 +134,9 @@ fun GameScreen() {
 
                     SpacerVertical(space = space32)
                     Row(
-                        modifier = Modifier.fillMaxHeight().padding(bottom = space16),
+                        modifier = Modifier
+                            .fillMaxHeight()
+                            .padding(bottom = space16),
                         verticalAlignment = Alignment.Bottom,
                         horizontalArrangement = Arrangement.Center
                     ) {
@@ -151,41 +169,75 @@ fun GameScreen() {
                 .weight(1f)
                 .fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
-        ) {
+        )
+        {
             RoundedCornerChoiceCard(
                 modifier = Modifier.weight(0.5f),
                 choiceText = stringResource(R.string.test_choice),
-                choiceNumber = stringResource(R.string.a)
-            )
+                choiceNumber = stringResource(R.string.a),
+                isCorrectAnswer = answers[0],
+                isSelected = selectedChoice[0],
+                isAnsweredOrTimeFinished = isAnsweredOrTimeFinished
+            ) {
+                //answers = listOf(true, false, false, false)
+                isAnsweredOrTimeFinished = true
+                selectedChoice = listOf(true, false, false, false)
+            }
             SpacerHorizontal(space = space8)
             RoundedCornerChoiceCard(
                 modifier = Modifier.weight(0.5f),
                 choiceText = stringResource(R.string.test_choice),
-                choiceNumber = stringResource(R.string.b)
-            )
+                choiceNumber = stringResource(R.string.b),
+                isCorrectAnswer = answers[1],
+                isSelected = selectedChoice[1],
+                isAnsweredOrTimeFinished = isAnsweredOrTimeFinished
+
+            ) {
+                //answers = listOf(true, false, false, false)
+                isAnsweredOrTimeFinished = true
+                selectedChoice = listOf(false, true, false, false)
+            }
         }
 
         SpacerVertical(space = space8)
         Row(
             modifier = Modifier
                 .weight(1f)
-                .fillMaxWidth(),
+                .fillMaxWidth()
         ) {
             RoundedCornerChoiceCard(
                 modifier = Modifier.weight(0.5f),
                 choiceText = stringResource(R.string.test_choice),
-                choiceNumber = stringResource(R.string.c)
-            )
+                choiceNumber = stringResource(R.string.c),
+                isCorrectAnswer = answers[2],
+                isSelected = selectedChoice[2],
+                isAnsweredOrTimeFinished = isAnsweredOrTimeFinished
+
+            ) {
+                //answers = listOf(true, false, false, false)
+                isAnsweredOrTimeFinished = true
+                selectedChoice = listOf(false, false, true, false)
+            }
             SpacerHorizontal(space = space8)
             RoundedCornerChoiceCard(
                 modifier = Modifier.weight(0.5f),
                 choiceText = stringResource(R.string.test_choice),
-                choiceNumber = stringResource(R.string.d)
-            )
+                choiceNumber = stringResource(R.string.d),
+                isCorrectAnswer = answers[3],
+                isSelected = selectedChoice[3],
+                isAnsweredOrTimeFinished = isAnsweredOrTimeFinished
+            ) {
+                //answers = listOf(true, false, false, false)
+                isAnsweredOrTimeFinished = true
+                selectedChoice = listOf(false, false, false, true)
+
+            }
         }
 
         Spacer(modifier = Modifier.weight(1f))
     }
+
+
 }
 
 

@@ -1,5 +1,6 @@
 package com.pancake.brainburst.screens.home.composable
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -13,13 +14,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.pancake.brainburst.R
 import com.pancake.brainburst.ui.theme.Brand500
 import com.pancake.brainburst.ui.theme.space16
 
 @Composable
 fun HeaderHobbies(
-    onClickPlayNow: () -> Unit
+    isPlayActive: Boolean,
+    onClickPlayNow: () -> Unit,
 ) {
     Row(
         modifier = Modifier
@@ -40,7 +44,12 @@ fun HeaderHobbies(
 
         Button(
             onClick = { onClickPlayNow() },
-            colors = ButtonDefaults.buttonColors(containerColor =  Brand500)
+            enabled = isPlayActive,
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Brand500,
+                disabledContainerColor = Color.Transparent
+            ),
+            border = BorderStroke(1.dp, if (isPlayActive) Color.Transparent else Color.Gray)
         ) {
             Text(
                 text = stringResource(id = R.string.play_now),
@@ -49,3 +58,17 @@ fun HeaderHobbies(
         }
     }
 }
+
+
+@Preview("Play active", showBackground = true)
+@Composable
+private fun HeaderHobbiesPlayActive() {
+    HeaderHobbies(true) {}
+}
+
+@Preview("Play not active", showBackground = true)
+@Composable
+private fun HeaderHobbiesPlayNotActive() {
+    HeaderHobbies(false) {}
+}
+

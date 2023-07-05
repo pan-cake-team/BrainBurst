@@ -170,10 +170,13 @@ private fun HomeContent(
 
             SpacerVertical32()
             HeaderHobbies(
-            ) {}
+                onClickPlayNow = {},
+                isPlayActive = state.hobbiesSelected.isNotEmpty()
+            )
 
             Hobbies(
-                state = state, onClickHobby = onClickHobby
+                state = state,
+                onClickHobby = onClickHobby
             )
 
 

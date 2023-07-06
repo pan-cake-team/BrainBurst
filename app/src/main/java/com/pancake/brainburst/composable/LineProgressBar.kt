@@ -1,4 +1,4 @@
-package com.pancake.brainburst.ui.composable
+package com.pancake.brainburst.composable
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween

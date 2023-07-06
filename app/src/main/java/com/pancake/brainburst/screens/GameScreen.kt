@@ -15,29 +15,24 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import com.pancake.brainburst.R
-import com.pancake.brainburst.ui.composable.CircularIconButton
-import com.pancake.brainburst.ui.composable.LineProgressBar
-import com.pancake.brainburst.ui.composable.QuestionTimer
-import com.pancake.brainburst.ui.composable.RoundedCornerChoiceCard
-import com.pancake.brainburst.ui.composable.SpacerHorizontal
-import com.pancake.brainburst.ui.composable.SpacerVertical
-import com.pancake.brainburst.ui.composable.TextWithTwoColor
+import com.pancake.brainburst.composable.CircularIconButton
+import com.pancake.brainburst.composable.LineProgressBar
+import com.pancake.brainburst.composable.QuestionTimer
+import com.pancake.brainburst.composable.RoundedCornerChoiceCard
+import com.pancake.brainburst.composable.SpacerHorizontal
+import com.pancake.brainburst.composable.SpacerVertical
+import com.pancake.brainburst.composable.TextWithTwoColor
 import com.pancake.brainburst.ui.theme.Brand500
 import com.pancake.brainburst.ui.theme.LightBackground
 import com.pancake.brainburst.ui.theme.OnPrimary
@@ -48,26 +43,40 @@ import com.pancake.brainburst.ui.theme.space16
 import com.pancake.brainburst.ui.theme.space24
 import com.pancake.brainburst.ui.theme.space32
 import com.pancake.brainburst.ui.theme.space8
-import kotlinx.coroutines.delay
 
-
-@Preview
 @Composable
 fun GameScreen() {
+    var isAnsweredOrTimeFinished by remember { mutableStateOf(false) }
+    var currentQuestionNumber by remember { mutableStateOf(1) }
 
-    val isAnsweredOrTimeFinished = remember { mutableStateOf(false) }
-    val currentQuestionNumber = remember { mutableStateOf(1) }
+    val correctAnswer = "Paris"
+    val inCorrectAnswers = listOf("London", "Berlin", "Brussels")
 
-    val correctAnswers = remember { mutableStateOf("Paris") }
-    val inCorrectAnswers = remember { mutableStateListOf("London", "Berlin", "Brussels") }
-    val allAnswers = correctAnswers.value + inCorrectAnswers
+    val allAnswers = mutableListOf<String>().apply {
+        addAll(inCorrectAnswers)
+        add(correctAnswer)
+    }
 
-//    val answers = remember {
-//        mutableStateListOf<String>().apply {
-//            addAll(correctAnswers)
-//            addAll(inCorrectAnswers.shuffled())
-//        }
-//    }
+    GameContent(
+        currentQuestionNumber = currentQuestionNumber,
+        isAnsweredOrTimeFinished = isAnsweredOrTimeFinished,
+        onAnsweredOrTimeFinished = { isAnsweredOrTimeFinished = true },
+        goToNextQuestion = { currentQuestionNumber++ },
+        correctAnswer = correctAnswer,
+        allAnswers = allAnswers
+    )
+}
+
+@Composable
+private fun GameContent(
+    currentQuestionNumber: Int,
+    isAnsweredOrTimeFinished: Boolean,
+    onAnsweredOrTimeFinished: () -> Unit,
+    goToNextQuestion: () -> Unit,
+    correctAnswer: String,
+    allAnswers: List<String>
+) {
+
 
     Column(
         modifier = Modifier
@@ -78,14 +87,14 @@ fun GameScreen() {
 
         ) {
         TextWithTwoColor(
-            currentQuestionNumber = currentQuestionNumber.value.toString(),
+            currentQuestionNumber = currentQuestionNumber.toString(),
             totalQuestionNumber = stringResource(
                 R.string.test_20
             )
         )
 
         SpacerVertical(space = space16)
-        LineProgressBar(20, currentTarget = currentQuestionNumber.value)
+        LineProgressBar(20, currentTarget = currentQuestionNumber)
 
         /************************************ Question Card ********************/
         SpacerVertical(space = space24)
@@ -126,12 +135,12 @@ fun GameScreen() {
 
                     SpacerVertical(space = space16)
                     Box(contentAlignment = Alignment.Center) {
-                        QuestionTimer(isTimerRunning = !isAnsweredOrTimeFinished.value) {
-                            isAnsweredOrTimeFinished.value = true
+                        QuestionTimer(isTimerRunning = !isAnsweredOrTimeFinished) {
+                           onAnsweredOrTimeFinished()
 
                             //todo: go to next question
 
-                            currentQuestionNumber.value += 1
+                            goToNextQuestion()
                         }
                     }
 
@@ -187,22 +196,22 @@ fun GameScreen() {
             RoundedCornerChoiceCard(
                 modifier = Modifier.weight(0.5f),
                 questionNumber = "A",
-                correctAnswer = correctAnswers.value,
-                answer = correctAnswers.value,
-                isClicked = isAnsweredOrTimeFinished.value
+                correctAnswer = correctAnswer,
+                answer = allAnswers[0],
+                isClicked = isAnsweredOrTimeFinished
             ) {
-                isAnsweredOrTimeFinished.value = true
+                onAnsweredOrTimeFinished()
             }
 
             SpacerHorizontal(space = space8)
             RoundedCornerChoiceCard(
                 modifier = Modifier.weight(0.5f),
                 questionNumber = "B",
-                correctAnswer = correctAnswers.value,
-                answer = inCorrectAnswers[0],
-                isClicked = isAnsweredOrTimeFinished.value
+                correctAnswer = correctAnswer,
+                answer = allAnswers[1],
+                isClicked = isAnsweredOrTimeFinished
             ) {
-                isAnsweredOrTimeFinished.value = true
+                onAnsweredOrTimeFinished()
             }
         }
 
@@ -215,11 +224,11 @@ fun GameScreen() {
             RoundedCornerChoiceCard(
                 modifier = Modifier.weight(0.5f),
                 questionNumber = "C",
-                correctAnswer = correctAnswers.value,
-                answer = inCorrectAnswers[1],
-                isClicked = isAnsweredOrTimeFinished.value
+                correctAnswer = correctAnswer,
+                answer = allAnswers[2],
+                isClicked = isAnsweredOrTimeFinished
             ) {
-                isAnsweredOrTimeFinished.value = true
+                onAnsweredOrTimeFinished()
             }
 
 
@@ -227,11 +236,11 @@ fun GameScreen() {
             RoundedCornerChoiceCard(
                 modifier = Modifier.weight(0.5f),
                 questionNumber = "D",
-                correctAnswer = correctAnswers.value,
-                answer = inCorrectAnswers[2],
-                isClicked = isAnsweredOrTimeFinished.value
+                correctAnswer = correctAnswer,
+                answer = allAnswers[3],
+                isClicked = isAnsweredOrTimeFinished
             ) {
-                isAnsweredOrTimeFinished.value = true
+                onAnsweredOrTimeFinished()
 
             }
 

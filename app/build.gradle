@@ -82,4 +82,8 @@ dependencies {
 
     // OkHttp Dependency
     implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.11"
+
+    //constraintlayout
+    implementation "androidx.constraintlayout:constraintlayout-compose:1.0.1"
+
 }

@@ -11,7 +11,7 @@ val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
 
 //region Brand
-val Brand500 = Color(0xFF77A9FD)
+val Brand500 = Color(0xFF77AAFE)
 val Brand300 = Color(0xFFD4E4FE)
 val Brand100 = Color(0xFFEAF1FE)
 //endregion
@@ -23,7 +23,7 @@ val LightPrimary = Color(0xFF1F2223)
 val LightSecondary = Color(0xFF57595A)
 val LightTertiary = Color(0xFF8D8F8F)
 
-val LightBackground = Color(0xFFEFF4FC)
+val LightBackground = Color(0xFFF0F5FD)
 
 val LightWhite500 = Color(0xFFFFFFFF)
 val LightWhite300 = Color(0x61FFFFFF)

@@ -13,9 +13,8 @@ import javax.inject.Inject
 class WelcomeScreenViewModel
 @Inject constructor(
     private val userScoreManager:UserScore,
-):BaseViewModel<WelcomeScreenUIState,WelcomeScreenUIState>(WelcomeScreenUIState()){
-    override val TAG: String
-        get() = TODO("Not yet implemented")
+):BaseViewModel<WelcomeScreenUIState>(WelcomeScreenUIState()){
+
 
 
     init {

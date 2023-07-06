@@ -20,24 +20,6 @@ import com.pancake.brainburst.ui.theme.textSize14
 
 
 @Composable
-fun CustomImage(@DrawableRes resourceId: Int, contentDesc: String) {
-    Image(
-        painter = painterResource(id = resourceId),
-        contentDescription = null,
-        modifier = Modifier
-    )
-}
-
-@Composable
-fun CustomText(text: String, size: TextUnit, fontFamily: FontFamily = FontFamily.Default) {
-    Text(
-        text = text,
-        fontSize = size,
-        fontFamily = fontFamily
-    )
-}
-
-@Composable
 fun PlayButton() {
     Button(
         modifier = Modifier

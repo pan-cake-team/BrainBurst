@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -32,14 +33,27 @@ fun WelcomeScreen(viewModel: WelcomeScreenViewModel = hiltViewModel()) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Spacer(modifier = Modifier.weight(0.3f))
-        CustomImage(resourceId = R.drawable.crown_star, contentDesc = "crown")
-        CustomText(text = state.heightsScore.toString(), textSize32, fontFamily = NerkoOne)
+
+        Image(
+            painter = painterResource(id = R.drawable.crown_star),
+            contentDescription = "crown",
+            modifier = Modifier
+        )
+        Text(
+            text = state.heightsScore.toString(),
+            fontSize = textSize32,
+            fontFamily = NerkoOne
+        )
         Spacer(modifier = Modifier.weight(0.1f))
-        CustomText(text = "Your heights score", textSize14)
+        Text(
+            text = "Your heights score",
+            fontSize = textSize14,
+
+            )
         Spacer(modifier = Modifier.weight(0.2f))
         Box {
             Image(
-                painter = painterResource(id = R.drawable._3297415_5157958_1,),
+                painter = painterResource(id = R.drawable._3297415_5157958_1),
                 contentDescription = null,
                 modifier = Modifier
             )

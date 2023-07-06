@@ -27,6 +27,8 @@ import com.pancake.brainburst.ui.theme.Green500
 import com.pancake.brainburst.ui.theme.Red500
 import com.pancake.brainburst.ui.theme.Type.Caption
 import com.pancake.brainburst.ui.theme.LightWhite500
+import com.pancake.brainburst.ui.theme.radius16
+import com.pancake.brainburst.ui.theme.space8
 
 @Composable
 fun AnswerCard(
@@ -39,14 +41,14 @@ fun AnswerCard(
     var rightAnswer by remember {
         mutableStateOf(false)
     }
-    LaunchedEffect(key1 = isTimerOut.value, ){
-        if (isTimerOut.value ) {
+    LaunchedEffect(key1 = isTimerOut.value) {
+        if (isTimerOut.value) {
             rightAnswer = letter == "A"
         }
     }
 
     val color: Color by animateColorAsState(
-        targetValue =  when {
+        targetValue = when {
             !isCLicked.value -> LightWhite500
             isTimerOut.value -> if (rightAnswer) Green500 else Red500
             else -> if (rightAnswer) Green500 else Red500
@@ -62,7 +64,7 @@ fun AnswerCard(
             .size(160.dp, 140.dp)
             .background(
                 color = color,
-                shape = RoundedCornerShape(16.dp)
+                shape = RoundedCornerShape(radius16)
             )
             .clickable {
                 if (!isTimerOut.value) {
@@ -74,7 +76,7 @@ fun AnswerCard(
             },
 
         ) {
-        Icon24(letter = letter, modifier = Modifier.padding(top = 8.dp, start = 8.dp))
+        Icon24(letter = letter, modifier = Modifier.padding(top = space8, start = space8))
         Text(
             text = answer,
             modifier = Modifier.align(Alignment.Center),

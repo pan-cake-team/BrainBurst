@@ -5,8 +5,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.pancake.brainburst.ui.theme.space24
 
 @Composable
 fun SpacerVertical24() {
-    Spacer(modifier = Modifier.height(23.dp))
+    Spacer(modifier = Modifier.height(space24))
 }

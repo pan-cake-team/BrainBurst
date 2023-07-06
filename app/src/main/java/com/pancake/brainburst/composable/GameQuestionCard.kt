@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import com.pancake.brainburst.R
 import com.pancake.brainburst.ui.theme.Brand500
 import com.pancake.brainburst.ui.theme.LightWhite500
+import com.pancake.brainburst.ui.theme.space16
 
 @Composable
 fun GameQuestionCard(
@@ -47,7 +48,7 @@ fun GameQuestionCard(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(16.dp),
+                .padding(space16),
         ) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally
@@ -81,9 +82,9 @@ fun GameQuestionCard(
                 horizontalArrangement = Arrangement.Center
             ) {
                 Icon40(painter = R.drawable.arrows_icon, {})
-                Spacer(modifier = Modifier.width(16.dp))
+                Spacer(modifier = Modifier.width(space16))
                 Icon40(painter = R.drawable.help_icon, {})
-                Spacer(modifier = Modifier.width(16.dp))
+                Spacer(modifier = Modifier.width(space16))
                 Icon40(painter = R.drawable.chat_icon, {})
             }
         }

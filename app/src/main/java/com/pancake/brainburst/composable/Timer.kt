@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.pancake.brainburst.ui.theme.Brand500
 import com.pancake.brainburst.ui.theme.LightWhite500
+import com.pancake.brainburst.ui.theme.textSize24
 import kotlinx.coroutines.delay
 
 @Composable
@@ -78,7 +79,7 @@ fun GameTimer(
         Text(
             text = (currentTime / 1000L).toString(),
             style = MaterialTheme.typography.titleSmall,
-            fontSize = 24.sp,
+            fontSize = textSize24,
             color = LightWhite500
         )
 

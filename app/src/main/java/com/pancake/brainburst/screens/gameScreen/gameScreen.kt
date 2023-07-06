@@ -23,6 +23,9 @@ import com.pancake.brainburst.composable.SpacerVertical16
 import com.pancake.brainburst.composable.SpacerVertical24
 import com.pancake.brainburst.screens.gameScreen.constants.question
 import com.pancake.brainburst.ui.theme.LightBackground
+import com.pancake.brainburst.ui.theme.space16
+import com.pancake.brainburst.ui.theme.space24
+import com.pancake.brainburst.ui.theme.space8
 
 @Composable
 fun GameScreen() {
@@ -47,7 +50,7 @@ private fun GameContent(
         modifier = Modifier
             .fillMaxSize()
             .background(color = LightBackground)
-            .padding(horizontal = 16.dp, vertical = 24.dp)
+            .padding(horizontal = space16, vertical = space24)
     ) {
         Column(
             modifier = Modifier
@@ -66,8 +69,8 @@ private fun GameContent(
 
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
+            horizontalArrangement = Arrangement.spacedBy(space8),
+            verticalArrangement = Arrangement.spacedBy(space8),
         ) {
             item {
                 AnswerCard(

@@ -1,6 +1,7 @@
 package com.pancake.brainburst.ui.composable
 
-import android.util.Log
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -9,14 +10,11 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.pancake.brainburst.ui.theme.Brand100
@@ -31,43 +29,49 @@ import com.pancake.brainburst.ui.theme.space8
 
 @Composable
 fun RoundedCornerChoiceCard(
-    choiceText: String,
-    choiceNumber: String,
-    isCorrectAnswer: Boolean = false,
-    isSelected: Boolean,
-    isAnsweredOrTimeFinished : Boolean = false,
-    contentColor: Color = Brand500,
-    containerColor: Color = LightWhite500,
+    questionNumber: String,
+    correctAnswer: String,
+    answer: String,
+    isClicked: Boolean,
     modifier: Modifier = Modifier,
     onChoiceSelected: () -> Unit
 ) {
+    val isCorrectAnswer = correctAnswer == answer
+    val rightAnswer by remember { mutableStateOf(isCorrectAnswer) }
 
-    var isAnsweredOrTimeFinishedState by remember { mutableStateOf(isAnsweredOrTimeFinished) }
-    var cardBackgroundState by remember { mutableStateOf(containerColor) }
-    var letterBackgroundState by remember { mutableStateOf(Brand100) }
-    var contentColorState by remember { mutableStateOf(contentColor) }
+    val durationMillis = 500
+    val cardBackgroundState by animateColorAsState(
+        targetValue = when {
+            !isClicked -> LightWhite500
+            rightAnswer -> Green500
+            else -> Red500
+        },
+        animationSpec = tween(durationMillis = durationMillis)
+    )
 
-    LaunchedEffect(key1 = isCorrectAnswer){
-        Log.e("bk", "RoundedCornerChoiceCard: ", )
-        if( isCorrectAnswer){
-            Log.e("bk", "RoundedCornerChoiceCard:isCorrectAnswer", )
-            cardBackgroundState = Green500
-            letterBackgroundState = LightWhite300
-            contentColorState = LightWhite500
-        } else {
-//            cardBackgroundState = Red500
-//            letterBackgroundState = LightWhite300
-//            contentColorState = LightWhite500
-        }
-    }
+    val contentColor by animateColorAsState(
+        targetValue = if (!isClicked) Brand500 else LightWhite500,
+        animationSpec = tween(durationMillis = durationMillis)
+    )
+
+    val letterBackgroundColor by animateColorAsState(
+        targetValue = if(!isClicked) Brand100 else LightWhite300,
+        animationSpec = tween(durationMillis = durationMillis)
+    )
+
+
     Card(
         modifier = modifier
             .fillMaxSize()
             .clip(RoundedCornerShape(space16))
-            .clickable { onChoiceSelected() },
+            .clickable {
+                onChoiceSelected()
+                //isCLicked = true
+                //rightAnswer = answer == correctAnswer
+            },
         colors = CardDefaults.cardColors(
             containerColor = cardBackgroundState,
-            contentColor = contentColorState
+            contentColor = contentColor
         )
     ) {
         ConstraintLayout(
@@ -78,9 +82,9 @@ fun RoundedCornerChoiceCard(
             val (letter, cardText) = createRefs()
 
             CircularBackgroundLetter(
-                letter = choiceNumber,
-                letterColor = contentColorState,
-                letterBackground = letterBackgroundState,
+                letter = questionNumber,
+                letterColor = contentColor,
+                letterBackground = letterBackgroundColor,
                 modifier = Modifier.constrainAs(letter) {
                     start.linkTo(parent.start)
                     top.linkTo(parent.top)
@@ -88,9 +92,9 @@ fun RoundedCornerChoiceCard(
             )
 
             Text(
-                text = choiceText,
+                text = answer,
                 style = Type.Title,
-                color = contentColorState,
+                color = contentColor,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.constrainAs(cardText) {
                     start.linkTo(parent.start)

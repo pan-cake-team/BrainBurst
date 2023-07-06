@@ -1,6 +1,5 @@
 package com.pancake.brainburst.ui.screens
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -16,10 +15,14 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -45,16 +48,26 @@ import com.pancake.brainburst.ui.theme.space16
 import com.pancake.brainburst.ui.theme.space24
 import com.pancake.brainburst.ui.theme.space32
 import com.pancake.brainburst.ui.theme.space8
+import kotlinx.coroutines.delay
 
 
 @Preview
 @Composable
 fun GameScreen() {
-    var isAnsweredOrTimeFinished by rememberSaveable { mutableStateOf(false) }
-    var answers by rememberSaveable { mutableStateOf(listOf(false, false, false, false)) }
-    val correctAnswers by rememberSaveable { mutableStateOf(listOf(true, false, false, false)) }
-    var selectedChoice by rememberSaveable { mutableStateOf(listOf(false, false, false, false)) }
-    //var selectedChoice by remember { mutableStateOf("") }
+
+    val isAnsweredOrTimeFinished = remember { mutableStateOf(false) }
+    val currentQuestionNumber = remember { mutableStateOf(1) }
+
+    val correctAnswers = remember { mutableStateOf("Paris") }
+    val inCorrectAnswers = remember { mutableStateListOf("London", "Berlin", "Brussels") }
+    val allAnswers = correctAnswers.value + inCorrectAnswers
+
+//    val answers = remember {
+//        mutableStateListOf<String>().apply {
+//            addAll(correctAnswers)
+//            addAll(inCorrectAnswers.shuffled())
+//        }
+//    }
 
     Column(
         modifier = Modifier
@@ -65,14 +78,14 @@ fun GameScreen() {
 
         ) {
         TextWithTwoColor(
-            currentQuestionNumber = stringResource(R.string.test_4),
+            currentQuestionNumber = currentQuestionNumber.value.toString(),
             totalQuestionNumber = stringResource(
                 R.string.test_20
             )
         )
 
         SpacerVertical(space = space16)
-        LineProgressBar(20, currentTarget = 4)
+        LineProgressBar(20, currentTarget = currentQuestionNumber.value)
 
         /************************************ Question Card ********************/
         SpacerVertical(space = space24)
@@ -113,12 +126,12 @@ fun GameScreen() {
 
                     SpacerVertical(space = space16)
                     Box(contentAlignment = Alignment.Center) {
-                        QuestionTimer() {
-                            //todo: action when the timer is finished
-                            answers = correctAnswers
-                            isAnsweredOrTimeFinished = true
-                            Log.e("TAG", "Time Ouuuuuuuuuuuuuuuuuuuuuut${answers.toString()}")
+                        QuestionTimer(isTimerRunning = !isAnsweredOrTimeFinished.value) {
+                            isAnsweredOrTimeFinished.value = true
 
+                            //todo: go to next question
+
+                            currentQuestionNumber.value += 1
                         }
                     }
 
@@ -173,29 +186,23 @@ fun GameScreen() {
         {
             RoundedCornerChoiceCard(
                 modifier = Modifier.weight(0.5f),
-                choiceText = stringResource(R.string.test_choice),
-                choiceNumber = stringResource(R.string.a),
-                isCorrectAnswer = answers[0],
-                isSelected = selectedChoice[0],
-                isAnsweredOrTimeFinished = isAnsweredOrTimeFinished
+                questionNumber = "A",
+                correctAnswer = correctAnswers.value,
+                answer = correctAnswers.value,
+                isClicked = isAnsweredOrTimeFinished.value
             ) {
-                //answers = listOf(true, false, false, false)
-                isAnsweredOrTimeFinished = true
-                selectedChoice = listOf(true, false, false, false)
+                isAnsweredOrTimeFinished.value = true
             }
+
             SpacerHorizontal(space = space8)
             RoundedCornerChoiceCard(
                 modifier = Modifier.weight(0.5f),
-                choiceText = stringResource(R.string.test_choice),
-                choiceNumber = stringResource(R.string.b),
-                isCorrectAnswer = answers[1],
-                isSelected = selectedChoice[1],
-                isAnsweredOrTimeFinished = isAnsweredOrTimeFinished
-
+                questionNumber = "B",
+                correctAnswer = correctAnswers.value,
+                answer = inCorrectAnswers[0],
+                isClicked = isAnsweredOrTimeFinished.value
             ) {
-                //answers = listOf(true, false, false, false)
-                isAnsweredOrTimeFinished = true
-                selectedChoice = listOf(false, true, false, false)
+                isAnsweredOrTimeFinished.value = true
             }
         }
 
@@ -207,37 +214,37 @@ fun GameScreen() {
         ) {
             RoundedCornerChoiceCard(
                 modifier = Modifier.weight(0.5f),
-                choiceText = stringResource(R.string.test_choice),
-                choiceNumber = stringResource(R.string.c),
-                isCorrectAnswer = answers[2],
-                isSelected = selectedChoice[2],
-                isAnsweredOrTimeFinished = isAnsweredOrTimeFinished
-
+                questionNumber = "C",
+                correctAnswer = correctAnswers.value,
+                answer = inCorrectAnswers[1],
+                isClicked = isAnsweredOrTimeFinished.value
             ) {
-                //answers = listOf(true, false, false, false)
-                isAnsweredOrTimeFinished = true
-                selectedChoice = listOf(false, false, true, false)
+                isAnsweredOrTimeFinished.value = true
             }
+
+
             SpacerHorizontal(space = space8)
             RoundedCornerChoiceCard(
                 modifier = Modifier.weight(0.5f),
-                choiceText = stringResource(R.string.test_choice),
-                choiceNumber = stringResource(R.string.d),
-                isCorrectAnswer = answers[3],
-                isSelected = selectedChoice[3],
-                isAnsweredOrTimeFinished = isAnsweredOrTimeFinished
+                questionNumber = "D",
+                correctAnswer = correctAnswers.value,
+                answer = inCorrectAnswers[2],
+                isClicked = isAnsweredOrTimeFinished.value
             ) {
-                //answers = listOf(true, false, false, false)
-                isAnsweredOrTimeFinished = true
-                selectedChoice = listOf(false, false, false, true)
+                isAnsweredOrTimeFinished.value = true
 
             }
+
+
         }
 
         Spacer(modifier = Modifier.weight(1f))
+
     }
 
-
 }
+
+
+
 
 

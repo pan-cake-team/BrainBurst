@@ -22,7 +22,7 @@ fun Icon24(letter: String, modifier: Modifier = Modifier) {
     Box(
         modifier = modifier
             .size(24.dp, 24.dp)
-            .background(color = Color.Black, shape = CircleShape)
+            .background(color = Brand100, shape = CircleShape)
         ,
         contentAlignment = Alignment.Center
     ) {

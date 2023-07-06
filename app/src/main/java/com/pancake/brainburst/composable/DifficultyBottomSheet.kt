@@ -68,6 +68,6 @@ fun BottomSheet() {
 
 @Preview
 @Composable
-fun Preview() {
+private fun Preview() {
     BottomSheet()
 }

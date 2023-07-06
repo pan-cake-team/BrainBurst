@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -28,15 +29,28 @@ import com.pancake.brainburst.ui.theme.Type.Caption
 import com.pancake.brainburst.ui.theme.LightWhite500
 
 @Composable
-fun AnswerCard(letter: String, answer: String, isCLicked: MutableState<Boolean>) {
+fun AnswerCard(
+    letter: String,
+    answer: String,
+    isCLicked: MutableState<Boolean>,
+    isTimerOut: MutableState<Boolean>,
+) {
 
     var rightAnswer by remember {
         mutableStateOf(false)
     }
+    LaunchedEffect(key1 = isTimerOut.value, ){
+        if (isTimerOut.value ) {
+            rightAnswer = letter == "A"
+        }
+    }
+
     val color: Color by animateColorAsState(
-        targetValue = if (!isCLicked.value) LightWhite500
-        else if (rightAnswer) Green500
-        else Red500,
+        targetValue =  when {
+            !isCLicked.value -> LightWhite500
+            isTimerOut.value -> if (rightAnswer) Green500 else Red500
+            else -> if (rightAnswer) Green500 else Red500
+        },
         animationSpec = tween(
             durationMillis = 500,
             easing = FastOutSlowInEasing
@@ -51,8 +65,12 @@ fun AnswerCard(letter: String, answer: String, isCLicked: MutableState<Boolean>)
                 shape = RoundedCornerShape(16.dp)
             )
             .clickable {
-                isCLicked.value = true
-                rightAnswer = letter == "A"
+                if (!isTimerOut.value) {
+                    if (!isCLicked.value) {
+                        isCLicked.value = true
+                        rightAnswer = letter == "A"
+                    }
+                }
             },
 
         ) {
@@ -72,5 +90,5 @@ private fun Preview() {
     val state = remember {
         mutableStateOf(false)
     }
-    AnswerCard(letter = "A", answer = "Jupiter", state)
+    AnswerCard(letter = "A", answer = "Jupiter", state, state)
 }

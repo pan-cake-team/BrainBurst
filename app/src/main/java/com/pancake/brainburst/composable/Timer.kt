@@ -7,6 +7,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -29,11 +30,13 @@ import kotlinx.coroutines.delay
 
 @Composable
 fun GameTimer(
+    modifier: Modifier = Modifier,
     totalTime: Long,
     activeBarColor: Color,
     initValue: Float = 0f,
-    modifier: Modifier = Modifier,
     strokeWidth: Dp = 3.dp,
+    isTimerOut: MutableState<Boolean>,
+    isItemClicked: MutableState<Boolean>,
 ) {
     var size by remember {
         mutableStateOf(IntSize.Zero)
@@ -48,11 +51,12 @@ fun GameTimer(
         mutableStateOf(true)
     }
     LaunchedEffect(key1 = currentTime) {
-        if (currentTime > 0) {
+        if (currentTime > 0 && !isItemClicked.value) {
             delay(100L)
             currentTime -= 100L
             percentage = currentTime / totalTime.toFloat()
-        }
+        } else isTimerOut.value = true
+        isTimerRunning = false
     }
     Box(
         modifier = modifier
@@ -84,11 +88,15 @@ fun GameTimer(
 @Preview
 @Composable
 private fun Preview() {
-
+    val isTimerOut = remember {
+        mutableStateOf(false)
+    }
     GameTimer(
         totalTime = 30L * 1000L,
         activeBarColor = Brand500,
-        modifier = Modifier.size(200.dp)
+        modifier = Modifier.size(200.dp),
+        isTimerOut = isTimerOut,
+        isItemClicked = isTimerOut
     )
 
 }

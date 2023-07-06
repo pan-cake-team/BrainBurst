@@ -16,15 +16,13 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.pancake.brainburst.ui.theme.Brand100
 import com.pancake.brainburst.ui.theme.Brand500
 import com.pancake.brainburst.ui.theme.Green500
@@ -37,18 +35,13 @@ import com.pancake.brainburst.ui.theme.space16
 import com.pancake.brainburst.ui.theme.space24
 import com.pancake.brainburst.ui.theme.space8
 
+
+@Composable
 @Preview(showBackground = true)
-@Composable
-fun questionBottomSheetScreen(
-    viewModel: QuestionBottomSheetViewModel = hiltViewModel()
-){
-    val state by viewModel.state.collectAsState()
-    questionBottomSheetContent(state)
-}
-
-
-@Composable
-fun questionBottomSheetContent(state: QuestionUiState) {
+fun questionBottomSheetContent(state: QuestionUiState = QuestionUiState()) {
+    val letters =  remember {
+        mutableListOf("A", "B", "C", "D")
+    }
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -66,7 +59,7 @@ fun questionBottomSheetContent(state: QuestionUiState) {
             items(count = state.answers.size) {
                 val answer = state.answers[it]
                 answerCard(
-                    letter = answer.letter,
+                    letter = letters[it],
                     text = answer.text,
                     isCorrectAnswer = answer.isCorrect
                 )

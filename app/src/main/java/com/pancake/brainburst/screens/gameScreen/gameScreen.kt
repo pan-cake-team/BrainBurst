@@ -1,5 +1,6 @@
 package com.pancake.brainburst.screens.gameScreen
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -10,6 +11,7 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -45,7 +47,9 @@ private fun GameContent(
     clickedState: MutableState<Boolean>,
     isTimerOut: MutableState<Boolean>,
 ) {
-
+    LaunchedEffect(key1 = isTimerOut) {
+        Log.i("TAG", "isTimerOut : ${isTimerOut.value}")
+    }
     Column(
         modifier = Modifier
             .fillMaxSize()

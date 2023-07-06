@@ -1,5 +1,6 @@
 package com.pancake.brainburst.composable
 
+import android.util.Log
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
@@ -41,18 +42,28 @@ fun AnswerCard(
     var rightAnswer by remember {
         mutableStateOf(false)
     }
-    LaunchedEffect(key1 = isTimerOut.value) {
+
+    val cardColor = remember {
+        mutableStateOf(Color.White)
+    }
+    LaunchedEffect(key1 = isTimerOut.value, key2 = isCLicked) {
+
         if (isTimerOut.value) {
             rightAnswer = letter == "A"
         }
+
+      cardColor.value =   when{
+            !isCLicked.value ->  LightWhite500
+            isTimerOut.value -> if (rightAnswer) Green500 else Red500
+            else -> if (rightAnswer) Green500 else Red500
+        }
+
+        Log.i("Answer", isTimerOut.value.toString())
+
     }
 
     val color: Color by animateColorAsState(
-        targetValue = when {
-            !isCLicked.value -> LightWhite500
-            isTimerOut.value -> if (rightAnswer) Green500 else Red500
-            else -> if (rightAnswer) Green500 else Red500
-        },
+        targetValue = cardColor.value,
         animationSpec = tween(
             durationMillis = 500,
             easing = FastOutSlowInEasing

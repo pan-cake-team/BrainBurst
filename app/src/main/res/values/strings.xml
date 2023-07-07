@@ -1,6 +1,34 @@
 <resources>
     <string name="app_name">BrainBurst</string>
 
+
+    <string name="play_by_category">Play by Category</string>
+    <string name="choose_your_hobbies">Choose your hobbies</string>
+    <string name="select_and_play">select and play</string>
+    <string name="play_now">Play now</string>
+
+    <string name="people">People</string>
+    <string name="business">Business</string>
+    <string name="medicine">Medicine</string>
+
+    <string name="animals">Animals</string>
+    <string name="bands">Bands</string>
+    <string name="language">Language</string>
+
+    <string name="cities">Cities</string>
+    <string name="space">Space</string>
+    <string name="biology">Biology</string>
+
+    <string name="science">Science</string>
+    <string name="food">Food</string>
+    <string name="sports">Sports</string>
+    <string name="music">Music</string>
+    <string name="history">History</string>
+    <string name="art">Art</string>
+    <string name="films">Films</string>
+    <string name="geography">Geography</string>
+
+
     <string name="easy">Easy</string>
     <string name="medium">Medium</string>
     <string name="difficult">Difficult</string>
@@ -18,5 +46,6 @@
     <string name="next_level">Next Level</string>
 
     <string name="exit">Exit</string>
+
 
 </resources>

@@ -68,7 +68,7 @@ fun BrainBurstTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,
+        typography = GooglePoppinsTypography,
         content = content
     )
 }

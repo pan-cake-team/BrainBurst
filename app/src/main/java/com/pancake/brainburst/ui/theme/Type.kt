@@ -19,6 +19,17 @@ val Typography = Typography(
         fontSize = 16.sp,
         lineHeight = 24.sp,
         letterSpacing = 0.5.sp
+
+    )
+    /* Other default text styles to override
+    titleLarge = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = 22.sp,
+        lineHeight = 28.sp,
+        letterSpacing = textSizeZero
+
+
     ),
     bodyMedium = TextStyle(
         fontFamily = Poppins,
@@ -38,49 +49,49 @@ object Type {
     val Caption = TextStyle(
         fontFamily = Poppins,
         fontWeight = FontWeight.Normal,
-        fontSize = 12.sp,
-        letterSpacing = 0.sp
+        fontSize = textSize12,
+        letterSpacing = textSize0
     )
 
     val Body = TextStyle(
         fontFamily = Poppins,
         fontWeight = FontWeight.Normal,
-        fontSize = 14.sp,
-        letterSpacing = 0.sp
+        fontSize = textSize14,
+        letterSpacing = textSize0
     )
 
     val Title = TextStyle(
         fontFamily = Poppins,
         fontWeight = FontWeight.SemiBold,
-        fontSize = 14.sp,
-        letterSpacing = 0.sp
+        fontSize = textSize14,
+        letterSpacing = textSize0
     )
 
     val Headline = TextStyle(
         fontFamily = Poppins,
         fontWeight = FontWeight.SemiBold,
-        fontSize = 16.sp,
-        letterSpacing = 0.sp
+        fontSize = textSize16,
+        letterSpacing = textSize0
     )
 
     val Large = TextStyle(
         fontFamily = Poppins,
         fontWeight = FontWeight.SemiBold,
-        fontSize = 24.sp,
-        letterSpacing = 0.sp
+        fontSize = textSize24,
+        letterSpacing = textSize0
     )
 
     val GraphicTextNormal = TextStyle(
         fontFamily = NerkoOne,
         fontWeight = FontWeight.Normal,
-        fontSize = 24.sp,
-        letterSpacing = 0.sp
+        fontSize = textSize24,
+        letterSpacing = textSize0
     )
 
     val GraphicTextLarge = TextStyle(
         fontFamily = NerkoOne,
         fontWeight = FontWeight.Normal,
-        fontSize = 32.sp,
-        letterSpacing = 0.sp
+        fontSize = textSize32,
+        letterSpacing = textSize0
     )
 }

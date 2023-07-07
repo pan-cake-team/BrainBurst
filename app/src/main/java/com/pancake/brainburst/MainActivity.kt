@@ -13,6 +13,7 @@ import com.pancake.brainburst.screens.welecome.WelcomeScreen
 import com.pancake.brainburst.ui.theme.BrainBurstTheme
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,3 +49,4 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+

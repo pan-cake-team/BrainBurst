@@ -4,9 +4,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 //region Space Dimensions
+
+val space0 = 0.dp
+
 val zero = 0.dp
-
-
 val space2 = 2.dp
 val space4 = 4.dp
 val space8 = 8.dp
@@ -23,6 +24,8 @@ val space80 = 80.dp
 //endregion
 
 //region Text Size Dimensions
+val textSize0 = 0.sp
+val textSize12 = 12.sp
 val textSize14 = 14.sp
 val textSize16 = 16.sp
 val textSize24 = 24.sp
@@ -46,7 +49,16 @@ const val textWeight600 = 600
 val width1 = 1.dp
 //endregion
 
+
+//region Game Screen
+val bigIconButtonSize = 40.dp
+val smallIconButtonSize = 32.dp
+val timerStrokeWidth = 2.dp
+val QuestionCounterSize = 40.dp
+//endregion
+
 // region Radius Dimensions
 val radius16 = 16.dp
 //endregion
+
 

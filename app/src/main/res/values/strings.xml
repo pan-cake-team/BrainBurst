@@ -1,6 +1,18 @@
 <resources>
     <string name="app_name">BrainBurst</string>
 
+    <string name="of">of</string>
+    <string name="question">Question</string>
+    <string name="test_question">Lorem ipsum dolor sit amet consectetur Placerat ut sit urna .</string>
+    <string name="test_4">4</string>
+    <string name="test_20">20</string>
+    <string name="a">A</string>
+    <string name="b">B</string>
+    <string name="c">C</string>
+    <string name="d">D</string>
+    <string name="test_choice">Jupiter</string>
+
+
 
     <string name="play_by_category">Play by Category</string>
     <string name="choose_your_hobbies">Choose your hobbies</string>

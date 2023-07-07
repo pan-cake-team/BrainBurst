@@ -10,7 +10,7 @@ class GameRepositoryImpl @Inject constructor(
     private val apiService: TriviaService,
     private val dao: BrainBurstDao
 ) : GameRepository {
-    override fun addFavoriteQuestion(question: FavoriteQuestionEntity) {
+    override suspend fun addFavoriteQuestion(question: FavoriteQuestionEntity) {
         return dao.addFavoriteQuestion(question)
     }
 

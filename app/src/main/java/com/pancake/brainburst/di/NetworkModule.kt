@@ -1,5 +1,6 @@
 package com.pancake.brainburst.di
 
+import com.pancake.brainburst.data.source.remote.network.TriviaService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,7 +18,13 @@ internal object NetworkModule {
 
     private const val BASE_URL = "https://the-trivia-api.com/v2/"
 
+
     @Singleton
+    @Provides
+    fun provideFootballApiService(retrofit: Retrofit): TriviaService {
+        return retrofit.create(TriviaService::class.java)
+    }
+        @Singleton
     @Provides
     fun provideRetrofit(
         client: OkHttpClient,

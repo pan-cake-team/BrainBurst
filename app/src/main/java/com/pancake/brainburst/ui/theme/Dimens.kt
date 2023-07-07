@@ -30,7 +30,7 @@ val textSize14 = 14.sp
 val textSize16 = 16.sp
 val textSize24 = 24.sp
 val textSize32 = 32.sp
-val textSize12 = 12.sp
+
 //endregion
 
 //region Border Size Dimensions

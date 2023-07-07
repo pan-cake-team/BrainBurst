@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">BrainBurst</string>
+
     <string name="of">of</string>
     <string name="question">Question</string>
     <string name="test_question">Lorem ipsum dolor sit amet consectetur Placerat ut sit urna .</string>
@@ -10,4 +11,53 @@
     <string name="c">C</string>
     <string name="d">D</string>
     <string name="test_choice">Jupiter</string>
+
+
+
+    <string name="play_by_category">Play by Category</string>
+    <string name="choose_your_hobbies">Choose your hobbies</string>
+    <string name="select_and_play">select and play</string>
+    <string name="play_now">Play now</string>
+
+    <string name="people">People</string>
+    <string name="business">Business</string>
+    <string name="medicine">Medicine</string>
+
+    <string name="animals">Animals</string>
+    <string name="bands">Bands</string>
+    <string name="language">Language</string>
+
+    <string name="cities">Cities</string>
+    <string name="space">Space</string>
+    <string name="biology">Biology</string>
+
+    <string name="science">Science</string>
+    <string name="food">Food</string>
+    <string name="sports">Sports</string>
+    <string name="music">Music</string>
+    <string name="history">History</string>
+    <string name="art">Art</string>
+    <string name="films">Films</string>
+    <string name="geography">Geography</string>
+
+
+    <string name="easy">Easy</string>
+    <string name="medium">Medium</string>
+    <string name="difficult">Difficult</string>
+    <string name="your_highest_score">Your highest score</string>
+    <string name="crown_star">crown star</string>
+
+  
+    <string name="you_lose">You Lose</string>
+    <string name="your_score">your score</string>
+    <string name="try_again">Try again</string>
+
+    <string name="win_image">Win Image</string>
+    <string name="you_win">You Win</string>
+    <string name="your_score">Your Score</string>
+    <string name="next_level">Next Level</string>
+
+    <string name="exit">Exit</string>
+
+
 </resources>

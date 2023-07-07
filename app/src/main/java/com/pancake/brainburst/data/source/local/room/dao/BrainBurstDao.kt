@@ -10,8 +10,8 @@ import com.pancake.brainburst.data.source.local.room.entity.FavoriteQuestionEnti
 interface BrainBurstDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun addFavoriteQuestion(question: FavoriteQuestionEntity)
+  suspend fun addFavoriteQuestion(question: FavoriteQuestionEntity)
 
     @Query("select * from FavoriteQuestionEntity")
-    fun getAllFavoriteQuestions(): List<FavoriteQuestionEntity>
+   suspend fun getAllFavoriteQuestions(): List<FavoriteQuestionEntity>
 }

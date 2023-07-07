@@ -4,7 +4,7 @@ import com.pancake.brainburst.data.source.local.room.entity.FavoriteQuestionEnti
 
 interface GameRepository {
 
-    fun addFavoriteQuestion(question: FavoriteQuestionEntity)
+   suspend fun addFavoriteQuestion(question: FavoriteQuestionEntity)
 
-    fun getAllFavoriteQuestions(): List<FavoriteQuestionEntity>
+   suspend fun getAllFavoriteQuestions(): List<FavoriteQuestionEntity>
 }

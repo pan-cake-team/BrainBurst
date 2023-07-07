@@ -10,19 +10,32 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.pancake.brainburst.screens.GameScreen
 import com.pancake.brainburst.ui.theme.LightBackground
+import androidx.compose.ui.tooling.preview.Preview
+import com.pancake.brainburst.screens.home.HomeScreen
+import com.pancake.brainburst.screens.welecome.WelcomeScreen
+
+
 import com.pancake.brainburst.ui.theme.BrainBurstTheme
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             BrainBurstTheme {
+
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color =  LightBackground
                 ) {
                     Box(contentAlignment = Alignment.Center) {
-                       GameScreen()
+                       
+                WelcomeScreen()
+            }
+
+        }
+    }
+
 
                     }
 

@@ -19,40 +19,40 @@ class SavedQuestionViewModel @Inject constructor(
         _state.update {
             it.copy(
                 questions = listOf(
-                    QuestionUiState(
+                    QuestionModel(
                         question = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
                         answers = listOf(
-                            AnswerUiState(text = "Jupitar"),
-                            AnswerUiState(text = "Jupe", isCorrect = true),
-                            AnswerUiState(text = "Jupitar"),
-                            AnswerUiState(text = "Jupitar")
+                            AnswerModel(text = "Jupitar"),
+                            AnswerModel(text = "Jupe", isCorrect = true),
+                            AnswerModel(text = "Jupitar"),
+                            AnswerModel(text = "Jupitar")
                         )
                     ),
-                    QuestionUiState(
+                    QuestionModel(
                         question = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
                         answers = listOf(
-                            AnswerUiState(text = "Jupitar"),
-                            AnswerUiState(text = "Jupe", isCorrect = true),
-                            AnswerUiState(text = "Jupitar"),
-                            AnswerUiState(text = "Jupitar")
+                            AnswerModel(text = "Jupitar"),
+                            AnswerModel(text = "Jupe", isCorrect = true),
+                            AnswerModel(text = "Jupitar"),
+                            AnswerModel(text = "Jupitar")
                         )
                     ),
-                    QuestionUiState(
+                    QuestionModel(
                         question = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
                         answers = listOf(
-                            AnswerUiState(text = "Jupitar"),
-                            AnswerUiState(text = "Jupe", isCorrect = true),
-                            AnswerUiState(text = "Jupitar"),
-                            AnswerUiState(text = "Jupitar")
+                            AnswerModel(text = "Jupitar"),
+                            AnswerModel(text = "Jupe", isCorrect = true),
+                            AnswerModel(text = "Jupitar"),
+                            AnswerModel(text = "Jupitar")
                         )
                     ),
-                    QuestionUiState(
+                    QuestionModel(
                         question = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
                         answers = listOf(
-                            AnswerUiState(text = "Jupitar"),
-                            AnswerUiState(text = "Jupe", isCorrect = true),
-                            AnswerUiState(text = "Jupitar"),
-                            AnswerUiState(text = "Jupitar")
+                            AnswerModel(text = "Jupitar"),
+                            AnswerModel(text = "Jupe", isCorrect = true),
+                            AnswerModel(text = "Jupitar"),
+                            AnswerModel(text = "Jupitar")
                         )
                     ),
                 )

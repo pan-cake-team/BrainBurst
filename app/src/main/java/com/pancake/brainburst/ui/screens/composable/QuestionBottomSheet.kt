@@ -21,9 +21,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.pancake.brainburst.ui.screens.savedQuestions.QuestionUiState
+import com.pancake.brainburst.ui.screens.savedQuestions.QuestionModel
 import com.pancake.brainburst.ui.theme.Brand100
 import com.pancake.brainburst.ui.theme.Brand500
 import com.pancake.brainburst.ui.theme.Green500
@@ -38,8 +37,7 @@ import com.pancake.brainburst.ui.theme.space8
 
 
 @Composable
-@Preview(showBackground = true)
-fun questionBottomSheetContent(state: QuestionUiState = QuestionUiState()) {
+private fun QuestionBottomSheetContent(state: QuestionModel = QuestionModel()) {
     val letters =  remember {
         mutableListOf("A", "B", "C", "D")
     }
@@ -50,7 +48,7 @@ fun questionBottomSheetContent(state: QuestionUiState = QuestionUiState()) {
             .background(LightBackground)
             .padding(horizontal = space16, vertical = space24)
     ) {
-        questionText(text = state.question)
+        QuestionText(text = state.question)
         Spacer(modifier = Modifier.size(space16))
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
@@ -59,7 +57,7 @@ fun questionBottomSheetContent(state: QuestionUiState = QuestionUiState()) {
         ) {
             items(count = state.answers.size) {
                 val answer = state.answers[it]
-                answerCard(
+                AnswerCard(
                     letter = letters[it],
                     text = answer.text,
                     isCorrectAnswer = answer.isCorrect
@@ -71,8 +69,8 @@ fun questionBottomSheetContent(state: QuestionUiState = QuestionUiState()) {
 
 
 @Composable
-fun questionText(text: String) {
-    cardText(
+private fun QuestionText(text: String) {
+    CardText(
         text = text,
         isCorrectAnswer = false,
         modifier = Modifier
@@ -84,7 +82,7 @@ fun questionText(text: String) {
 }
 
 @Composable
-fun answerCard(
+private fun AnswerCard(
     letter: String,
     text: String,
     isCorrectAnswer: Boolean = true
@@ -96,7 +94,7 @@ fun answerCard(
             .background(if (isCorrectAnswer) Green500 else LightWhite500)
             .padding(space8),
     ) {
-        cardText(
+        CardText(
             text = letter,
             isCorrectAnswer = isCorrectAnswer,
             modifier = Modifier
@@ -105,7 +103,7 @@ fun answerCard(
                 .background(if (isCorrectAnswer) LightWhite300 else Brand100)
                 .align(Alignment.TopStart)
         )
-        cardText(
+        CardText(
             text = text,
             isCorrectAnswer = isCorrectAnswer,
             modifier = Modifier.align(Alignment.Center)
@@ -114,7 +112,7 @@ fun answerCard(
 }
 
 @Composable
-fun cardText(
+private fun CardText(
     text: String,
     modifier: Modifier = Modifier,
     isCorrectAnswer: Boolean

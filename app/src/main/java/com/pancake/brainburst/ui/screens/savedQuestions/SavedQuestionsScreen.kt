@@ -16,7 +16,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,7 +27,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.pancake.brainburst.R
 import com.pancake.brainburst.ui.theme.Brand500
@@ -43,32 +41,30 @@ import com.pancake.brainburst.ui.theme.space32
 import com.pancake.brainburst.ui.theme.space4
 import com.pancake.brainburst.ui.theme.space8
 
-@Preview(showBackground = true)
 @Composable
-fun savedQuestionScreen(
+fun SavedQuestionScreen(
     viewModel: SavedQuestionViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
-    savedQuestionContent(state = state)
+    SavedQuestionContent(state = state)
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun savedQuestionContent(state: SavedQuestionsUiState) {
+private fun SavedQuestionContent(state: SavedQuestionsUiState) {
 
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(space16)
     ) {
-        topBar(title = "Saved Questions")
-        questionList(state.getQuestionsText())
+        TopBar()
+        QuestionList(state.getQuestionsText())
     }
 }
 
 
 @Composable
-fun topBar(title: String) {
+private fun TopBar() {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.Start
@@ -83,7 +79,7 @@ fun topBar(title: String) {
         Spacer(modifier = Modifier.size(space16))
         Text(
             modifier = Modifier.padding(vertical = space4),
-            text = title,
+            text = "Saved Questions",
             style = Type.Title,
             textAlign = TextAlign.Center
         )
@@ -91,13 +87,13 @@ fun topBar(title: String) {
 }
 
 @Composable
-fun questionList(questions: List<String>) {
+private fun QuestionList(questions: List<String>) {
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(space8),
         contentPadding = PaddingValues(vertical = space24)
     ) {
         items(count = questions.size) {
-            questionCard(
+            QuestionCard(
                 text = questions[it],
             )
         }
@@ -105,7 +101,7 @@ fun questionList(questions: List<String>) {
 }
 
 @Composable
-fun questionCard(
+private fun QuestionCard(
     text: String,
 ) {
 

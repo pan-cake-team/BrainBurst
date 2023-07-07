@@ -1,5 +1,6 @@
 package com.pancake.brainburst
 
+
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -8,14 +9,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.pancake.brainburst.screens.GameScreen
-import com.pancake.brainburst.ui.theme.LightBackground
-import androidx.compose.ui.tooling.preview.Preview
-import com.pancake.brainburst.screens.home.HomeScreen
 import com.pancake.brainburst.screens.welecome.WelcomeScreen
-
-
 import com.pancake.brainburst.ui.theme.BrainBurstTheme
+import com.pancake.brainburst.ui.theme.LightBackground
+import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -29,19 +26,17 @@ class MainActivity : ComponentActivity() {
                     color =  LightBackground
                 ) {
                     Box(contentAlignment = Alignment.Center) {
-                       
-                WelcomeScreen()
-            }
 
-        }
-    }
-
-
+                        WelcomeScreen()
                     }
 
                 }
             }
+
+
         }
+
     }
 }
+
 

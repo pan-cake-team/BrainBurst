@@ -6,11 +6,11 @@ import com.pancake.brainburst.data.source.remote.network.TriviaService
 import javax.inject.Inject
 
 
-class RepositoryImpl @Inject constructor(
+class GameRepositoryImpl @Inject constructor(
     private val apiService: TriviaService,
     private val dao: BrainBurstDao
-) : Repository {
-    override suspend fun addFavoriteQuestion(question: FavoriteQuestionEntity) {
+) : GameRepository {
+    override fun addFavoriteQuestion(question: FavoriteQuestionEntity) {
         return dao.addFavoriteQuestion(question)
     }
 

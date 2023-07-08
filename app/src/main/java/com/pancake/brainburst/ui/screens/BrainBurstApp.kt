@@ -6,7 +6,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.rememberNavController
 import com.pancake.brainburst.BrainNavGraph
-import com.pancake.brainburst.ui.screens.winScreen.WinScreen
 import com.pancake.brainburst.ui.theme.BrainBurstTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -17,7 +16,6 @@ fun BrainBurstApp() {
         Scaffold {
             val navController = rememberNavController()
             BrainNavGraph(navController)
-            WinScreen()
         }
     }
 

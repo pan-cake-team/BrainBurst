@@ -1,14 +1,19 @@
 package com.pancake.brainburst.ui.screens.savedQuestions
 
+import androidx.lifecycle.viewModelScope
+import com.pancake.brainburst.domain.model.FavoriteQuestionModel
+import com.pancake.brainburst.domain.useCases.GetAllSavedQuestionLocal
 import com.pancake.brainburst.ui.base.BaseViewModel
+import com.pancake.brainburst.ui.screens.savedQuestions.state.SavedQuestionsUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
 @HiltViewModel
 class SavedQuestionViewModel @Inject constructor(
-
+    private val getAllSavedQuestionLocal: GetAllSavedQuestionLocal
 ) : BaseViewModel<SavedQuestionsUiState>(SavedQuestionsUiState()) {
 
     init {
@@ -16,47 +21,13 @@ class SavedQuestionViewModel @Inject constructor(
     }
 
     private fun getSavedQuestions() {
-        _state.update {
-            it.copy(
-                questions = listOf(
-                    QuestionModel(
-                        question = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-                        answers = listOf(
-                            AnswerModel(text = "Jupitar"),
-                            AnswerModel(text = "Jupe", isCorrect = true),
-                            AnswerModel(text = "Jupitar"),
-                            AnswerModel(text = "Jupitar")
-                        )
-                    ),
-                    QuestionModel(
-                        question = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-                        answers = listOf(
-                            AnswerModel(text = "Jupitar"),
-                            AnswerModel(text = "Jupe", isCorrect = true),
-                            AnswerModel(text = "Jupitar"),
-                            AnswerModel(text = "Jupitar")
-                        )
-                    ),
-                    QuestionModel(
-                        question = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-                        answers = listOf(
-                            AnswerModel(text = "Jupitar"),
-                            AnswerModel(text = "Jupe", isCorrect = true),
-                            AnswerModel(text = "Jupitar"),
-                            AnswerModel(text = "Jupitar")
-                        )
-                    ),
-                    QuestionModel(
-                        question = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-                        answers = listOf(
-                            AnswerModel(text = "Jupitar"),
-                            AnswerModel(text = "Jupe", isCorrect = true),
-                            AnswerModel(text = "Jupitar"),
-                            AnswerModel(text = "Jupitar")
-                        )
-                    ),
-                )
-            )
+        viewModelScope.launch {
+            val favoriteQuestions = getAllSavedQuestionLocal()
+            _state.update { it.copy(questions = favoriteQuestions) }
         }
+    }
+
+    fun onClickQuestion(question: FavoriteQuestionModel) {
+        _state.update { it.copy(selectedQuestion = question) }
     }
 }

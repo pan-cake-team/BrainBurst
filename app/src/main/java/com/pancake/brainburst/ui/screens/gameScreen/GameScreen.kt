@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import com.pancake.brainburst.R
 import com.pancake.brainburst.ui.screens.composable.Loading
 import com.pancake.brainburst.ui.screens.composable.QuestionBar
@@ -32,7 +33,8 @@ import com.pancake.brainburst.ui.theme.space8
 import kotlinx.coroutines.delay
 
 @Composable
-fun GameScreen2(
+fun GameScreen(
+    navController: NavHostController,
     viewModel: GameViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()

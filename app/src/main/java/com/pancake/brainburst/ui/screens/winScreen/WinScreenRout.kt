@@ -19,7 +19,7 @@ fun NavController.navToHome(){
 }
 
 fun NavController.navToGame(){
-    navigate(AppDestination.GameScreenTwo.screen)
+    navigate(AppDestination.GameScreen.screen)
 
 }
 

@@ -4,9 +4,8 @@ import android.annotation.SuppressLint
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import com.pancake.brainburst.ui.screens.gameScreen.GameScreen
-import com.pancake.brainburst.ui.screens.gameScreen.GameScreen2
-import com.pancake.brainburst.ui.screens.winScreen.WinScreen
+import androidx.navigation.compose.rememberNavController
+import com.pancake.brainburst.BrainNavGraph
 import com.pancake.brainburst.ui.theme.BrainBurstTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -15,7 +14,8 @@ import com.pancake.brainburst.ui.theme.BrainBurstTheme
 fun BrainBurstApp() {
     BrainBurstTheme() {
         Scaffold {
-            GameScreen2()
+            val navController = rememberNavController()
+            BrainNavGraph(navController)
         }
     }
 

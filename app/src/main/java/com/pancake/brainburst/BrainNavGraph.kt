@@ -24,7 +24,7 @@ fun BrainNavGraph(navController: NavHostController) {
 
         composable(AppDestination.GameScreenTwo.screen) { GameScreen2() }
 
-        composable(AppDestination.SavedQuestion.screen) { SavedQuestionScreen() }
+        composable(AppDestination.SavedQuestion.screen) { SavedQuestionScreen(navController) }
 
         composable(AppDestination.WinScreen.screen) { WinScreen() }
 

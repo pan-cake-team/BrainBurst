@@ -34,6 +34,7 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.pancake.brainburst.R
 import com.pancake.brainburst.domain.model.FavoriteQuestionModel
 import com.pancake.brainburst.ui.screens.savedQuestions.bottomSheet.QuestionBottomSheetContent
@@ -51,13 +52,14 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun SavedQuestionScreen(
+    navController: NavController,
     viewModel: SavedQuestionViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
     SavedQuestionContent(
         state = state,
         onClickQuestion = viewModel::onClickQuestion,
-        onClickBack = {}
+        onClickBack = { navController.popBackStack() }
     )
 }
 

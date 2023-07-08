@@ -1,5 +1,6 @@
 package com.pancake.brainburst.ui.screens.gameScreen
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.pancake.brainburst.domain.model.Question
 import com.pancake.brainburst.domain.usecase.QuestionsUseCase
@@ -42,5 +43,60 @@ class GameViewModel @Inject constructor(
             answers = answers,
             correctAnswer = correctAnswer
         )
+    }
+
+    fun onSelectedAnswer(answerSelected: String) {
+        Log.v("ameerxyz", "sadsadsd $answerSelected")
+
+//        var isAnswerCorrectSelected =
+        _state.update { state ->
+            state.copy(
+                isLoading = false,
+                isAnsweredOrTimeFinished = true,
+                isAnswerSelected = true,
+                isAnswerCorrectSelected = isAnswerCorrectSelected(answerSelected),
+                isUpdateStateQuestion = true
+            )
+        }
+
+    }
+
+    private fun isAnswerCorrectSelected(answer: String): Boolean {
+        val currentQuestion = _state.value.questions[_state.value.currentQuestionNumber]
+        return currentQuestion.correctAnswer == answer
+    }
+
+
+    fun goToNextQuestion() {
+        _state.update { state ->
+            state.copy(
+                isLoading = false,
+                isAnswerSelected = true,
+                isAnsweredOrTimeFinished = false,
+                isAnswerCorrectSelected = false,
+                isUpdateStateQuestion = false,
+                resetTimer = true,
+                currentQuestionNumber = _state.value.currentQuestionNumber + 1
+            )
+        }
+
+    }
+
+    fun onTimeUpdate() {
+        if (_state.value.totalTime > 0) {
+            _state.update { state ->
+                state.copy(
+                    totalTime = _state.value.totalTime - 1000
+                )
+            }
+        } else {
+            _state.update { state ->
+                state.copy(
+                    isTimerRunning = false
+                )
+            }
+        }
+
+
     }
 }

@@ -24,7 +24,7 @@ fun QuestionBar(
         animationSpec = tween(
             durationMillis = animationDuration,
             delayMillis = animationDelay
-        )
+        ), label = ""
     )
 
     LinearProgressIndicator(

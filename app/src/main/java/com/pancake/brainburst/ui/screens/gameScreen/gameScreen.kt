@@ -19,7 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.pancake.brainburst.ui.screens.composable.AnswerCard
-import com.pancake.brainburst.ui.screens.composable.GameQuestionCard
+//import com.pancake.brainburst.ui.screens.composable.GameQuestionCard
 import com.pancake.brainburst.ui.screens.composable.SpacerVertical16
 import com.pancake.brainburst.ui.screens.composable.SpacerVertical24
 import com.pancake.brainburst.ui.theme.LightBackground
@@ -62,11 +62,11 @@ private fun GameContent(
             SpacerVertical16()
         }
         SpacerVertical24()
-        GameQuestionCard(
-            question = "Lorem ipsum dolor sit amet consectetur Placerat ut sit urna .",
-            isTimerOut,
-            isItemCLicked = clickedState
-        )
+//        GameQuestionCard(
+//            question = "Lorem ipsum dolor sit amet consectetur Placerat ut sit urna .",
+//            isTimerOut,
+//            isItemCLicked = clickedState
+//        )
         SpacerVertical24()
 
         LazyVerticalGrid(

@@ -7,11 +7,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
@@ -35,8 +34,8 @@ fun GameTimer(
     activeBarColor: Color,
     initValue: Float = 0f,
     strokeWidth: Dp = 3.dp,
-    isTimerOut: MutableState<Boolean>,
-    isItemClicked: MutableState<Boolean>,
+    onTimerOut: () -> Unit,
+    isItemClicked: Boolean,
 ) {
     var size by remember {
         mutableStateOf(IntSize.Zero)
@@ -51,11 +50,13 @@ fun GameTimer(
         mutableStateOf(true)
     }
     LaunchedEffect(key1 = currentTime) {
-        if (currentTime > 0 && !isItemClicked.value) {
+        if (currentTime > 0 && !isItemClicked) {
             delay(100L)
             currentTime -= 100L
             percentage = currentTime / totalTime.toFloat()
-        } else isTimerOut.value = true
+        } else {
+            onTimerOut()
+        }
         isTimerRunning = false
     }
     Box(
@@ -88,15 +89,13 @@ fun GameTimer(
 @Preview
 @Composable
 private fun Preview() {
-    val isTimerOut = remember {
-        mutableStateOf(false)
-    }
+
     GameTimer(
         totalTime = 30L * 1000L,
         activeBarColor = Brand500,
         modifier = Modifier.size(200.dp),
-        isTimerOut = isTimerOut,
-        isItemClicked = isTimerOut
+        onTimerOut = {},
+        isItemClicked = false
     )
 
 }

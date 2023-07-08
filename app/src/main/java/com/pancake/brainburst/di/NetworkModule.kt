@@ -1,5 +1,6 @@
 package com.pancake.brainburst.di
 
+import com.pancake.brainburst.data.source.remote.network.TriviaService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,6 +17,15 @@ import javax.inject.Singleton
 internal object NetworkModule {
 
     private const val BASE_URL = "https://the-trivia-api.com/v2/"
+
+    @Provides
+    fun provideTriviaService(
+        okHttpClient: OkHttpClient,
+        gsonConverterFactory: GsonConverterFactory
+    ): TriviaService {
+        return provideRetrofit(okHttpClient, gsonConverterFactory)
+            .create(TriviaService::class.java)
+    }
 
     @Singleton
     @Provides
@@ -48,7 +58,7 @@ internal object NetworkModule {
     @Provides
     fun provideLoggingInterceptor(): HttpLoggingInterceptor =
         HttpLoggingInterceptor().apply {
-        level = HttpLoggingInterceptor.Level.BASIC
+            level = HttpLoggingInterceptor.Level.BODY
     }
 
 }

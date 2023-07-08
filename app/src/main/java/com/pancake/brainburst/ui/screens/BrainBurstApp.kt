@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import com.pancake.brainburst.ui.screens.gameScreen.GameScreen
+import com.pancake.brainburst.ui.screens.gameScreen.GameScreen2
 import com.pancake.brainburst.ui.screens.winScreen.WinScreen
 import com.pancake.brainburst.ui.theme.BrainBurstTheme
 
@@ -13,7 +15,7 @@ import com.pancake.brainburst.ui.theme.BrainBurstTheme
 fun BrainBurstApp() {
     BrainBurstTheme() {
         Scaffold {
-            WinScreen()
+            GameScreen2()
         }
     }
 

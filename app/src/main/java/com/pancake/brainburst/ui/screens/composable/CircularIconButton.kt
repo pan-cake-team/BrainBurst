@@ -13,8 +13,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.pancake.brainburst.ui.theme.LightWhite500
 import com.pancake.brainburst.ui.theme.LightWhite300
+import com.pancake.brainburst.ui.theme.LightWhite500
 import com.pancake.brainburst.ui.theme.space0
 import com.pancake.brainburst.ui.theme.space40
 

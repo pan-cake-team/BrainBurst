@@ -17,7 +17,7 @@ fun QuestionDto.toQuestion(): Question {
         category = category ?: "",
         question = question?.text ?: "",
         correctAnswer = correctAnswerValue,
-        answer = answers,
+        answers = answers,
     )
 
 }

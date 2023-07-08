@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">BrainBurst</string>
 
-    <string name="of">of</string>
-    <string name="question">Question</string>
+    <string name="of">of %1$s </string>
+    <string name="question">Question %1$s </string>
     <string name="test_question">Lorem ipsum dolor sit amet consectetur Placerat ut sit urna .</string>
     <string name="test_4">4</string>
     <string name="test_20">20</string>
@@ -11,7 +11,6 @@
     <string name="c">C</string>
     <string name="d">D</string>
     <string name="test_choice">Jupiter</string>
-
 
 
     <string name="play_by_category">Play by Category</string>
@@ -47,7 +46,7 @@
     <string name="your_highest_score">Your highest score</string>
     <string name="crown_star">crown star</string>
 
-  
+
     <string name="you_lose">You Lose</string>
     <string name="try_again">Try again</string>
 
@@ -58,5 +57,11 @@
 
     <string name="exit">Exit</string>
 
+    <string-array name="questionـsequence">
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+        <item>B</item>
+    </string-array>
 
 </resources>

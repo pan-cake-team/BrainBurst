@@ -11,7 +11,7 @@ import com.pancake.brainburst.ui.theme.Brand500
 import com.pancake.brainburst.ui.theme.LightWhite500
 
 @Composable
-fun LineProgressBar(
+fun QuestionBar(
     maxTarget: Int,
     currentTarget: Int = 0,
     color: Color = LightWhite500,

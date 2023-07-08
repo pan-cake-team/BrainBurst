@@ -14,9 +14,9 @@ import com.pancake.brainburst.ui.screens.winScreen.WinScreen
 
 @Composable
 fun BrainNavGraph(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = AppDestination.HomeScreen.screen) {
+    NavHost(navController = navController, startDestination = AppDestination.WelcomeScreen.screen) {
 
-        composable(AppDestination.WelcomeScreen.screen) { WelcomeScreen() }
+        composable(AppDestination.WelcomeScreen.screen) { WelcomeScreen(navController) }
 
         composable(AppDestination.HomeScreen.screen) { HomeScreen() }
 

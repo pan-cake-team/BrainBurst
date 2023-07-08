@@ -20,6 +20,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import com.pancake.brainburst.AppDestination
 import com.pancake.brainburst.R
 import com.pancake.brainburst.ui.theme.BrainBurstTheme
 import com.pancake.brainburst.ui.theme.Cyan300
@@ -29,18 +32,20 @@ import com.pancake.brainburst.ui.theme.space56
 import com.pancake.brainburst.ui.theme.textSize14
 import com.pancake.brainburst.ui.theme.textSize32
 
-@Preview
 @Composable
-fun WelcomeScreen(viewModel: WelcomeScreenViewModel = hiltViewModel()) {
+fun WelcomeScreen(
+    navController: NavController,
+    viewModel: WelcomeScreenViewModel = hiltViewModel()
+) {
     val state by viewModel.state.collectAsState()
 
     welcomeScreenContent(
         state
-    )
+    ) { navController.navigate(AppDestination.HomeScreen.screen) }
 }
 
 @Composable
-fun welcomeScreenContent(state: WelcomeScreenUIState) {
+fun welcomeScreenContent(state: WelcomeScreenUIState, onClickPlay: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize(),
@@ -74,20 +79,20 @@ fun welcomeScreenContent(state: WelcomeScreenUIState) {
             )
         }
         Spacer(modifier = Modifier.weight(0.5f))
-        PlayButton()
+        PlayButton(
+            onClickPlay = onClickPlay
+        )
     }
 }
 
 @Composable
-fun PlayButton() {
+fun PlayButton(onClickPlay: () -> Unit) {
     Button(
         modifier = Modifier
             .fillMaxWidth()
             .padding(space24)
             .height(space56),
-
-
-        onClick = { },
+        onClick = onClickPlay,
         colors = ButtonDefaults.buttonColors(
             containerColor = Cyan300,
         ),
@@ -96,13 +101,5 @@ fun PlayButton() {
             text = stringResource(R.string.let_s_play),
             fontSize = textSize14,
         )
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    BrainBurstTheme {
-        WelcomeScreen()
     }
 }

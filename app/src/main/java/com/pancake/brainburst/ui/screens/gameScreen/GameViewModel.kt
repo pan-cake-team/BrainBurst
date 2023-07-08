@@ -1,6 +1,5 @@
 package com.pancake.brainburst.ui.screens.gameScreen
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.pancake.brainburst.domain.model.Question
 import com.pancake.brainburst.domain.usecase.QuestionsUseCase
@@ -46,9 +45,7 @@ class GameViewModel @Inject constructor(
     }
 
     fun onSelectedAnswer(answerSelected: String) {
-        Log.v("ameerxyz", "sadsadsd $answerSelected")
 
-//        var isAnswerCorrectSelected =
         _state.update { state ->
             state.copy(
                 isLoading = false,

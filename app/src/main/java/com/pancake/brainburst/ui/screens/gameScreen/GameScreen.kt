@@ -31,7 +31,6 @@ import com.pancake.brainburst.ui.theme.space16
 import com.pancake.brainburst.ui.theme.space8
 import kotlinx.coroutines.delay
 
-private val span: (LazyGridItemSpanScope) -> GridItemSpan = { GridItemSpan(2) }
 @Composable
 fun GameScreen2(
     viewModel: GameViewModel = hiltViewModel()
@@ -89,8 +88,9 @@ private fun GameContent(
             verticalArrangement = Arrangement.spacedBy(space8),
             horizontalArrangement = Arrangement.spacedBy(space8)
         ) {
+            val spanGrid: (LazyGridItemSpanScope) -> GridItemSpan = { GridItemSpan(2) }
             item(
-                span = span
+                span = spanGrid
             ) {
 
                 Column(
@@ -151,17 +151,6 @@ private fun GameContent(
                 onGameFinish(state.score, false)
             }
         }
-//        LaunchedEffect(key1 = currentTime, key2 = isTimerRunning, key3 = resetTimer) {
-//            if (currentTime > 0 && isTimerRunning) {
-//                delay(1000L)
-//                currentTime -= 1000L
-//                if (currentTime == 0L) {
-//                    onTimerFinished()
-//                }
-//            }
-//            if(resetTimer)
-//                currentTime = totalTime
-//        }
 
         LaunchedEffect(state.isTimerRunning) {
             if (state.isTimerRunning) {

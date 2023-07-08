@@ -3,7 +3,6 @@ package com.pancake.brainburst.ui.screens.welecome
 import androidx.lifecycle.viewModelScope
 import com.pancake.brainburst.ui.base.BaseViewModel
 import com.pancake.brainburst.data.source.local.UserScore
-import com.pancake.brainburst.data.source.local.UserScoreManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -15,16 +14,14 @@ class WelcomeScreenViewModel
     private val userScoreManager:UserScore,
 ): BaseViewModel<WelcomeScreenUIState>(WelcomeScreenUIState()){
 
-
-
     init {
         viewModelScope.launch {
             _state.update {uiState ->
                 uiState.copy (
-                    isLoading = false,
                     heightsScore = userScoreManager.getHighestScore()
                 )
             }
         }
     }
 }
+

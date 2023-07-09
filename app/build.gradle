@@ -71,9 +71,12 @@ dependencies {
     debugImplementation 'androidx.compose.ui:ui-tooling'
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
 
+
     // Hilt Dependency
     implementation "com.google.dagger:hilt-android:2.44"
     kapt "com.google.dagger:hilt-compiler:2.44"
+    implementation "androidx.hilt:hilt-navigation-compose:1.0.0"
+
 
     // Coil Compose
     implementation "io.coil-kt:coil-compose:2.0.0"

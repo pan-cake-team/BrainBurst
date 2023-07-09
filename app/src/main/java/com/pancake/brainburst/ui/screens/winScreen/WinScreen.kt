@@ -24,6 +24,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.pancake.brainburst.R
 import com.pancake.brainburst.ui.screens.winScreen.composobale.ButtonPrimary
 import com.pancake.brainburst.ui.screens.winScreen.composobale.VerticalSpacer
@@ -33,6 +34,7 @@ import com.pancake.brainburst.ui.theme.LightBackground
 import com.pancake.brainburst.ui.theme.LightPrimary
 import com.pancake.brainburst.ui.theme.LightTertiary
 import com.pancake.brainburst.ui.theme.LightWhite500
+import com.pancake.brainburst.ui.theme.Red500
 import com.pancake.brainburst.ui.theme.Type.Caption
 import com.pancake.brainburst.ui.theme.Type.GraphicTextLarge
 import com.pancake.brainburst.ui.theme.space16
@@ -43,13 +45,14 @@ import com.pancake.brainburst.ui.theme.space8
 
 @Composable
 fun WinScreen(
+    navController: NavController,
     viewModel: WinScreenViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
     WinContent(
         state = state,
-        onClickNext = {},
-        onClickExit ={},
+        onClickNext = { navController.navToGame() },
+        onClickExit = { navController.navToHome() },
     )
 }
 
@@ -72,16 +75,25 @@ private fun WinContent(
         ) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Image(
-                    imageVector = ImageVector.vectorResource(R.drawable.image_win),
+                    imageVector = if (state.isWin.toBoolean()) {
+                        ImageVector.vectorResource(R.drawable.image_win)
+                    } else {
+                        ImageVector.vectorResource(R.drawable.lose)
+                    },
+
                     contentDescription = stringResource(R.string.win_image),
                     modifier = Modifier
                         .padding(horizontal = space24)
                         .padding(top = space24, bottom = space16)
                 )
                 Text(
-                    text = stringResource(R.string.you_win),
+                    text = if (state.isWin.toBoolean()) {
+                        stringResource(R.string.you_win)
+                    } else {
+                        stringResource(R.string.you_lose)
+                    },
                     style = GraphicTextLarge,
-                    color = Brand500,
+                    color = if (state.isWin.toBoolean()) Brand500 else Red500,
                 )
                 Text(
                     text = state.score,
@@ -99,7 +111,7 @@ private fun WinContent(
         }
         Spacer(modifier = Modifier.weight(1f))
         ButtonPrimary(
-            textId = R.string.next_level,
+            textId = R.string.play_more,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(space56),

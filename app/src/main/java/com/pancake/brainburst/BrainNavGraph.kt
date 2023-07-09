@@ -18,7 +18,7 @@ fun BrainNavGraph(navController: NavHostController) {
 
         composable(AppDestination.WelcomeScreen.screen) { WelcomeScreen(navController) }
 
-        composable(AppDestination.HomeScreen.screen) { HomeScreen() }
+        composable(AppDestination.HomeScreen.screen) { HomeScreen(navController = navController) }
 
         composable(AppDestination.GameScreenOne.screen) { GameScreen() }
 

@@ -5,6 +5,5 @@ sealed class AppDestination(val screen: String) {
     object HomeScreen : AppDestination("homeScreen")
     object GameScreen : AppDestination("gameScreen")
     object SavedQuestion : AppDestination("savedQuestionScreen")
-    object WinScreen : AppDestination("winScreen")
-    object LoseScreen : AppDestination("loseScreen")
+    object GameOver : AppDestination("gameOver")
 }

@@ -8,8 +8,7 @@ import com.pancake.brainburst.ui.screens.gameScreen.GameScreen
 import com.pancake.brainburst.ui.screens.home.HomeScreen
 import com.pancake.brainburst.ui.screens.savedQuestions.SavedQuestionScreen
 import com.pancake.brainburst.ui.screens.welecome.WelcomeScreen
-import com.pancake.brainburst.ui.screens.winScreen.LoseScreen
-import com.pancake.brainburst.ui.screens.winScreen.winRout
+import com.pancake.brainburst.ui.screens.gameOver.gameOverRoute
 
 @Composable
 fun BrainNavGraph(navController: NavHostController) {
@@ -24,8 +23,6 @@ fun BrainNavGraph(navController: NavHostController) {
 
         composable(AppDestination.SavedQuestion.screen) { SavedQuestionScreen(navController) }
 
-        winRout(navController)
-
-        composable(AppDestination.LoseScreen.screen) { LoseScreen() }
+        gameOverRoute(navController)
     }
 }

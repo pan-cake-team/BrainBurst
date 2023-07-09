@@ -1,4 +1,4 @@
-package com.pancake.brainburst.ui.screens.winScreen
+package com.pancake.brainburst.ui.screens.gameOver
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -26,9 +26,9 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.pancake.brainburst.R
-import com.pancake.brainburst.ui.screens.winScreen.composobale.ButtonPrimary
-import com.pancake.brainburst.ui.screens.winScreen.composobale.VerticalSpacer
-import com.pancake.brainburst.ui.screens.winScreen.state.WinUiState
+import com.pancake.brainburst.ui.screens.gameOver.composobale.ButtonPrimary
+import com.pancake.brainburst.ui.screens.gameOver.composobale.VerticalSpacer
+import com.pancake.brainburst.ui.screens.gameOver.state.GameOverUiState
 import com.pancake.brainburst.ui.theme.Brand500
 import com.pancake.brainburst.ui.theme.LightBackground
 import com.pancake.brainburst.ui.theme.LightPrimary
@@ -44,12 +44,12 @@ import com.pancake.brainburst.ui.theme.space56
 import com.pancake.brainburst.ui.theme.space8
 
 @Composable
-fun WinScreen(
+fun GameOverScreen(
     navController: NavController,
-    viewModel: WinScreenViewModel = hiltViewModel()
+    viewModel: GameOverViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
-    WinContent(
+    GameOverContent(
         state = state,
         onClickNext = { navController.navToGame() },
         onClickExit = { navController.navToHome() },
@@ -57,8 +57,8 @@ fun WinScreen(
 }
 
 @Composable
-private fun WinContent(
-    state: WinUiState,
+private fun GameOverContent(
+    state: GameOverUiState,
     onClickNext: () -> Unit,
     onClickExit: () -> Unit
 ) {
@@ -75,7 +75,7 @@ private fun WinContent(
         ) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Image(
-                    imageVector = if (state.isWin.toBoolean()) {
+                    imageVector = if (state.isWin) {
                         ImageVector.vectorResource(R.drawable.image_win)
                     } else {
                         ImageVector.vectorResource(R.drawable.lose)
@@ -87,16 +87,16 @@ private fun WinContent(
                         .padding(top = space24, bottom = space16)
                 )
                 Text(
-                    text = if (state.isWin.toBoolean()) {
+                    text = if (state.isWin) {
                         stringResource(R.string.you_win)
                     } else {
                         stringResource(R.string.you_lose)
                     },
                     style = GraphicTextLarge,
-                    color = if (state.isWin.toBoolean()) Brand500 else Red500,
+                    color = if (state.isWin) Brand500 else Red500,
                 )
                 Text(
-                    text = state.score,
+                    text = state.score.toString(),
                     style = GraphicTextLarge,
                     color = LightPrimary,
                     modifier = Modifier.padding(top = space16)

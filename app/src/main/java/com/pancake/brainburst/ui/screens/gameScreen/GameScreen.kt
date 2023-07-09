@@ -27,6 +27,8 @@ import com.pancake.brainburst.ui.screens.composable.RoundedCornerChoiceCard
 import com.pancake.brainburst.ui.screens.composable.SpacerVertical16
 import com.pancake.brainburst.ui.screens.gameScreen.composable.QuestionCard
 import com.pancake.brainburst.ui.screens.gameScreen.composable.QuestionNumber
+import com.pancake.brainburst.ui.screens.gameScreen.composable.QuestionProgressBar
+import com.pancake.brainburst.ui.screens.gameOver.navigateToGameOverScreen
 import com.pancake.brainburst.ui.theme.LightBackground
 import com.pancake.brainburst.ui.theme.space16
 import com.pancake.brainburst.ui.theme.space8

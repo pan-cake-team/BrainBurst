@@ -56,7 +56,7 @@ fun HomeBottomSheet(
                 modifier = Modifier,
                 onDismissRequest = onDismiss, sheetState = bottomSheetState
             ) {
-                Box(modifier = Modifier,) {
+                Box(modifier = Modifier) {
                     Column(
                         Modifier
                             .fillMaxWidth()
@@ -77,19 +77,25 @@ fun HomeBottomSheet(
                             color = LightSecondary,
                         )
                         Spacer(modifier = Modifier.height(space16))
-                        DifficultyCard(title = stringResource(R.string.easy), color = Green500, onClickCard = onClickEasy)
+                        DifficultyCard(
+                            title = stringResource(R.string.easy),
+                            color = Green500,
+                            onClickCard = onClickEasy
+                        )
                         Spacer(modifier = Modifier.height(space8))
-                        DifficultyCard(title = stringResource(R.string.medium), color = Brand500, onClickCard = onClickMedium)
+                        DifficultyCard(
+                            title = stringResource(R.string.medium),
+                            color = Brand500,
+                            onClickCard = onClickMedium
+                        )
                         Spacer(modifier = Modifier.height(space8))
                         DifficultyCard(
                             title = stringResource(R.string.difficult),
-                            color = Red500
-                        , onClickCard = {onClickDifficult()})
+                            color = Red500, onClickCard = { onClickDifficult() })
 
                     }
                 }
             }
-
         }
     }
 }
@@ -97,7 +103,7 @@ fun HomeBottomSheet(
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
-private fun Preview(){
+private fun Preview() {
 //    HomeBottomSheet()
 
 }

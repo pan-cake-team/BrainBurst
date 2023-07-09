@@ -35,9 +35,11 @@ import com.pancake.brainburst.ui.theme.zero
 fun ItemCategory(
     state: CategoryUiState,
     pageOffset: Float,
-    onClickItem: () -> Unit,
+    onClickItem: (category:String) -> Unit,
     modifier: Modifier = Modifier
 ) {
+
+    val title = stringResource(id = state.idTitleResource)
     Card(
         modifier = modifier
             .fillMaxSize()
@@ -52,13 +54,14 @@ fun ItemCategory(
                     scaleY = scale
                 }
             }
+            .clickable { onClickItem(title) }
 
     ) {
         Card(
             modifier = modifier
                 .fillMaxSize()
                 .background(color = state.color)
-                .clickable { onClickItem() }
+                .clickable { onClickItem(title) }
                 .clip(Shapes.large)
         ) {
             Column(
@@ -76,7 +79,7 @@ fun ItemCategory(
                 )
                 SpacerVertical8()
                 IconButtonSmall(
-                    onClick = { },
+                    onClick = {onClickItem(title) },
                     imageVector = Icons.Rounded.PlayArrow,
                     iconColor = MaterialTheme.colorScheme.onPrimary,
                     modifier = Modifier

@@ -18,6 +18,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 import com.pancake.brainburst.ui.screens.composable.AnswerCard
 import com.pancake.brainburst.ui.screens.composable.GameQuestionCard
 import com.pancake.brainburst.ui.screens.composable.SpacerVertical16
@@ -28,7 +29,7 @@ import com.pancake.brainburst.ui.theme.space24
 import com.pancake.brainburst.ui.theme.space8
 
 @Composable
-fun GameScreen() {
+fun GameScreen(navController: NavController) {
 
     val clickedState = remember {
         mutableStateOf(false)
@@ -101,7 +102,7 @@ private fun GameContent(
 @Preview(showSystemUi = true)
 @Composable
 private fun Preview() {
-    GameScreen()
+//    GameScreen()
 }
 
 object constants {

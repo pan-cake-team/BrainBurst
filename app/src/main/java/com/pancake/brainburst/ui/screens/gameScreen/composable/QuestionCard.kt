@@ -16,8 +16,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import com.pancake.brainburst.ui.screens.composable.QuestionTimer
 import com.pancake.brainburst.ui.screens.composable.SpacerVertical
+import com.pancake.brainburst.ui.screens.gameScreen.TimerUiState
 import com.pancake.brainburst.ui.theme.BrainBurstTheme
 import com.pancake.brainburst.ui.theme.Brand500
 import com.pancake.brainburst.ui.theme.OnPrimary
@@ -28,17 +28,14 @@ import com.pancake.brainburst.ui.theme.space32
 
 @Composable
 fun QuestionCard(
-    totalTime:Long,
-    resetTimer: Boolean,
+    timer: TimerUiState,
     modifier: Modifier = Modifier,
-    isAnswerSelected: Boolean,
     question: String,
     onClickBack: () -> Unit,
     onClickSave: () -> Unit,
     onClickReplace: () -> Unit,
     onClickCall: () -> Unit,
     onClickDeleteAnswer: () -> Unit,
-    onTimerOut: () -> Unit,
 ) {
     Card(
         modifier = modifier
@@ -65,8 +62,8 @@ fun QuestionCard(
             Box(contentAlignment = Alignment.Center) {
 
                 QuestionTimer(
-                    currentTime = totalTime,
-
+                    totalTime = timer.totalTime,
+                    currentTime = timer.currentTime,
                 )
             }
 
@@ -93,8 +90,9 @@ fun QuestionCard(
 @Composable
 fun QuestionCardPreview() {
     BrainBurstTheme {
-        QuestionCard(1000,true, Modifier, true,
-            "Which of these is a popular drink in Portugal?", {}, {}, {}, {}, {}, {}
+        QuestionCard(
+            TimerUiState(), Modifier,
+            "Which of these is a popular drink in Portugal?", {}, {}, {}, {}, {}
         )
     }
 

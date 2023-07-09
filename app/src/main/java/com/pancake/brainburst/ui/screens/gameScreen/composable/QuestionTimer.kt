@@ -1,4 +1,4 @@
-package com.pancake.brainburst.ui.screens.composable
+package com.pancake.brainburst.ui.screens.gameScreen.composable
 
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.animateFloatAsState
@@ -9,18 +9,13 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.IntSize
 import com.pancake.brainburst.ui.theme.Brand500
 import com.pancake.brainburst.ui.theme.LightWhite500
 import com.pancake.brainburst.ui.theme.QuestionCounterSize
@@ -37,22 +32,18 @@ fun QuestionTimer(
     modifier: Modifier = Modifier,
     strokeWidth: Dp = timerStrokeWidth,
 ) {
-    var size by remember { mutableStateOf(IntSize.Zero) }
-
     val progress by animateFloatAsState(
         targetValue = (currentTime.toFloat() / totalTime.toFloat()).coerceIn(0f, 1f),
         animationSpec = tween(durationMillis = 1000, easing = LinearEasing), label = ""
     )
 
-
     Box(
         contentAlignment = Alignment.Center,
-        modifier = Modifier.onSizeChanged {
-            size = it
-        }
     ) {
 
-        Canvas(modifier = modifier.size(QuestionCounterSize * 2f)) {
+        Canvas(
+            modifier = modifier.size(QuestionCounterSize * 2f)
+        ) {
             drawArc(
                 color = inactiveBarColor,
                 startAngle = -90f,

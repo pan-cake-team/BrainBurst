@@ -10,6 +10,7 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyGridItemSpanScope
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -22,7 +23,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.pancake.brainburst.R
 import com.pancake.brainburst.ui.screens.composable.Loading
-import com.pancake.brainburst.ui.screens.composable.QuestionBar
 import com.pancake.brainburst.ui.screens.composable.RoundedCornerChoiceCard
 import com.pancake.brainburst.ui.screens.composable.SpacerVertical16
 import com.pancake.brainburst.ui.screens.gameScreen.composable.QuestionCard
@@ -51,9 +51,10 @@ fun GameScreen(
         onClickDeleteAnswer = {},
         onSelectedAnswer = viewModel::onSelectedAnswer,
         onGameFinish = { score, isWin ->
+//            navController.navigateToWinScreen(score, isWin)
         },
         onTimerOut = {
-            viewModel.onSelectedAnswer(state.questions[1].answers.first())
+            navController.navigateToGameOverScreen(0, false)
         },
         onTimerUpdate = viewModel::onTimeUpdate
     )
@@ -72,8 +73,7 @@ private fun GameContent(
     onGameFinish: (score: Int, isWin: Boolean) -> Unit,
     onTimerOut: () -> Unit,
     onTimerUpdate: () -> Unit,
-
-    ) {
+) {
 
     if (state.isLoading) {
         Loading()
@@ -109,19 +109,20 @@ private fun GameContent(
 
                     SpacerVertical16()
 
-                    QuestionBar(state.questions.size, currentTarget = state.currentQuestionNumber)
+                    QuestionProgressBar(
+                        maxTarget = state.questions.size,
+                        currentTarget = state.currentQuestionNumber
+                    )
 
+                    Text(text = currentQuestion.correctAnswer)
                     QuestionCard(
-                        totalTime = state.totalTime,
+                        timer = state.timer,
                         question = currentQuestion.question,
-                        isAnswerSelected = state.isAnswerSelected,
                         onClickBack = onClickBack,
                         onClickSave = onClickSave,
                         onClickReplace = onClickReplace,
                         onClickCall = onClickCall,
                         onClickDeleteAnswer = onClickDeleteAnswer,
-                        onTimerOut = onTimerOut,
-                        resetTimer = state.resetTimer
                     )
 
                 }
@@ -158,13 +159,16 @@ private fun GameContent(
 
         LaunchedEffect(state.isTimerRunning) {
             if (state.isTimerRunning) {
-                while (state.totalTime > 0) {
+                while (state.timer.currentTime > 0) {
                     delay(1000)
                     onTimerUpdate()
                 }
             }
+        }
 
-            if (!state.isTimerRunning) {
+        LaunchedEffect(state.isGameFinish) {
+            if (state.isGameFinish) {
+                delay(1000)
                 onTimerOut()
             }
 

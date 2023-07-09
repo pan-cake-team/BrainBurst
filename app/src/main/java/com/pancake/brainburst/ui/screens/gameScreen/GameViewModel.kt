@@ -1,5 +1,6 @@
 package com.pancake.brainburst.ui.screens.gameScreen
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.pancake.brainburst.domain.model.Question
 import com.pancake.brainburst.domain.usecase.QuestionsUseCase
@@ -45,7 +46,11 @@ class GameViewModel @Inject constructor(
     }
 
     fun onSelectedAnswer(answerSelected: String) {
-
+        val isAnswerCorrect = isAnswerCorrectSelected(answerSelected)
+        Log.v(
+            "ameerxyz",
+            "onSelectedAnswer  Answer:-> $answerSelected , isAnswerCorrect:->$isAnswerCorrect"
+        )
         _state.update { state ->
             state.copy(
                 isLoading = false,
@@ -54,6 +59,14 @@ class GameViewModel @Inject constructor(
                 isAnswerCorrectSelected = isAnswerCorrectSelected(answerSelected),
                 isUpdateStateQuestion = true
             )
+
+        }
+        stopTimer()
+        if (!isAnswerCorrect) {
+            Log.v(
+                "ameerxyz", "isAnswerCorrect not Correct"
+            )
+            onGameFinish()
         }
 
     }
@@ -65,6 +78,9 @@ class GameViewModel @Inject constructor(
 
 
     fun goToNextQuestion() {
+        if (_state.value.isLastQuestion()) {
+            onGameFinish()
+        }
         _state.update { state ->
             state.copy(
                 isLoading = false,
@@ -72,28 +88,40 @@ class GameViewModel @Inject constructor(
                 isAnsweredOrTimeFinished = false,
                 isAnswerCorrectSelected = false,
                 isUpdateStateQuestion = false,
-                resetTimer = true,
-                currentQuestionNumber = _state.value.currentQuestionNumber + 1
+                isTimerRunning = true,
+                currentQuestionNumber = _state.value.currentQuestionNumber + 1,
+                timer = state.timer.copy(
+                    currentTime = state.timer.totalTime,
+                    totalTime = state.timer.totalTime,
+                )
+
             )
         }
 
     }
 
     fun onTimeUpdate() {
-        if (_state.value.totalTime > 0) {
+        Log.v("Ameerxzy", "${_state.value.timer.currentTime}")
+        if (_state.value.timer.currentTime > 0) {
             _state.update { state ->
                 state.copy(
-                    totalTime = _state.value.totalTime - 1000
+                    timer = state.timer.copy(
+                        currentTime = _state.value.timer.currentTime - 1000
+                    )
                 )
             }
         } else {
-            _state.update { state ->
-                state.copy(
-                    isTimerRunning = false
-                )
-            }
+            onGameFinish()
         }
 
 
+    }
+
+    private fun onGameFinish() {
+        _state.update { it.copy(isGameFinish = true) }
+    }
+
+    private fun stopTimer() {
+        _state.update { it.copy(isTimerRunning = false) }
     }
 }

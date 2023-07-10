@@ -46,7 +46,7 @@ fun GameScreen(
         goToNextQuestion = viewModel::goToNextQuestion,
         onClickBack = {},
         onClickSave = {},
-        onClickReplace = {},
+        onClickReplace = viewModel::onReplaceQuestion,
         onClickCall = {},
         onClickDeleteAnswer = {},
         onSelectedAnswer = viewModel::onSelectedAnswer,
@@ -114,7 +114,7 @@ private fun GameContent(
                         currentTarget = state.currentQuestionNumber
                     )
 
-                    Text(text = currentQuestion.correctAnswer)
+                    Text(text = currentQuestion!!.correctAnswer)
                     QuestionCard(
                         timer = state.timer,
                         question = currentQuestion.question,
@@ -129,12 +129,12 @@ private fun GameContent(
 
             }
 
-            items(state.questions[state.currentQuestionNumber].answers.size) { index ->
+            items(state.questions[state.currentQuestionNumber]!!.answers.size) { index ->
                 RoundedCornerChoiceCard(
                     modifier = Modifier.height(160.dp),
                     questionNumber = questionSequence[index],
-                    correctAnswer = state.questions[state.currentQuestionNumber].correctAnswer,
-                    answer = state.questions[state.currentQuestionNumber].answers[index],
+                    correctAnswer = state.questions[state.currentQuestionNumber]!!.correctAnswer,
+                    answer = state.questions[state.currentQuestionNumber]!!.answers[index],
                     isClicked = state.isAnsweredOrTimeFinished,
                     onSelectedAnswer = onSelectedAnswer
                 )

@@ -14,7 +14,8 @@ data class GameUiState(
     val isAnswerSelected: Boolean = false,
     val isUpdateStateQuestion: Boolean = false,
     val currentQuestionNumber: Int = 1,
-    var questions: List<QuestionUiState> = emptyList(),
+    var ReplacedQuestion: QuestionUiState? = null,
+    var questions: List<QuestionUiState?> = emptyList(),
 ) : BaseUiState {
     fun isLastQuestion() = currentQuestionNumber == questions.size
 }

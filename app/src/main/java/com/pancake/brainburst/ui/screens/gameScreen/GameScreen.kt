@@ -114,7 +114,7 @@ private fun GameContent(
                         currentTarget = state.currentQuestionNumber
                     )
 
-                    Text(text = currentQuestion!!.correctAnswer)
+                    Text(text = currentQuestion.correctAnswer)
                     QuestionCard(
                         timer = state.timer,
                         helpTool = state.helpTool,
@@ -130,12 +130,10 @@ private fun GameContent(
 
             }
 
-            items(state.questions[state.currentQuestionNumber]!!.answers.size) { index ->
+            items(state.questions[state.currentQuestionNumber].answers.size) { index ->
                 ChoiceCard(
                     modifier = Modifier.height(160.dp),
                     questionNumber = questionSequence[index],
-                    correctAnswer = state.questions[state.currentQuestionNumber]!!.correctAnswer,
-                    answer = state.questions[state.currentQuestionNumber]!!.answers[index],
                     correctAnswer = currentQuestion.correctAnswer,
                     answer = currentQuestion.answers[index],
                     isClicked = state.isAnsweredOrTimeFinished,

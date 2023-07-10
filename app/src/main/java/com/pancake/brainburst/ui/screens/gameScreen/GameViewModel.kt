@@ -22,7 +22,7 @@ class GameViewModel @Inject constructor(
     private fun getQuestions() {
         viewModelScope.launch {
             val questions: MutableList<Question> = questions("food_and_drink", "medium", 12).toMutableList()
-            _state.value.ReplacedQuestion = questions.last().toQuestionUiState()
+            _state.value.ReplacedQuestion = questions.toQuestionsUiState().last()
             questions.removeAt(questions.size - 1)
             onGetQuestionsSuccess(questions)
         }
@@ -34,7 +34,6 @@ class GameViewModel @Inject constructor(
                 isLoading = false, questions = question.toQuestionsUiState()
             )
         }
-
     }
 
     private fun List<Question>.toQuestionsUiState(): List<QuestionUiState> {
@@ -46,8 +45,6 @@ class GameViewModel @Inject constructor(
                 correctAnswer = question.correctAnswer
             )
         }
-
-
     }
 
     fun onSelectedAnswer(answerSelected: String) {
@@ -131,23 +128,11 @@ class GameViewModel @Inject constructor(
     }
 
     fun onReplaceQuestion() {
-
-        val questions = _state.value.questions.toMutableList().apply { add(_state.value.ReplacedQuestion) }
+        val newQuestion = _state.value.ReplacedQuestion
+        val questions = _state.value.questions.toMutableList().apply { add(newQuestion) }
         questions.removeAt(0)
 
-
-        _state.update { state ->
-            state.copy(
-                isLoading = false,
-                isAnswerSelected = true,
-                isAnsweredOrTimeFinished = false,
-                isAnswerCorrectSelected = false,
-                isUpdateStateQuestion = false,
-                isTimerRunning = true,
-                currentQuestionNumber = _state.value.currentQuestionNumber + 1,
-                questions = questions,
-            )
-        }
+        goToNextQuestion()
     }
 
     fun onClickDeleteAnswer() {

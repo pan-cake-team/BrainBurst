@@ -3,12 +3,13 @@ package com.pancake.brainburst.ui.screens.gameScreen
 import androidx.lifecycle.SavedStateHandle
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.pancake.brainburst.AppDestination
 
-private val GameRoute = AppDestination.GameScreenOne.screen
+private val GameRoute = AppDestination.GameScreen.screen
 
 fun NavController.navigateToGameScreen(categories: String, difficulty: String) {
     navigate("$GameRoute/$categories/$difficulty")
@@ -16,14 +17,14 @@ fun NavController.navigateToGameScreen(categories: String, difficulty: String) {
 
 }
 
-fun NavGraphBuilder.gameScreen(navController: NavController) {
+fun NavGraphBuilder.gameScreen(navController: NavHostController) {
     composable(
         "$GameRoute/{${GameArgs.CATEGORIES_ARGS}}/{${GameArgs.DIFFICULTY_ARGS}}",
         arguments = listOf(
             navArgument(GameArgs.CATEGORIES_ARGS) { NavType.StringType },
             navArgument(GameArgs.DIFFICULTY_ARGS) { NavType.StringType }
         )
-    ) { GameScreen(navController = navController) }
+    ) { GameScreen(navController) }
 
 
 }

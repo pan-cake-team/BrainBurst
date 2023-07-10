@@ -26,8 +26,6 @@ import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
 import com.google.accompanist.systemuicontroller.SystemUiController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import com.pancake.brainburst.AppDestination
-import com.pancake.brainburst.R
 import com.pancake.brainburst.ui.screens.composable.SpacerVertical32
 import com.pancake.brainburst.ui.screens.gameScreen.navigateToGameScreen
 import com.pancake.brainburst.ui.screens.home.composable.HeaderHobbies
@@ -41,7 +39,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalPagerApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(viewModel: HomeViewModel = hiltViewModel(), navController: NavController) {
+fun HomeScreen(navController: NavController, viewModel: HomeViewModel = hiltViewModel()) {
     val state by viewModel.state.collectAsState()
     val pagerState = rememberPagerState(initialPage = 0)
     val systemUiController = rememberSystemUiController()
@@ -84,7 +82,7 @@ fun HomeScreen(viewModel: HomeViewModel = hiltViewModel(), navController: NavCon
             }
         },
         onPlayClick = {
-            category = viewModel.categories
+            category = viewModel.state.value.hobbiesSelected.joinToString(",")
             displayBottomSheet()
         },
         bottomSheetState = bottomSheetState,

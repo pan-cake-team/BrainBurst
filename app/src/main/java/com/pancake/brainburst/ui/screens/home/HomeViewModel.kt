@@ -21,6 +21,5 @@ class HomeViewModel : BaseViewModel<HomeUiState>(HomeUiState()) {
         }
     }
 
-    val categories: String = _state.value.hobbiesSelected.joinToString(",")
 
 }

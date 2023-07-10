@@ -1,4 +1,4 @@
-package com.pancake.brainburst.ui.screens.winScreen.composobale
+package com.pancake.brainburst.ui.screens.gameOver.composobale
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button

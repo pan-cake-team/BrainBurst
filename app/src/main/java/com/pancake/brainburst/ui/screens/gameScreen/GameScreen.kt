@@ -1,0 +1,184 @@
+package com.pancake.brainburst.ui.screens.gameScreen
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridItemSpan
+import androidx.compose.foundation.lazy.grid.LazyGridItemSpanScope
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringArrayResource
+import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
+import com.pancake.brainburst.R
+import com.pancake.brainburst.ui.screens.composable.Loading
+import com.pancake.brainburst.ui.screens.composable.RoundedCornerChoiceCard
+import com.pancake.brainburst.ui.screens.composable.SpacerVertical16
+import com.pancake.brainburst.ui.screens.gameScreen.composable.QuestionCard
+import com.pancake.brainburst.ui.screens.gameScreen.composable.QuestionNumber
+import com.pancake.brainburst.ui.screens.gameScreen.composable.QuestionProgressBar
+import com.pancake.brainburst.ui.screens.gameOver.navigateToGameOverScreen
+import com.pancake.brainburst.ui.theme.LightBackground
+import com.pancake.brainburst.ui.theme.space16
+import com.pancake.brainburst.ui.theme.space8
+import kotlinx.coroutines.delay
+
+@Composable
+fun GameScreen(
+    navController: NavHostController,
+    viewModel: GameViewModel = hiltViewModel()
+) {
+    val state by viewModel.state.collectAsState()
+
+    GameContent(
+        state = state,
+        goToNextQuestion = viewModel::goToNextQuestion,
+        onClickBack = {},
+        onClickSave = {},
+        onClickReplace = {},
+        onClickCall = {},
+        onClickDeleteAnswer = {},
+        onSelectedAnswer = viewModel::onSelectedAnswer,
+        onGameFinish = { score, isWin ->
+//            navController.navigateToWinScreen(score, isWin)
+        },
+        onTimerOut = {
+            navController.navigateToGameOverScreen(0, false)
+        },
+        onTimerUpdate = viewModel::onTimeUpdate
+    )
+}
+
+@Composable
+private fun GameContent(
+    state: GameUiState,
+    goToNextQuestion: () -> Unit,
+    onClickBack: () -> Unit,
+    onClickSave: () -> Unit,
+    onClickReplace: () -> Unit,
+    onClickCall: () -> Unit,
+    onClickDeleteAnswer: () -> Unit,
+    onSelectedAnswer: (answerSelected: String) -> Unit,
+    onGameFinish: (score: Int, isWin: Boolean) -> Unit,
+    onTimerOut: () -> Unit,
+    onTimerUpdate: () -> Unit,
+) {
+
+    if (state.isLoading) {
+        Loading()
+    } else {
+
+        val questionSequence: Array<String> = stringArrayResource(R.array.questionـsequence)
+        val currentQuestion = state.questions[state.currentQuestionNumber]
+
+        LazyVerticalGrid(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(LightBackground),
+            columns = GridCells.Fixed(2),
+
+            contentPadding = PaddingValues(space16),
+            verticalArrangement = Arrangement.spacedBy(space8),
+            horizontalArrangement = Arrangement.spacedBy(space8)
+        ) {
+            val spanGrid: (LazyGridItemSpanScope) -> GridItemSpan = { GridItemSpan(2) }
+            item(
+                span = spanGrid
+            ) {
+
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                ) {
+
+                    QuestionNumber(
+                        currentQuestionNumber = state.currentQuestionNumber,
+                        totalQuestionNumber = state.questions.size,
+                    )
+
+
+                    SpacerVertical16()
+
+                    QuestionProgressBar(
+                        maxTarget = state.questions.size,
+                        currentTarget = state.currentQuestionNumber
+                    )
+
+                    Text(text = currentQuestion.correctAnswer)
+                    QuestionCard(
+                        timer = state.timer,
+                        question = currentQuestion.question,
+                        onClickBack = onClickBack,
+                        onClickSave = onClickSave,
+                        onClickReplace = onClickReplace,
+                        onClickCall = onClickCall,
+                        onClickDeleteAnswer = onClickDeleteAnswer,
+                    )
+
+                }
+
+            }
+
+            items(state.questions[state.currentQuestionNumber].answers.size) { index ->
+                RoundedCornerChoiceCard(
+                    modifier = Modifier.height(160.dp),
+                    questionNumber = questionSequence[index],
+                    correctAnswer = state.questions[state.currentQuestionNumber].correctAnswer,
+                    answer = state.questions[state.currentQuestionNumber].answers[index],
+                    isClicked = state.isAnsweredOrTimeFinished,
+                    onSelectedAnswer = onSelectedAnswer
+                )
+            }
+        }
+
+
+        LaunchedEffect(state.isUpdateStateQuestion) {
+
+            if (state.isAnswerCorrectSelected) {
+                delay(5000)
+                if (state.currentQuestionNumber == state.questions.size) {
+                    onGameFinish(state.score, true)
+                } else {
+                    goToNextQuestion()
+                }
+            }
+            if (!state.isAnswerSelected) {
+                onGameFinish(state.score, false)
+            }
+        }
+
+        LaunchedEffect(state.isTimerRunning) {
+            if (state.isTimerRunning) {
+                while (state.timer.currentTime > 0) {
+                    delay(1000)
+                    onTimerUpdate()
+                }
+            }
+        }
+
+        LaunchedEffect(state.isGameFinish) {
+            if (state.isGameFinish) {
+                delay(1000)
+                onTimerOut()
+            }
+
+        }
+
+    }
+
+}
+
+
+
+
+

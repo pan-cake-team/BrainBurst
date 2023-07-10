@@ -34,7 +34,7 @@ fun RoundedCornerChoiceCard(
     answer: String,
     isClicked: Boolean,
     modifier: Modifier = Modifier,
-    onChoiceSelected: () -> Unit
+    onSelectedAnswer: (answerSelected: String) -> Unit,
 ) {
     val isCorrectAnswer = correctAnswer == answer
     val rightAnswer by remember { mutableStateOf(isCorrectAnswer) }
@@ -45,18 +45,19 @@ fun RoundedCornerChoiceCard(
             !isClicked -> LightWhite500
             rightAnswer -> Green500
             else -> Red500
-        },
-        animationSpec = tween(durationMillis = durationMillis)
+        }, animationSpec = tween(durationMillis = durationMillis), label = ""
     )
 
     val contentColor by animateColorAsState(
         targetValue = if (!isClicked) Brand500 else LightWhite500,
-        animationSpec = tween(durationMillis = durationMillis)
+        animationSpec = tween(durationMillis = durationMillis),
+        label = ""
     )
 
     val letterBackgroundColor by animateColorAsState(
-        targetValue = if(!isClicked) Brand100 else LightWhite300,
-        animationSpec = tween(durationMillis = durationMillis)
+        targetValue = if (!isClicked) Brand100 else LightWhite300,
+        animationSpec = tween(durationMillis = durationMillis),
+        label = ""
     )
 
 
@@ -65,9 +66,7 @@ fun RoundedCornerChoiceCard(
             .fillMaxSize()
             .clip(RoundedCornerShape(space16))
             .clickable {
-                onChoiceSelected()
-                //isCLicked = true
-                //rightAnswer = answer == correctAnswer
+                onSelectedAnswer(answer)
             },
         colors = CardDefaults.cardColors(
             containerColor = cardBackgroundState,

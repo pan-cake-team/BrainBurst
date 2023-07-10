@@ -18,13 +18,16 @@ internal object NetworkModule {
 
     private const val BASE_URL = "https://the-trivia-api.com/v2/"
 
+    @Provides
+    fun provideTriviaService(
+        okHttpClient: OkHttpClient,
+        gsonConverterFactory: GsonConverterFactory
+    ): TriviaService {
+        return provideRetrofit(okHttpClient, gsonConverterFactory)
+            .create(TriviaService::class.java)
+    }
 
     @Singleton
-    @Provides
-    fun provideFootballApiService(retrofit: Retrofit): TriviaService {
-        return retrofit.create(TriviaService::class.java)
-    }
-        @Singleton
     @Provides
     fun provideRetrofit(
         client: OkHttpClient,
@@ -55,7 +58,7 @@ internal object NetworkModule {
     @Provides
     fun provideLoggingInterceptor(): HttpLoggingInterceptor =
         HttpLoggingInterceptor().apply {
-        level = HttpLoggingInterceptor.Level.BASIC
+            level = HttpLoggingInterceptor.Level.BODY
     }
 
 }

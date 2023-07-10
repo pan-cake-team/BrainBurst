@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">BrainBurst</string>
 
-    <string name="of">of</string>
-    <string name="question">Question</string>
+    <string name="of">of %1$s </string>
+    <string name="question">Question %1$s </string>
     <string name="test_question">Lorem ipsum dolor sit amet consectetur Placerat ut sit urna .</string>
     <string name="test_4">4</string>
     <string name="test_20">20</string>
@@ -11,7 +11,6 @@
     <string name="c">C</string>
     <string name="d">D</string>
     <string name="test_choice">Jupiter</string>
-
 
 
     <string name="play_by_category">Play by Category</string>
@@ -61,6 +60,12 @@
 
     <string name="image_splash">Image Splash</string>
 
+    <string-array name="questionـsequence">
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+        <item>B</item>
+    </string-array>
 
     <string name="fake_string">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for lorem ipsum will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</string>
     <string name="let_s_play">Let\'s PLay</string>

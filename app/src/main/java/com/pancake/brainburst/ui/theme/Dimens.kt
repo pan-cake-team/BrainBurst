@@ -53,6 +53,7 @@ val width1 = 1.dp
 //region Game Screen
 val bigIconButtonSize = 40.dp
 val smallIconButtonSize = 32.dp
+val normalButtonHeight = 36.dp
 val timerStrokeWidth = 2.dp
 val QuestionCounterSize = 40.dp
 //endregion

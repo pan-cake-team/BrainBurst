@@ -146,13 +146,13 @@ private fun GameContent(
 
         val localContext = LocalContext.current
         val correctMediaPlayer = MediaPlayer.create(localContext, R.raw.correct_sound)
-        val wrongMediaPlayer = MediaPlayer.create(localContext, R.raw.wrong_sound2)
+        val wrongMediaPlayer = MediaPlayer.create(localContext, R.raw.wrong_sound)
 
         LaunchedEffect(state.isUpdateStateQuestion) {
             if (state.isAnswerSelected) {
                 if (state.isAnswerCorrectSelected) {
                     correctMediaPlayer.start()
-                    delay(5000)
+                    delay(3000)
                     correctMediaPlayer.release()
                     if (state.currentQuestionNumber == state.questions.size) {
                         onGameFinish(state.score, true)
@@ -161,7 +161,7 @@ private fun GameContent(
                     }
                 } else {
                     wrongMediaPlayer.start()
-                    delay(5000)
+                    delay(3000)
                     wrongMediaPlayer.release()
                     if (state.currentQuestionNumber == state.questions.size) {
                         onGameFinish(state.score, true)

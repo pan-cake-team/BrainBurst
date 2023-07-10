@@ -23,12 +23,12 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.pancake.brainburst.R
 import com.pancake.brainburst.ui.screens.composable.Loading
-import com.pancake.brainburst.ui.screens.composable.RoundedCornerChoiceCard
 import com.pancake.brainburst.ui.screens.composable.SpacerVertical16
+import com.pancake.brainburst.ui.screens.gameOver.navigateToGameOverScreen
+import com.pancake.brainburst.ui.screens.gameScreen.composable.ChoiceCard
 import com.pancake.brainburst.ui.screens.gameScreen.composable.QuestionCard
 import com.pancake.brainburst.ui.screens.gameScreen.composable.QuestionNumber
 import com.pancake.brainburst.ui.screens.gameScreen.composable.QuestionProgressBar
-import com.pancake.brainburst.ui.screens.gameOver.navigateToGameOverScreen
 import com.pancake.brainburst.ui.theme.LightBackground
 import com.pancake.brainburst.ui.theme.space16
 import com.pancake.brainburst.ui.theme.space8
@@ -48,7 +48,7 @@ fun GameScreen(
         onClickSave = {},
         onClickReplace = viewModel::onReplaceQuestion,
         onClickCall = {},
-        onClickDeleteAnswer = {},
+        onClickDeleteAnswer = viewModel::onClickDeleteAnswer,
         onSelectedAnswer = viewModel::onSelectedAnswer,
         onGameFinish = { score, isWin ->
 //            navController.navigateToWinScreen(score, isWin)
@@ -117,6 +117,7 @@ private fun GameContent(
                     Text(text = currentQuestion!!.correctAnswer)
                     QuestionCard(
                         timer = state.timer,
+                        helpTool = state.helpTool,
                         question = currentQuestion.question,
                         onClickBack = onClickBack,
                         onClickSave = onClickSave,
@@ -130,11 +131,13 @@ private fun GameContent(
             }
 
             items(state.questions[state.currentQuestionNumber]!!.answers.size) { index ->
-                RoundedCornerChoiceCard(
+                ChoiceCard(
                     modifier = Modifier.height(160.dp),
                     questionNumber = questionSequence[index],
                     correctAnswer = state.questions[state.currentQuestionNumber]!!.correctAnswer,
                     answer = state.questions[state.currentQuestionNumber]!!.answers[index],
+                    correctAnswer = currentQuestion.correctAnswer,
+                    answer = currentQuestion.answers[index],
                     isClicked = state.isAnsweredOrTimeFinished,
                     onSelectedAnswer = onSelectedAnswer
                 )

@@ -28,8 +28,12 @@ data class QuestionUiState(
     val id: String = "",
     val question: String = "",
     val correctAnswer: String = "",
-    val answers: List<String> = emptyList(),
+    val answers: List<AnswerUiState> = emptyList(),
 )
 
+data class AnswerUiState(
+    var text: String = "",
+    var isEnable: Boolean = true
+)
 
 

@@ -29,20 +29,23 @@ class GameViewModel @Inject constructor(
     private fun onGetQuestionsSuccess(question: List<Question>) {
         _state.update { state ->
             state.copy(
-                isLoading = false,
-                questions = question.map { it.toQuestionUiState() }
+                isLoading = false, questions = question.toQuestionsUiState()
             )
         }
 
     }
 
-    private fun Question.toQuestionUiState(): QuestionUiState {
-        return QuestionUiState(
-            id = id,
-            question = question,
-            answers = answers,
-            correctAnswer = correctAnswer
-        )
+    private fun List<Question>.toQuestionsUiState(): List<QuestionUiState> {
+        return this.map { question ->
+            QuestionUiState(
+                id = question.id,
+                question = question.question,
+                answers = question.answers.map { AnswerUiState(text = it) },
+                correctAnswer = question.correctAnswer
+            )
+        }
+
+
     }
 
     fun onSelectedAnswer(answerSelected: String) {
@@ -123,5 +126,46 @@ class GameViewModel @Inject constructor(
 
     private fun stopTimer() {
         _state.update { it.copy(isTimerRunning = false) }
+    }
+
+    fun onClickDeleteAnswer() {
+        var currentQuestion = _state.value.questions[_state.value.currentQuestionNumber]
+        currentQuestion.let { question ->
+            question.answers.groupBy { answer ->
+                if (answer.text != currentQuestion.correctAnswer) {
+                    ANSWER
+                } else {
+                    CORRECT_ANSWER
+                }
+
+            }.let { it ->
+                it[ANSWER]?.take(2)?.map { it.isEnable = false }
+                it.toList()
+            }
+//            question.answers.map { answer ->
+//                if (answer.text != currentQuestion.correctAnswer) {
+//                    answer.isEnable = false
+//                }
+//            }
+
+        }
+        Log.v("ameerxyz", "currentQuestion ${currentQuestion}")
+
+
+        _state.update {
+            state
+            val updatedQuestions = state.value.questions.toMutableList()
+            updatedQuestions[_state.value.currentQuestionNumber] = currentQuestion
+            it.copy(
+                questions = updatedQuestions
+            )
+        }
+
+
+    }
+
+    private companion object {
+        const val CORRECT_ANSWER = "correctAnswer"
+        const val ANSWER = "answer"
     }
 }

@@ -1,4 +1,4 @@
-package com.pancake.brainburst.ui.screens.composable
+package com.pancake.brainburst.ui.screens.gameScreen.composable
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.tween
@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.constraintlayout.compose.ConstraintLayout
+import com.pancake.brainburst.ui.screens.gameScreen.AnswerUiState
 import com.pancake.brainburst.ui.theme.Brand100
 import com.pancake.brainburst.ui.theme.Brand500
 import com.pancake.brainburst.ui.theme.Green500
@@ -28,20 +29,21 @@ import com.pancake.brainburst.ui.theme.space16
 import com.pancake.brainburst.ui.theme.space8
 
 @Composable
-fun RoundedCornerChoiceCard(
+fun ChoiceCard(
     questionNumber: String,
     correctAnswer: String,
-    answer: String,
+    answer: AnswerUiState,
     isClicked: Boolean,
     modifier: Modifier = Modifier,
     onSelectedAnswer: (answerSelected: String) -> Unit,
 ) {
-    val isCorrectAnswer = correctAnswer == answer
+    val isCorrectAnswer = correctAnswer == answer.text
     val rightAnswer by remember { mutableStateOf(isCorrectAnswer) }
 
     val durationMillis = 500
     val cardBackgroundState by animateColorAsState(
         targetValue = when {
+            !answer.isEnable && !isClicked -> LightWhite500.copy(0.5F)
             !isClicked -> LightWhite500
             rightAnswer -> Green500
             else -> Red500
@@ -65,8 +67,8 @@ fun RoundedCornerChoiceCard(
         modifier = modifier
             .fillMaxSize()
             .clip(RoundedCornerShape(space16))
-            .clickable {
-                onSelectedAnswer(answer)
+            .clickable(enabled = answer.isEnable) {
+                onSelectedAnswer(answer.text)
             },
         colors = CardDefaults.cardColors(
             containerColor = cardBackgroundState,
@@ -91,7 +93,7 @@ fun RoundedCornerChoiceCard(
             )
 
             Text(
-                text = answer,
+                text = answer.text,
                 style = Type.Title,
                 color = contentColor,
                 textAlign = TextAlign.Center,

@@ -13,6 +13,7 @@ data class GameUiState(
     val isAnswerCorrectSelected: Boolean = false,
     val isAnswerSelected: Boolean = false,
     val isUpdateStateQuestion: Boolean = false,
+    val isFriendHelperDialogVisible: Boolean = false,
     val currentQuestionNumber: Int = 1,
     val helpTool: HelpToolUiState = HelpToolUiState(),
     var questions: List<QuestionUiState> = emptyList(),

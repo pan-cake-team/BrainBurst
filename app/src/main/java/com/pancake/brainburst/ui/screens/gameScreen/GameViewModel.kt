@@ -96,7 +96,6 @@ class GameViewModel @Inject constructor(
                     currentTime = state.timer.totalTime,
                     totalTime = state.timer.totalTime,
                 )
-
             )
         }
 
@@ -129,10 +128,32 @@ class GameViewModel @Inject constructor(
 
     fun onReplaceQuestion() {
         val newQuestion = _state.value.ReplacedQuestion
-        val questions = _state.value.questions.toMutableList().apply { add(newQuestion) }
-        questions.removeAt(0)
+        val questions = _state.value.questions.takeIf { it.isNotEmpty() }
+            ?.toMutableList()?.apply { add(newQuestion) }
 
-        goToNextQuestion()
+
+
+        if (_state.value.isLastQuestion()) {
+            onGameFinish()
+        }
+        _state.update { state ->
+            state.copy(
+                isLoading = false,
+                isAnswerSelected = true,
+                isAnsweredOrTimeFinished = false,
+                isAnswerCorrectSelected = false,
+                isUpdateStateQuestion = false,
+                isTimerRunning = true,
+                isReplaced = true,
+                questions = questions as List<QuestionUiState>,
+                currentQuestionNumber = _state.value.currentQuestionNumber + 1,
+                timer = state.timer.copy(
+                    currentTime = state.timer.totalTime,
+                    totalTime = state.timer.totalTime,
+                )
+
+            )
+        }
     }
 
     fun onClickDeleteAnswer() {

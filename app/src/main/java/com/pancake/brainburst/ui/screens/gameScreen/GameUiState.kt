@@ -1,6 +1,5 @@
 package com.pancake.brainburst.ui.screens.gameScreen
 
-import android.media.MediaCodec.QueueRequest
 import com.pancake.brainburst.ui.base.BaseUiState
 
 data class GameUiState(
@@ -15,6 +14,7 @@ data class GameUiState(
     val isAnswerSelected: Boolean = false,
     val isUpdateStateQuestion: Boolean = false,
     val currentQuestionNumber: Int = 1,
+    val isReplaced: Boolean = false,
     var ReplacedQuestion: QuestionUiState = QuestionUiState(),
     val helpTool: HelpToolUiState = HelpToolUiState(),
     var questions: List<QuestionUiState> = emptyList(),

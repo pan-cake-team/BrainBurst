@@ -10,12 +10,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.pancake.brainburst.R
 import com.pancake.brainburst.ui.screens.composable.CircularIconButton
 import com.pancake.brainburst.ui.screens.composable.SpacerHorizontal16
+import com.pancake.brainburst.ui.screens.gameScreen.HelpToolUiState
 import com.pancake.brainburst.ui.theme.BrainBurstTheme
 import com.pancake.brainburst.ui.theme.bigIconButtonSize
 
 
 @Composable
 fun BottomQuestionCard(
+    state: HelpToolUiState,
     modifier: Modifier = Modifier,
     onClickReplace: () -> Unit,
     onClickCall: () -> Unit,
@@ -29,6 +31,7 @@ fun BottomQuestionCard(
         CircularIconButton(
             drawableRes = painterResource(id = R.drawable.ic_repeat),
             size = bigIconButtonSize,
+            isEnable = state.isReplaceQuestionEnable,
             onClick = onClickReplace
         )
 
@@ -37,6 +40,7 @@ fun BottomQuestionCard(
         CircularIconButton(
             drawableRes = painterResource(id = R.drawable.ic_call),
             size = bigIconButtonSize,
+            isEnable = state.isCallFriendEnable,
             onClick = onClickCall
         )
 
@@ -45,6 +49,7 @@ fun BottomQuestionCard(
         CircularIconButton(
             drawableRes = painterResource(id = R.drawable.ic_conversation),
             size = bigIconButtonSize,
+            isEnable = state.isDeleteTwoAnswerEnable,
             onClick = onClickDeleteAnswer
         )
 
@@ -56,6 +61,11 @@ fun BottomQuestionCard(
 private fun BottomQuestionCardPreview() {
     BrainBurstTheme {
         BottomQuestionCard(
+            HelpToolUiState(
+                isCallFriendEnable = false,
+                isReplaceQuestionEnable = false,
+                isDeleteTwoAnswerEnable = true
+            ),
             onClickReplace = {},
             onClickCall = {},
             onClickDeleteAnswer = {},

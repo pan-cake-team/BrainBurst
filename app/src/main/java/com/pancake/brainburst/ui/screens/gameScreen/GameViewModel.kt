@@ -129,7 +129,7 @@ class GameViewModel @Inject constructor(
     }
 
     fun onClickDeleteAnswer() {
-        var currentQuestion = _state.value.questions[_state.value.currentQuestionNumber]
+        val currentQuestion = _state.value.questions[_state.value.currentQuestionNumber]
         currentQuestion.let { question ->
             question.answers.groupBy { answer ->
                 if (answer.text != currentQuestion.correctAnswer) {
@@ -137,27 +137,21 @@ class GameViewModel @Inject constructor(
                 } else {
                     CORRECT_ANSWER
                 }
-
             }.let { it ->
                 it[ANSWER]?.take(2)?.map { it.isEnable = false }
                 it.toList()
             }
-//            question.answers.map { answer ->
-//                if (answer.text != currentQuestion.correctAnswer) {
-//                    answer.isEnable = false
-//                }
-//            }
-
         }
-        Log.v("ameerxyz", "currentQuestion ${currentQuestion}")
 
 
         _state.update {
-            state
             val updatedQuestions = state.value.questions.toMutableList()
             updatedQuestions[_state.value.currentQuestionNumber] = currentQuestion
             it.copy(
-                questions = updatedQuestions
+                questions = updatedQuestions,
+                helpTool = it.helpTool.copy(
+                    isDeleteTwoAnswerEnable = false,
+                ),
             )
         }
 

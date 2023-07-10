@@ -17,6 +17,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.pancake.brainburst.ui.screens.composable.SpacerVertical
+import com.pancake.brainburst.ui.screens.gameScreen.HelpToolUiState
 import com.pancake.brainburst.ui.screens.gameScreen.TimerUiState
 import com.pancake.brainburst.ui.theme.BrainBurstTheme
 import com.pancake.brainburst.ui.theme.Brand500
@@ -29,6 +30,7 @@ import com.pancake.brainburst.ui.theme.space32
 @Composable
 fun QuestionCard(
     timer: TimerUiState,
+    helpTool: HelpToolUiState,
     modifier: Modifier = Modifier,
     question: String,
     onClickBack: () -> Unit,
@@ -77,6 +79,7 @@ fun QuestionCard(
             )
 
             BottomQuestionCard(
+                helpTool,
                 modifier = Modifier.fillMaxHeight(),
                 onClickReplace = onClickReplace,
                 onClickCall = onClickCall,
@@ -91,7 +94,7 @@ fun QuestionCard(
 fun QuestionCardPreview() {
     BrainBurstTheme {
         QuestionCard(
-            TimerUiState(), Modifier,
+            TimerUiState(), HelpToolUiState(), Modifier,
             "Which of these is a popular drink in Portugal?", {}, {}, {}, {}, {}
         )
     }

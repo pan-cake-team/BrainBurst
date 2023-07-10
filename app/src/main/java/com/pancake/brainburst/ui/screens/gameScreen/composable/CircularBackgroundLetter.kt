@@ -1,4 +1,4 @@
-package com.pancake.brainburst.ui.screens.composable
+package com.pancake.brainburst.ui.screens.gameScreen.composable
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

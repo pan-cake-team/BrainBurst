@@ -14,6 +14,7 @@ data class GameUiState(
     val isAnswerSelected: Boolean = false,
     val isUpdateStateQuestion: Boolean = false,
     val currentQuestionNumber: Int = 1,
+    val helpTool: HelpToolUiState = HelpToolUiState(),
     var questions: List<QuestionUiState> = emptyList(),
 ) : BaseUiState {
     fun isLastQuestion() = currentQuestionNumber == questions.size
@@ -24,12 +25,22 @@ data class TimerUiState(
     val currentTime: Long = 30000L,
 )
 
+data class HelpToolUiState(
+    val isCallFriendEnable: Boolean = true,
+    val isReplaceQuestionEnable: Boolean = true,
+    val isDeleteTwoAnswerEnable: Boolean = true,
+)
+
 data class QuestionUiState(
     val id: String = "",
     val question: String = "",
     val correctAnswer: String = "",
-    val answers: List<String> = emptyList(),
+    val answers: List<AnswerUiState> = emptyList(),
 )
 
+data class AnswerUiState(
+    var text: String = "",
+    var isEnable: Boolean = true
+)
 
 

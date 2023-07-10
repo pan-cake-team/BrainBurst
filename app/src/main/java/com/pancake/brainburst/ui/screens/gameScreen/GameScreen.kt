@@ -1,5 +1,6 @@
 package com.pancake.brainburst.ui.screens.gameScreen
 
+import android.media.MediaPlayer
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -143,21 +144,49 @@ private fun GameContent(
             }
         }
 
+        val localContext = LocalContext.current
+        val correctMediaPlayer = MediaPlayer.create(localContext, R.raw.correct_sound)
+        val wrongMediaPlayer = MediaPlayer.create(localContext, R.raw.wrong_sound2)
 
         LaunchedEffect(state.isUpdateStateQuestion) {
-
-            if (state.isAnswerCorrectSelected) {
-                delay(5000)
-                if (state.currentQuestionNumber == state.questions.size) {
-                    onGameFinish(state.score, true)
+            if (state.isAnswerSelected) {
+                if (state.isAnswerCorrectSelected) {
+                    correctMediaPlayer.start()
+                    delay(5000)
+                    correctMediaPlayer.release()
+                    if (state.currentQuestionNumber == state.questions.size) {
+                        onGameFinish(state.score, true)
+                    } else {
+                        goToNextQuestion()
+                    }
                 } else {
-                    goToNextQuestion()
+                    wrongMediaPlayer.start()
+                    delay(5000)
+                    wrongMediaPlayer.release()
+                    if (state.currentQuestionNumber == state.questions.size) {
+                        onGameFinish(state.score, true)
+                    } else {
+                        goToNextQuestion()
+                    }
                 }
             }
-            if (!state.isAnswerSelected) {
-                onGameFinish(state.score, false)
-            }
         }
+
+
+//        LaunchedEffect(state.isUpdateStateQuestion) {
+//
+//            if (state.isAnswerCorrectSelected) {
+//                delay(5000)
+//                if (state.currentQuestionNumber == state.questions.size) {
+//                    onGameFinish(state.score, true)
+//                } else {
+//                    goToNextQuestion()
+//                }
+//            }
+//            if (!state.isAnswerSelected) {
+//                onGameFinish(state.score, false)
+//            }
+//        }
 
         LaunchedEffect(state.isTimerRunning) {
             if (state.isTimerRunning) {

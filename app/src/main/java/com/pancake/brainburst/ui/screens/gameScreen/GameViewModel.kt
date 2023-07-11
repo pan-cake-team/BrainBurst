@@ -21,17 +21,18 @@ class GameViewModel @Inject constructor(
 
     private fun getQuestions() {
         viewModelScope.launch {
-            val questions: MutableList<Question> = questions("food_and_drink", "medium", 12).toMutableList()
-            _state.value.ReplacedQuestion = questions.toQuestionsUiState().last()
-            questions.removeAt(questions.size - 1)
+            val questions = questions("food_and_drink", "medium", 12)
             onGetQuestionsSuccess(questions)
         }
     }
 
-    private fun onGetQuestionsSuccess(question: List<Question>) {
+    private fun onGetQuestionsSuccess(questions: List<Question>) {
+        val questionUiState = questions.toQuestionsUiState()
         _state.update { state ->
             state.copy(
-                isLoading = false, questions = question.toQuestionsUiState()
+                isLoading = false,
+                replacedQuestion = questionUiState.last(),
+                questions = questionUiState.dropLast(1),
             )
         }
     }
@@ -127,31 +128,14 @@ class GameViewModel @Inject constructor(
     }
 
     fun onReplaceQuestion() {
-        val newQuestion = _state.value.ReplacedQuestion
-        val questions = _state.value.questions.takeIf { it.isNotEmpty() }
-            ?.toMutableList()?.apply { add(newQuestion) }
-
-
-
-        if (_state.value.isLastQuestion()) {
-            onGameFinish()
-        }
+        val updatedQuestions = state.value.questions.toMutableList()
+        updatedQuestions[_state.value.currentQuestionNumber] = _state.value.replacedQuestion
         _state.update { state ->
             state.copy(
-                isLoading = false,
-                isAnswerSelected = true,
-                isAnsweredOrTimeFinished = false,
-                isAnswerCorrectSelected = false,
-                isUpdateStateQuestion = false,
-                isTimerRunning = true,
-                isReplaced = true,
-                questions = questions as List<QuestionUiState>,
-                currentQuestionNumber = _state.value.currentQuestionNumber + 1,
-                timer = state.timer.copy(
-                    currentTime = state.timer.totalTime,
-                    totalTime = state.timer.totalTime,
+                questions = updatedQuestions,
+                helpTool = state.helpTool.copy(
+                    isReplaceQuestionEnable = false
                 )
-
             )
         }
     }

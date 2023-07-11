@@ -102,8 +102,8 @@ private fun GameContent(
                 ) {
 
                     QuestionNumber(
-                        currentQuestionNumber = if (state.isReplaced) {  state.currentQuestionNumber - 1} else state.currentQuestionNumber,
-                        totalQuestionNumber = state.questions.size - 1,
+                        currentQuestionNumber = state.currentQuestionNumber,
+                        totalQuestionNumber = state.questions.size,
                     )
 
 

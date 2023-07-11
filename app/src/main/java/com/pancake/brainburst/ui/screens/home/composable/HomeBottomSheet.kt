@@ -2,7 +2,6 @@ package com.pancake.brainburst.ui.screens.home.composable
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.slideInVertically
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,7 +16,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.pancake.brainburst.R
@@ -35,6 +33,7 @@ import com.pancake.brainburst.ui.theme.space8
 @ExperimentalMaterial3Api
 fun HomeBottomSheet(
     bottomSheetState: SheetState,
+    score: Int,
     onDismiss: () -> Unit,
     onClickDifficulty: (difficulty: String) -> Unit,
 ) {
@@ -57,17 +56,8 @@ fun HomeBottomSheet(
                     verticalArrangement = Arrangement.Center
                 ) {
 
-                    Image(
-                        modifier = Modifier.align(Alignment.CenterHorizontally),
-                        painter = painterResource(id = R.drawable.crown_star),
-                        contentDescription = stringResource(R.string.crown_star)
-                    )
-                    Text(text = "1502", style = Type.GraphicTextLarge)
-                    Text(
-                        text = stringResource(R.string.your_highest_score),
-                        style = Type.Body,
-                        color = LightSecondary,
-                    )
+                    if (score > 0) Score(score)
+
                     Spacer(modifier = Modifier.height(space16))
                     DifficultyCard(
                         title = stringResource(R.string.easy),

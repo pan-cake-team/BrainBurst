@@ -8,8 +8,8 @@ class SaveHighestScoreUseCase @Inject constructor(
 ){
 
     suspend operator fun invoke(score: Int) {
-        if (isHighestScore(score = score)){
-            userScoreManager.setHighestScore(score = score)
+        if (isHighestScore(score)) {
+            userScoreManager.setHighestScore(score)
         }
     }
 

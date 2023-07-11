@@ -105,6 +105,7 @@ private fun HomeContent(
 
     HomeBottomSheet(
         bottomSheetState = bottomSheetState,
+        score = state.score,
         onDismiss = onDismiss,
         onClickDifficulty = onClickDifficulty
 

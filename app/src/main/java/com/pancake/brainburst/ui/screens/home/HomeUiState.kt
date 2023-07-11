@@ -14,6 +14,7 @@ import com.pancake.brainburst.ui.theme.Red500
 import com.pancake.brainburst.ui.theme.Yellow500
 
 data class HomeUiState(
+    val score: Int = 0,
     var categories: List<CategoryUiState> = listOf(
         CategoryUiState(R.string.science, R.drawable.ic_science, Purple500),
         CategoryUiState(R.string.food, R.drawable.ic_food, Pink300),

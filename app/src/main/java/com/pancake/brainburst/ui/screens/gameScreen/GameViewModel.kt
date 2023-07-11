@@ -92,6 +92,7 @@ class GameViewModel @Inject constructor(
                 isAnswerCorrectSelected = false,
                 isUpdateStateQuestion = false,
                 isTimerRunning = true,
+                score = state.score + calculateQuestionScore(),
                 currentQuestionNumber = _state.value.currentQuestionNumber + 1,
                 timer = state.timer.copy(
                     currentTime = state.timer.totalTime,
@@ -99,6 +100,12 @@ class GameViewModel @Inject constructor(
                 )
             )
         }
+
+    }
+
+    private fun calculateQuestionScore(): Int {
+        val elapsedTimeInSeconds = state.value.timer.currentTime / 1000
+        return (5 * elapsedTimeInSeconds).toInt()
 
     }
 

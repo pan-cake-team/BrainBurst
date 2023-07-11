@@ -54,7 +54,7 @@ fun GameScreen(
 //            navController.navigateToWinScreen(score, isWin)
         },
         onTimerOut = {
-            navController.navigateToGameOverScreen(0, false)
+            navController.navigateToGameOverScreen(state.score, false)
         },
         onTimerUpdate = viewModel::onTimeUpdate
     )

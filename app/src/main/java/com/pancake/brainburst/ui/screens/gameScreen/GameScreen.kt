@@ -133,9 +133,7 @@ private fun GameContent(
                     if (state.isFriendHelperDialogVisible) {
                         FriendHelperDialog(state.questions[state.currentQuestionNumber].correctAnswer,
                             showDialog = true,
-                            onDismissClick = {
-                                onFriendHelperDismiss()
-                            })
+                            onDismissClick = { onFriendHelperDismiss() })
                     }
                 }
 

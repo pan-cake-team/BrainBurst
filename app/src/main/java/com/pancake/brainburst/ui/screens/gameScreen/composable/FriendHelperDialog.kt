@@ -25,7 +25,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
 import com.pancake.brainburst.R
@@ -80,7 +79,6 @@ fun FriendHelperDialog(
                 ) {
                     Text(
                         text = stringResource(R.string.answers_is) + " ‘" + correctAnswerNumber + " ’",
-                        modifier = Modifier,
                         textAlign = TextAlign.Center,
                         style = Type.Title
                     )
@@ -108,10 +106,4 @@ fun FriendHelperDialog(
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun test() {
-    FriendHelperDialog("A", showDialog = true, onDismissClick = {})
 }

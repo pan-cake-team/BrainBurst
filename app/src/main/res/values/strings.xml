@@ -11,6 +11,7 @@
     <string name="c">C</string>
     <string name="d">D</string>
     <string name="test_choice">Jupiter</string>
+<string name="no_Highest_Score">Don\'t have a score yet? Play Now.</string>
 
 
     <string name="play_by_category">Play by Category</string>

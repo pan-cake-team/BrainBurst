@@ -1,5 +1,6 @@
 package com.pancake.brainburst.ui.screens.home.composable
 
+import androidx.annotation.StringRes
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.slideInVertically
 import androidx.compose.foundation.Image
@@ -37,8 +38,8 @@ fun HomeBottomSheet(
     bottomSheetState: SheetState,
     onDismiss: () -> Unit,
     onClickDifficulty: (difficulty: String) -> Unit,
+    highestScore: Int,
 ) {
-
     AnimatedVisibility(
         bottomSheetState.isVisible,
         enter = slideInVertically()
@@ -62,12 +63,15 @@ fun HomeBottomSheet(
                         painter = painterResource(id = R.drawable.crown_star),
                         contentDescription = stringResource(R.string.crown_star)
                     )
-                    Text(text = "1502", style = Type.GraphicTextLarge)
-                    Text(
-                        text = stringResource(R.string.your_highest_score),
-                        style = Type.Body,
-                        color = LightSecondary,
-                    )
+                    if (highestScore != 0) {
+                        Text(text = highestScore.toString(), style = Type.GraphicTextLarge)
+                        Text(
+                            text = stringResource(R.string.your_highest_score),
+                            style = Type.Body,
+                            color = LightSecondary,
+                        )
+                    } else Text(text = stringResource(id = R.string.no_Highest_Score))
+
                     Spacer(modifier = Modifier.height(space16))
                     DifficultyCard(
                         title = stringResource(R.string.easy),

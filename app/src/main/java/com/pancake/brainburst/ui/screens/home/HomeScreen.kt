@@ -86,6 +86,7 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = hiltView
             displayBottomSheet()
         },
         bottomSheetState = bottomSheetState,
+        highestScore = viewModel.highestScore
     )
 }
 
@@ -101,13 +102,14 @@ private fun HomeContent(
     onDismiss: () -> Unit,
     onPlayClick: () -> Unit,
     bottomSheetState: SheetState,
+    highestScore:Int
 ) {
 
     HomeBottomSheet(
         bottomSheetState = bottomSheetState,
         onDismiss = onDismiss,
-        onClickDifficulty = onClickDifficulty
-
+        onClickDifficulty = onClickDifficulty,
+        highestScore = highestScore
     )
     Surface {
         Column(

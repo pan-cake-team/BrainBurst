@@ -126,6 +126,19 @@ class GameViewModel @Inject constructor(
 
     }
 
+    fun onCallFriend(){
+        _state.update { state ->
+            state.copy(isFriendHelperDialogVisible = true, helpTool = state.helpTool.copy(isCallFriendEnable = false) )
+        }
+    }
+
+    fun onHideFriendHelpDialog(){
+        _state.update { state ->
+            state.copy(isFriendHelperDialogVisible = false)
+        }
+
+    }
+
     private fun onGameFinish() {
         _state.update { it.copy(isGameFinish = true) }
     }

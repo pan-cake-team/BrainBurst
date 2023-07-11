@@ -18,12 +18,12 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.pancake.brainburst.R
+import com.pancake.brainburst.ui.screens.composable.FriendHelperDialog
 import com.pancake.brainburst.ui.screens.composable.Loading
 import com.pancake.brainburst.ui.screens.composable.SpacerVertical16
 import com.pancake.brainburst.ui.screens.gameOver.navigateToGameOverScreen
@@ -48,18 +48,20 @@ fun GameScreen(
         goToNextQuestion = viewModel::goToNextQuestion,
         onClickBack = {},
         onClickSave = {},
-        onClickReplace = {},
-        onClickCall = {},
+        onClickReplace = viewModel::onReplaceQuestion,
+        onClickCall = viewModel::onCallFriend,
+        onFriendHelperDismiss = viewModel::onHideFriendHelpDialog,
         onClickDeleteAnswer = viewModel::onClickDeleteAnswer,
         onSelectedAnswer = viewModel::onSelectedAnswer,
         onGameFinish = { score, isWin ->
 //            navController.navigateToWinScreen(score, isWin)
         },
         onTimerOut = {
-            navController.navigateToGameOverScreen(0, false)
+            navController.navigateToGameOverScreen(state.score, false)
         },
-        onTimerUpdate = viewModel::onTimeUpdate
-    )
+        onTimerUpdate = viewModel::onTimeUpdate,
+
+        )
 }
 
 @Composable
@@ -75,6 +77,7 @@ private fun GameContent(
     onGameFinish: (score: Int, isWin: Boolean) -> Unit,
     onTimerOut: () -> Unit,
     onTimerUpdate: () -> Unit,
+    onFriendHelperDismiss: () -> Unit
 ) {
 
     if (state.isLoading) {
@@ -128,6 +131,11 @@ private fun GameContent(
                         onClickDeleteAnswer = onClickDeleteAnswer,
                     )
 
+                    if (state.isFriendHelperDialogVisible) {
+                        FriendHelperDialog(state.questions[state.currentQuestionNumber].correctAnswer,
+                            showDialog = true,
+                            onDismissClick = { onFriendHelperDismiss() })
+                    }
                 }
 
             }

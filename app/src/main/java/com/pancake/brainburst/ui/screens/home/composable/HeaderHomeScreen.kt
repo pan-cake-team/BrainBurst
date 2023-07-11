@@ -37,6 +37,7 @@ import kotlin.math.absoluteValue
 fun HeaderHomeScreen(
     pagerState: PagerState,
     categories: List<CategoryUiState>,
+    onClick: (category: String) -> Unit,
 ) {
     Box(
         modifier = Modifier
@@ -104,7 +105,7 @@ fun HeaderHomeScreen(
                     ItemCategory(
                         state = categories[pageIndex],
                         pageOffset = pageOffset,
-                        onClickItem = {}
+                        onClickItem = onClick
 
                     )
 

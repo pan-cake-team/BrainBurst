@@ -25,10 +25,10 @@ import com.pancake.brainburst.ui.theme.space56
 fun DifficultyCard(
     title: String,
     color: Color,
-    onClickCard: () -> Unit
+    onClickCard: (difficulty:String) -> Unit
 ) {
     Card(
-        onClick = onClickCard,
+        onClick = { onClickCard(title) },
         modifier = Modifier
             .fillMaxWidth()
             .height(space56),
@@ -40,8 +40,8 @@ fun DifficultyCard(
             color = color,
             style = Type.Title,
             modifier = Modifier
-            .align(Alignment.CenterHorizontally)
-            .padding(top = 17.5.dp)
+                .align(Alignment.CenterHorizontally)
+                .padding(top = 17.5.dp)
         )
     }
 }

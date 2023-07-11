@@ -21,18 +21,20 @@ class GameViewModel @Inject constructor(
 
     private fun getQuestions() {
         viewModelScope.launch {
-            val questions = questions("food_and_drink", "medium", 11)
+            val questions = questions("food_and_drink", "medium", 12)
             onGetQuestionsSuccess(questions)
         }
     }
 
-    private fun onGetQuestionsSuccess(question: List<Question>) {
+    private fun onGetQuestionsSuccess(questions: List<Question>) {
+        val questionUiState = questions.toQuestionsUiState()
         _state.update { state ->
             state.copy(
-                isLoading = false, questions = question.toQuestionsUiState()
+                isLoading = false,
+                replacedQuestion = questionUiState.last(),
+                questions = questionUiState.dropLast(1),
             )
         }
-
     }
 
     private fun List<Question>.toQuestionsUiState(): List<QuestionUiState> {
@@ -44,8 +46,6 @@ class GameViewModel @Inject constructor(
                 correctAnswer = question.correctAnswer
             )
         }
-
-
     }
 
     fun onSelectedAnswer(answerSelected: String) {
@@ -92,14 +92,20 @@ class GameViewModel @Inject constructor(
                 isAnswerCorrectSelected = false,
                 isUpdateStateQuestion = false,
                 isTimerRunning = true,
+                score = state.score + calculateQuestionScore(),
                 currentQuestionNumber = _state.value.currentQuestionNumber + 1,
                 timer = state.timer.copy(
                     currentTime = state.timer.totalTime,
                     totalTime = state.timer.totalTime,
                 )
-
             )
         }
+
+    }
+
+    private fun calculateQuestionScore(): Int {
+        val elapsedTimeInSeconds = state.value.timer.currentTime / 1000
+        return (5 * elapsedTimeInSeconds).toInt()
 
     }
 
@@ -120,12 +126,38 @@ class GameViewModel @Inject constructor(
 
     }
 
+    fun onCallFriend(){
+        _state.update { state ->
+            state.copy(isFriendHelperDialogVisible = true, helpTool = state.helpTool.copy(isCallFriendEnable = false) )
+        }
+    }
+
+    fun onHideFriendHelpDialog(){
+        _state.update { state ->
+            state.copy(isFriendHelperDialogVisible = false)
+        }
+
+    }
+
     private fun onGameFinish() {
         _state.update { it.copy(isGameFinish = true) }
     }
 
     private fun stopTimer() {
         _state.update { it.copy(isTimerRunning = false) }
+    }
+
+    fun onReplaceQuestion() {
+        val updatedQuestions = state.value.questions.toMutableList()
+        updatedQuestions[_state.value.currentQuestionNumber] = _state.value.replacedQuestion
+        _state.update { state ->
+            state.copy(
+                questions = updatedQuestions,
+                helpTool = state.helpTool.copy(
+                    isReplaceQuestionEnable = false
+                )
+            )
+        }
     }
 
     fun onClickDeleteAnswer() {

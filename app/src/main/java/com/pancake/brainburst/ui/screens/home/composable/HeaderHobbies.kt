@@ -43,7 +43,7 @@ fun HeaderHobbies(
         }
 
         Button(
-            onClick = { onClickPlayNow() },
+            onClick = onClickPlayNow,
             enabled = isPlayActive,
             colors = ButtonDefaults.buttonColors(
                 containerColor = Brand500,

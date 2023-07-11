@@ -70,5 +70,6 @@ val Brown100 = Color(0x14C17D3F)
 
 val FoodCard = Color(0xFF87D3FE)
 
+val Background = Color(0xFFF0F5FD)
 
 //endregion

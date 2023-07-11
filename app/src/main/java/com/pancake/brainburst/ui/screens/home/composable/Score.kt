@@ -1,7 +1,9 @@
 package com.pancake.brainburst.ui.screens.home.composable
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -16,7 +18,11 @@ import com.pancake.brainburst.ui.theme.Type
 
 @Composable
 fun Score(state: Int) {
-    Column {
+    Column(
+        Modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         Image(
             modifier = Modifier.align(Alignment.CenterHorizontally),
             painter = painterResource(id = R.drawable.crown_star),

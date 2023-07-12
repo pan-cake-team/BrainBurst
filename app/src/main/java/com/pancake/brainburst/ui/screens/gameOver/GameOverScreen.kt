@@ -29,6 +29,7 @@ import com.pancake.brainburst.R
 import com.pancake.brainburst.ui.screens.gameOver.composobale.ButtonPrimary
 import com.pancake.brainburst.ui.screens.gameOver.composobale.VerticalSpacer
 import com.pancake.brainburst.ui.screens.gameOver.state.GameOverUiState
+import com.pancake.brainburst.ui.screens.home.navigateToHomeScreen
 import com.pancake.brainburst.ui.theme.Brand500
 import com.pancake.brainburst.ui.theme.LightBackground
 import com.pancake.brainburst.ui.theme.LightPrimary
@@ -51,8 +52,8 @@ fun GameOverScreen(
     val state by viewModel.state.collectAsState()
     GameOverContent(
         state = state,
-        onClickNext = { navController.navToGame() },
-        onClickExit = { navController.navToHome() },
+        onClickNext = navController::navigateToHomeScreen,
+        onClickExit = navController::navigateToHomeScreen,
     )
 }
 

@@ -6,27 +6,16 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.pancake.brainburst.AppDestination
+import com.pancake.brainburst.ui.navigation.BrainDestination
 
-private const val ROUT = "gameOverRoute"
+private const val ROUTE = BrainDestination.GameOver
 fun NavController.navigateToGameOverScreen(score: Int, isWin: Boolean) {
-    navigate("$ROUT/${score}/${isWin}")
+    navigate("$ROUTE/${score}/${isWin}")
 }
-
-
-fun NavController.navToHome() {
-    navigate(AppDestination.HomeScreen.screen)
-}
-
-fun NavController.navToGame() {
-    navigate(AppDestination.GameScreen.screen)
-
-}
-
 
 fun NavGraphBuilder.gameOverRoute(navController: NavController) {
     composable(
-        "$ROUT/{${WinArgs.SCORE_ARG}}/{${WinArgs.IS_WIN}}",
+        "$ROUTE/{${WinArgs.SCORE_ARG}}/{${WinArgs.IS_WIN}}",
         arguments = listOf(
             navArgument(WinArgs.SCORE_ARG) { NavType.IntType },
             navArgument(WinArgs.IS_WIN) { NavType.BoolType },

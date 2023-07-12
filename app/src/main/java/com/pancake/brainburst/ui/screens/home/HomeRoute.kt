@@ -4,9 +4,14 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
-import com.pancake.brainburst.AppDestination
+import com.pancake.brainburst.ui.navigation.BrainDestination
 
-private val ROUTE = AppDestination.HomeScreen.screen
+private const val ROUTE = BrainDestination.Home
+
+
+fun NavController.navigateToHomeScreen() {
+    navigate(ROUTE)
+}
 
 fun NavController.backToHomeScreen() {
     popBackStack()

@@ -7,19 +7,17 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.pancake.brainburst.AppDestination
+import com.pancake.brainburst.ui.navigation.BrainDestination
 
-private val GameRoute = AppDestination.GameScreen.screen
+private const val ROUTE = BrainDestination.Game
 
 fun NavController.navigateToGameScreen(categories: String, difficulty: String) {
-    navigate("$GameRoute/$categories/$difficulty")
-
-
+    navigate("$ROUTE/$categories/$difficulty")
 }
 
 fun NavGraphBuilder.gameScreen(navController: NavHostController) {
     composable(
-        "$GameRoute/{${GameArgs.CATEGORIES_ARGS}}/{${GameArgs.DIFFICULTY_ARGS}}",
+        "$ROUTE/{${GameArgs.CATEGORIES_ARGS}}/{${GameArgs.DIFFICULTY_ARGS}}",
         arguments = listOf(
             navArgument(GameArgs.CATEGORIES_ARGS) { NavType.StringType },
             navArgument(GameArgs.DIFFICULTY_ARGS) { NavType.StringType }

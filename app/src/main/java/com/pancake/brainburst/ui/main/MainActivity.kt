@@ -1,4 +1,4 @@
-package com.pancake.brainburst.ui.screens
+package com.pancake.brainburst.ui.main
 
 
 import android.os.Bundle

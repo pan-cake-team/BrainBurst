@@ -1,4 +1,4 @@
-package com.pancake.brainburst
+package com.pancake.brainburst.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
@@ -13,16 +13,24 @@ import com.pancake.brainburst.ui.screens.welecome.WelcomeScreen
 @Composable
 fun BrainNavGraph(navController: NavHostController) {
 
-    NavHost(navController = navController, startDestination = AppDestination.WelcomeScreen.screen) {
+    NavHost(navController = navController, startDestination = BrainDestination.Welcome) {
 
-        composable(AppDestination.WelcomeScreen.screen) { WelcomeScreen(navController) }
+        composable(BrainDestination.Welcome) { WelcomeScreen(navController) }
 
         homeScreen(navController)
 
         gameScreen(navController)
 
-        composable(AppDestination.SavedQuestion.screen) { SavedQuestionScreen(navController) }
+        composable(BrainDestination.SavedQuestion) { SavedQuestionScreen(navController) }
 
         gameOverRoute(navController)
     }
+}
+
+object BrainDestination {
+    const val Welcome = "welcomeScreen"
+    const val Home = "homeScreen"
+    const val Game = "gameScreen"
+    const val GameOver = "gameOverScreen"
+    const val SavedQuestion = "savedQuestionScreen"
 }

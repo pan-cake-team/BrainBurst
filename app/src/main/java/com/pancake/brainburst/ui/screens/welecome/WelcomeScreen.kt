@@ -18,13 +18,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
-import com.pancake.brainburst.AppDestination
 import com.pancake.brainburst.R
-import com.pancake.brainburst.ui.theme.BrainBurstTheme
+import com.pancake.brainburst.ui.screens.home.navigateToHomeScreen
 import com.pancake.brainburst.ui.theme.Cyan300
 import com.pancake.brainburst.ui.theme.NerkoOne
 import com.pancake.brainburst.ui.theme.space24
@@ -39,13 +36,17 @@ fun WelcomeScreen(
 ) {
     val state by viewModel.state.collectAsState()
 
-    welcomeScreenContent(
-        state
-    ) { navController.navigate(AppDestination.HomeScreen.screen) }
+    WelcomeContent(
+        state,
+        onClickPlay = navController::navigateToHomeScreen
+    )
 }
 
 @Composable
-fun welcomeScreenContent(state: WelcomeScreenUIState, onClickPlay: () -> Unit) {
+private fun WelcomeContent(
+    state: WelcomeScreenUIState,
+    onClickPlay: () -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxSize(),
@@ -53,7 +54,7 @@ fun welcomeScreenContent(state: WelcomeScreenUIState, onClickPlay: () -> Unit) {
     ) {
         Spacer(modifier = Modifier.weight(0.3f))
 
-        if (state.hasScore()){
+        if (state.hasScore()) {
             Image(
                 painter = painterResource(id = R.drawable.crown_star),
                 contentDescription = "crown",

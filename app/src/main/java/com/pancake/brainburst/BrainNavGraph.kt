@@ -4,11 +4,11 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.pancake.brainburst.ui.screens.home.HomeScreen
-import com.pancake.brainburst.ui.screens.savedQuestions.SavedQuestionScreen
-import com.pancake.brainburst.ui.screens.welecome.WelcomeScreen
 import com.pancake.brainburst.ui.screens.gameOver.gameOverRoute
 import com.pancake.brainburst.ui.screens.gameScreen.gameScreen
+import com.pancake.brainburst.ui.screens.home.homeScreen
+import com.pancake.brainburst.ui.screens.savedQuestions.SavedQuestionScreen
+import com.pancake.brainburst.ui.screens.welecome.WelcomeScreen
 
 @Composable
 fun BrainNavGraph(navController: NavHostController) {
@@ -17,7 +17,7 @@ fun BrainNavGraph(navController: NavHostController) {
 
         composable(AppDestination.WelcomeScreen.screen) { WelcomeScreen(navController) }
 
-        composable(AppDestination.HomeScreen.screen) { HomeScreen(navController) }
+        homeScreen(navController)
 
         gameScreen(navController)
 

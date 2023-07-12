@@ -32,6 +32,7 @@ import com.pancake.brainburst.ui.screens.gameScreen.composable.ChoiceCard
 import com.pancake.brainburst.ui.screens.gameScreen.composable.QuestionCard
 import com.pancake.brainburst.ui.screens.gameScreen.composable.QuestionNumber
 import com.pancake.brainburst.ui.screens.gameScreen.composable.QuestionProgressBar
+import com.pancake.brainburst.ui.screens.home.backToHomeScreen
 import com.pancake.brainburst.ui.theme.LightBackground
 import com.pancake.brainburst.ui.theme.space16
 import com.pancake.brainburst.ui.theme.space8
@@ -47,7 +48,7 @@ fun GameScreen(
     GameContent(
         state = state,
         goToNextQuestion = viewModel::goToNextQuestion,
-        onClickBack = {},
+        onClickBack = navController::backToHomeScreen,
         onClickSave = {},
         onClickReplace = viewModel::onReplaceQuestion,
         onClickCall = viewModel::onCallFriend,

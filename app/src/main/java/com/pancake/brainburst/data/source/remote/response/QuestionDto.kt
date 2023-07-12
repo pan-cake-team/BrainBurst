@@ -24,11 +24,13 @@ data class QuestionDto(
     val regions: List<String?>?,
     @SerializedName("isNiche")
     val isNiche: Boolean?
-)
+) {
+    data class QuestionTextDto(
+        @SerializedName("text")
+        val text: String?
+    )
+}
 
-data class QuestionTextDto(
-    @SerializedName("text")
-    val text: String?
-)
+
 
 

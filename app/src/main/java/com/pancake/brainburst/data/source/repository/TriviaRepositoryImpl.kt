@@ -1,15 +1,26 @@
-package com.pancake.brainburst.data.source.remote.repository
+package com.pancake.brainburst.data.source.repository
 
 import android.util.Log
+import com.pancake.brainburst.data.source.local.room.dao.BrainBurstDao
+import com.pancake.brainburst.data.source.local.room.entity.FavoriteQuestionEntity
 import com.pancake.brainburst.data.source.remote.network.TriviaService
 import com.pancake.brainburst.data.source.remote.response.QuestionDto
 import retrofit2.Response
 import javax.inject.Inject
 
 class TriviaRepositoryImpl @Inject constructor(
-    private val triviaService: TriviaService
+    private val triviaService: TriviaService,
+    private val dao: BrainBurstDao
+
 ) : TriviaRepository {
 
+    override suspend fun addFavoriteQuestion(question: FavoriteQuestionEntity) {
+        return dao.addFavoriteQuestion(question)
+    }
+
+    override suspend fun getAllFavoriteQuestions(): List<FavoriteQuestionEntity> {
+        return dao.getAllFavoriteQuestions()
+    }
     override suspend fun getQuestions(
         categories: String,
         difficulty: String,
@@ -29,7 +40,6 @@ class TriviaRepositoryImpl @Inject constructor(
         if (response.isSuccessful) {
             val result = response.body()
             if (result != null) {
-                Log.i("ameerxzy", "res successful : $result")
                 return result
             } else {
                 throw Throwable(response.message())

@@ -1,7 +1,7 @@
 package com.pancake.brainburst.di
 
-import com.pancake.brainburst.data.source.remote.repository.TriviaRepository
-import com.pancake.brainburst.data.source.remote.repository.TriviaRepositoryImpl
+import com.pancake.brainburst.data.source.repository.TriviaRepository
+import com.pancake.brainburst.data.source.repository.TriviaRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

@@ -1,6 +1,6 @@
 package com.pancake.brainburst.domain.usecase
 
-import com.pancake.brainburst.data.source.remote.repository.TriviaRepository
+import com.pancake.brainburst.data.source.repository.TriviaRepository
 import com.pancake.brainburst.domain.mapper.toQuestion
 import com.pancake.brainburst.domain.model.Question
 import javax.inject.Inject

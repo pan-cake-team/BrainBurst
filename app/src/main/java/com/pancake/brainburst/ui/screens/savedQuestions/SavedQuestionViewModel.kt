@@ -2,7 +2,7 @@ package com.pancake.brainburst.ui.screens.savedQuestions
 
 import androidx.lifecycle.viewModelScope
 import com.pancake.brainburst.domain.model.FavoriteQuestionModel
-import com.pancake.brainburst.domain.useCases.GetAllSavedQuestionLocal
+import com.pancake.brainburst.domain.usecase.GetAllSavedQuestionLocalUseCase
 import com.pancake.brainburst.ui.base.BaseViewModel
 import com.pancake.brainburst.ui.screens.savedQuestions.state.SavedQuestionsUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SavedQuestionViewModel @Inject constructor(
-    private val getAllSavedQuestionLocal: GetAllSavedQuestionLocal
+    private val getAllSavedQuestionLocal: GetAllSavedQuestionLocalUseCase
 ) : BaseViewModel<SavedQuestionsUiState>(SavedQuestionsUiState()) {
 
     init {

@@ -18,6 +18,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -167,34 +168,13 @@ private fun GameContent(
                     } else {
                         goToNextQuestion()
                     }
-                } else {
-                    wrongMediaPlayer.start()
-                    delay(3000)
-                    wrongMediaPlayer.release()
-                    if (state.currentQuestionNumber == state.questions.size) {
-                        onGameFinish(state.score, true)
-                    } else {
-                        goToNextQuestion()
-                    }
                 }
+
+            }
+            if (!state.isAnswerSelected) {
+                onGameFinish(state.score, false)
             }
         }
-
-
-//        LaunchedEffect(state.isUpdateStateQuestion) {
-//
-//            if (state.isAnswerCorrectSelected) {
-//                delay(5000)
-//                if (state.currentQuestionNumber == state.questions.size) {
-//                    onGameFinish(state.score, true)
-//                } else {
-//                    goToNextQuestion()
-//                }
-//            }
-//            if (!state.isAnswerSelected) {
-//                onGameFinish(state.score, false)
-//            }
-//        }
 
         LaunchedEffect(state.isTimerRunning) {
             if (state.isTimerRunning) {
@@ -207,7 +187,9 @@ private fun GameContent(
 
         LaunchedEffect(state.isGameFinish) {
             if (state.isGameFinish) {
+                wrongMediaPlayer.start()
                 delay(1000)
+                wrongMediaPlayer.release()
                 onTimerOut()
             }
 

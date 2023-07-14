@@ -149,7 +149,7 @@ private fun GameContent(
                     correctAnswer = currentQuestion.correctAnswer,
                     answer = currentQuestion.answers[index],
                     isClicked = state.isAnsweredOrTimeFinished,
-                    onSelectedAnswer = onSelectedAnswer
+                    onSelectedAnswer = onSelectedAnswer,
                 )
             }
         }

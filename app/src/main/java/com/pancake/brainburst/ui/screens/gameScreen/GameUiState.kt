@@ -1,9 +1,11 @@
 package com.pancake.brainburst.ui.screens.gameScreen
 
+import com.pancake.brainburst.ui.base.BaseErrorUiState
 import com.pancake.brainburst.ui.base.BaseUiState
 
 data class GameUiState(
     val isLoading: Boolean = true,
+    val error: BaseErrorUiState?=null,
     val isError: Boolean = false,
     val score: Int = 0,
     val isGameFinish: Boolean = false,

@@ -5,6 +5,7 @@ import com.pancake.brainburst.data.source.local.room.dao.BrainBurstDao
 import com.pancake.brainburst.data.source.local.room.entity.FavoriteQuestionEntity
 import com.pancake.brainburst.data.source.remote.network.TriviaService
 import com.pancake.brainburst.data.source.remote.response.QuestionDto
+import com.pancake.brainburst.domain.model.ErrorType
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -42,11 +43,10 @@ class TriviaRepositoryImpl @Inject constructor(
             if (result != null) {
                 return result
             } else {
-                throw Throwable(response.message())
+                throw ErrorType.Network(response.message())
             }
         } else {
-            val errorResponse = response.errorBody()?.toString()
-            throw Throwable(errorResponse)
+            throw ErrorType.Network(response.message())
         }
 
     }

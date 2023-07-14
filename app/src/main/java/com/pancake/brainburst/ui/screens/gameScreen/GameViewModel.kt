@@ -4,11 +4,14 @@ import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.pancake.brainburst.domain.model.Question
 import com.pancake.brainburst.domain.usecase.QuestionsUseCase
+import com.pancake.brainburst.ui.base.BaseErrorUiState
 import com.pancake.brainburst.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.math.log
 
 @HiltViewModel
 class GameViewModel @Inject constructor(
@@ -17,24 +20,41 @@ class GameViewModel @Inject constructor(
 
     init {
         getQuestions()
+
     }
 
-    private fun getQuestions() {
-        viewModelScope.launch {
-            val questions = questions("food_and_drink", "medium", 12)
-            onGetQuestionsSuccess(questions)
-        }
+    fun getQuestions() {
+        tryToExecute(
+            { questions("food_and_drink", "medium", 12) },
+            ::onGetQuestionsSuccess,
+            ::onGetQuestionsError
+        )
     }
 
     private fun onGetQuestionsSuccess(questions: List<Question>) {
+
         val questionUiState = questions.toQuestionsUiState()
+        Log.d("TAG", "onGetQuestionsSuccess: $questionUiState")
         _state.update { state ->
             state.copy(
                 isLoading = false,
+                isError = false,
                 replacedQuestion = questionUiState.last(),
                 questions = questionUiState.dropLast(1),
             )
         }
+    }
+
+    private fun onGetQuestionsError(error: BaseErrorUiState) {
+        Log.d("TAG", "onGetQuestionsError:$error ")
+        _state.update { state ->
+            state.copy(
+                isLoading = false,
+                error = error,
+                isError = true
+            )
+        }
+
     }
 
     private fun List<Question>.toQuestionsUiState(): List<QuestionUiState> {
@@ -57,6 +77,7 @@ class GameViewModel @Inject constructor(
         _state.update { state ->
             state.copy(
                 isLoading = false,
+                isError = false,
                 isAnsweredOrTimeFinished = true,
                 isAnswerSelected = true,
                 isAnswerCorrectSelected = isAnswerCorrectSelected(answerSelected),
@@ -87,6 +108,7 @@ class GameViewModel @Inject constructor(
         _state.update { state ->
             state.copy(
                 isLoading = false,
+                isError = false,
                 isAnswerSelected = true,
                 isAnsweredOrTimeFinished = false,
                 isAnswerCorrectSelected = false,
@@ -126,13 +148,16 @@ class GameViewModel @Inject constructor(
 
     }
 
-    fun onCallFriend(){
+    fun onCallFriend() {
         _state.update { state ->
-            state.copy(isFriendHelperDialogVisible = true, helpTool = state.helpTool.copy(isCallFriendEnable = false) )
+            state.copy(
+                isFriendHelperDialogVisible = true,
+                helpTool = state.helpTool.copy(isCallFriendEnable = false)
+            )
         }
     }
 
-    fun onHideFriendHelpDialog(){
+    fun onHideFriendHelpDialog() {
         _state.update { state ->
             state.copy(isFriendHelperDialogVisible = false)
         }

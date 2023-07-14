@@ -34,7 +34,7 @@ val textSize32 = 32.sp
 //endregion
 
 //region Border Size Dimensions
-val border1 = 1.sp
+val border1 = 1.dp
 
 //endregion
 
@@ -56,10 +56,14 @@ val smallIconButtonSize = 32.dp
 val normalButtonHeight = 36.dp
 val timerStrokeWidth = 2.dp
 val QuestionCounterSize = 40.dp
+val ButtonWidthNetWork = 120.dp
+val ButtonHeightNetWork = 40.dp
+
 //endregion
 
 // region Radius Dimensions
 val radius16 = 16.dp
+val radius24 = 24.dp
 //endregion
 
 

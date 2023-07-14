@@ -26,6 +26,7 @@ import androidx.navigation.NavHostController
 import com.pancake.brainburst.R
 import com.pancake.brainburst.ui.screens.composable.FriendHelperDialog
 import com.pancake.brainburst.ui.screens.composable.Loading
+import com.pancake.brainburst.ui.screens.composable.NetworkError
 import com.pancake.brainburst.ui.screens.composable.SpacerVertical16
 import com.pancake.brainburst.ui.screens.gameOver.navigateToGameOverScreen
 import com.pancake.brainburst.ui.screens.gameScreen.composable.ChoiceCard
@@ -82,9 +83,14 @@ private fun GameContent(
     onFriendHelperDismiss: () -> Unit
 ) {
 
-    if (state.isLoading) {
+    if (state.isError) {
+        NetworkError()
+    }
+    else if( state.isLoading){
         Loading()
-    } else {
+    }
+
+    else {
 
         val questionSequence: Array<String> = stringArrayResource(R.array.questionـsequence)
         val currentQuestion = state.questions[state.currentQuestionNumber]

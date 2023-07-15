@@ -84,7 +84,7 @@ private fun GameContent(
 
     if (state.isLoading) {
         Loading()
-    } else {
+    } else if (state.currentQuestionNumber < state.questions.size) {
 
         val questionSequence: Array<String> = stringArrayResource(R.array.questionـsequence)
         val currentQuestion = state.questions[state.currentQuestionNumber]
@@ -110,7 +110,7 @@ private fun GameContent(
 
                     QuestionNumber(
                         currentQuestionNumber = state.currentQuestionNumber,
-                        totalQuestionNumber = state.questions.size,
+                        totalQuestionNumber = state.questions.size - 1,
                     )
 
 
@@ -149,7 +149,7 @@ private fun GameContent(
                     correctAnswer = currentQuestion.correctAnswer,
                     answer = currentQuestion.answers[index],
                     isClicked = state.isAnsweredOrTimeFinished,
-                    onSelectedAnswer = onSelectedAnswer
+                    onSelectedAnswer = onSelectedAnswer,
                 )
             }
         }
@@ -196,6 +196,8 @@ private fun GameContent(
 
         }
 
+    } else {
+        onTimerOut()
     }
 
 }

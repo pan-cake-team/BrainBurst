@@ -38,7 +38,7 @@ fun ChoiceCard(
     onSelectedAnswer: (answerSelected: String) -> Unit,
 ) {
     val isCorrectAnswer = correctAnswer == answer.text
-    val rightAnswer by remember { mutableStateOf(isCorrectAnswer) }
+    val rightAnswer by remember(isCorrectAnswer) { mutableStateOf(isCorrectAnswer) }
 
     val durationMillis = 500
     val cardBackgroundState by animateColorAsState(

@@ -48,6 +48,9 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = hiltView
     var category: String by remember {
         mutableStateOf("")
     }
+    var tags: String by remember {
+        mutableStateOf("")
+    }
 
     fun displayBottomSheet() {
         coroutineScope.launch {
@@ -66,14 +69,16 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = hiltView
         onClickHobby = viewModel::onClickHobby,
         onClickDifficulty = { difficulty ->
             navController.navigateToGameScreen(
-                categories = category,
-                difficulty = difficulty
+                categories = category.ifEmpty { "no" },
+                difficulty = difficulty,
+                tags = tags.ifEmpty { "no" }
             )
             closeBottomSheet()
 
         },
         onCategoryClick = { Category ->
             category = Category
+            tags = viewModel.state.value.hobbiesSelected.joinToString(",")
             displayBottomSheet()
         },
         onDismiss = {
@@ -82,7 +87,7 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = hiltView
             }
         },
         onPlayClick = {
-            category = viewModel.state.value.hobbiesSelected.joinToString(",")
+            tags = viewModel.state.value.hobbiesSelected.joinToString(",")
             displayBottomSheet()
         },
         bottomSheetState = bottomSheetState,

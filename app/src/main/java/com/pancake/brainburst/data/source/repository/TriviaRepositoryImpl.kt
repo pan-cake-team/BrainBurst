@@ -24,11 +24,36 @@ class TriviaRepositoryImpl @Inject constructor(
     override suspend fun getQuestions(
         categories: String,
         difficulty: String,
-        limit: Int
+        limit: Int,
+        tags: String
     ): List<QuestionDto> {
         return wrapResponseWithErrorHandler {
             triviaService.getQuestions(
+                categories, limit, difficulty, tags
+            )
+        }
+    }
+
+    override suspend fun getQuestionsWithoutTags(
+        categories: String,
+        difficulty: String,
+        limit: Int
+    ): List<QuestionDto> {
+        return wrapResponseWithErrorHandler {
+            triviaService.getQuestionsWithoutTags(
                 categories, limit, difficulty
+            )
+        }
+    }
+
+    override suspend fun getQuestionsWithoutCategory(
+        difficulty: String,
+        limit: Int,
+        tags: String
+    ): List<QuestionDto> {
+        return wrapResponseWithErrorHandler {
+            triviaService.getQuestionsWithoutCategory(
+                limit, difficulty, tags
             )
         }
     }

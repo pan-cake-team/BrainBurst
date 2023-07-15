@@ -13,6 +13,19 @@ interface TriviaRepository {
         categories: String,
         difficulty: String,
         limit: Int,
+        tags: String
+    ): List<QuestionDto>
+
+    suspend fun getQuestionsWithoutTags(
+        categories: String,
+        difficulty: String,
+        limit: Int,
+    ): List<QuestionDto>
+
+    suspend fun getQuestionsWithoutCategory(
+        difficulty: String,
+        limit: Int,
+        tags: String
     ): List<QuestionDto>
 
 

@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.pancake.brainburst.domain.model.Question
 import com.pancake.brainburst.domain.usecase.QuestionsUseCase
+import com.pancake.brainburst.domain.usecase.SavedQuestionLocalUseCase
 import com.pancake.brainburst.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.update
@@ -12,7 +13,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class GameViewModel @Inject constructor(
-    private val questions: QuestionsUseCase
+    private val questions: QuestionsUseCase,
+    private val savedQuestionLocal: SavedQuestionLocalUseCase
 ) : BaseViewModel<GameUiState>(GameUiState()) {
 
     init {
@@ -24,6 +26,12 @@ class GameViewModel @Inject constructor(
             val questions = questions("food_and_drink", "medium", 12)
             onGetQuestionsSuccess(questions)
         }
+    }
+
+    fun onSaveQuestion(question: QuestionUiState){
+       viewModelScope.launch {
+           savedQuestionLocal(question.toQuestion())
+       }
     }
 
     private fun onGetQuestionsSuccess(questions: List<Question>) {

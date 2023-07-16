@@ -1,5 +1,6 @@
 package com.pancake.brainburst.domain.mapper
 
+import com.pancake.brainburst.data.source.local.room.entity.FavoriteQuestionEntity
 import com.pancake.brainburst.data.source.remote.response.QuestionDto
 import com.pancake.brainburst.domain.model.Question
 
@@ -21,3 +22,10 @@ fun QuestionDto.toQuestion(): Question {
     )
 
 }
+
+fun Question.toFavoriteQuestionEntity() = FavoriteQuestionEntity(
+    question = this.question,
+    answers = this.answers,
+    rightAnswer = this.correctAnswer,
+    id = null
+)

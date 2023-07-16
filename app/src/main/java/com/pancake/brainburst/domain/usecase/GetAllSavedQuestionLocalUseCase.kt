@@ -16,7 +16,7 @@ class GetAllSavedQuestionLocalUseCase @Inject constructor(
     private fun FavoriteQuestionEntity.toFavoriteQuestionModel(): FavoriteQuestionModel {
         return FavoriteQuestionModel(
             question = this.question,
-            answers = listOf(),
+            answers = this.answers,
             rightAnswer = this.rightAnswer
         )
     }

@@ -11,12 +11,28 @@ class QuestionsUseCase @Inject constructor(
     suspend operator fun invoke(
         categories: String,
         difficulty: String,
-        limit: Int,
+        limit: Int = 10,
+        tags: String
     ): List<Question> {
-        return triviaRepository.getQuestions(
-            categories = categories,
-            limit = limit,
-            difficulty = difficulty
-        ).map { it.toQuestion() }
+        if (categories.isEmpty()) {
+            return triviaRepository.getQuestionsWithoutCategory(
+                limit = limit,
+                difficulty = difficulty,
+                tags = tags
+            ).map { it.toQuestion() }
+        } else if (tags.isEmpty()) {
+            return triviaRepository.getQuestionsWithoutTags(
+                categories = categories,
+                limit = limit,
+                difficulty = difficulty,
+            ).map { it.toQuestion() }
+        } else {
+            return triviaRepository.getQuestions(
+                categories = categories,
+                limit = limit,
+                difficulty = difficulty,
+                tags = tags
+            ).map { it.toQuestion() }
+        }
     }
 }

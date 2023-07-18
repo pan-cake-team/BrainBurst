@@ -35,7 +35,7 @@ import com.pancake.brainburst.ui.theme.zero
 fun ItemCategory(
     state: CategoryUiState,
     pageOffset: Float,
-    onClickItem: (category:String) -> Unit,
+    onClickItem: (category: String) -> Unit,
     modifier: Modifier = Modifier
 ) {
 

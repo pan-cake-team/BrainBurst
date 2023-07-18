@@ -1,6 +1,7 @@
 package com.pancake.brainburst.ui.screens.gameScreen
 
 import android.util.Log
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.pancake.brainburst.domain.model.Question
 import com.pancake.brainburst.domain.usecase.QuestionsUseCase
@@ -13,17 +14,24 @@ import javax.inject.Inject
 
 @HiltViewModel
 class GameViewModel @Inject constructor(
-    private val questions: QuestionsUseCase,
+    savedStateHandle: SavedStateHandle,
+    private val questions: QuestionsUseCase
     private val savedQuestionLocal: SavedQuestionLocalUseCase
 ) : BaseViewModel<GameUiState>(GameUiState()) {
+
+    private val args: GameArgs = GameArgs(savedStateHandle)
 
     init {
         getQuestions()
     }
 
     private fun getQuestions() {
+        val category = args.categories.takeIf { it != "no" } ?: ""
+        val tag = args.tags.takeIf { it != "no" } ?: ""
         viewModelScope.launch {
-            val questions = questions("food_and_drink", "medium", 12)
+            val questions = questions(category,
+                args.difficulty?.lowercase() ?: "",
+                tags = tag)
             onGetQuestionsSuccess(questions)
         }
     }

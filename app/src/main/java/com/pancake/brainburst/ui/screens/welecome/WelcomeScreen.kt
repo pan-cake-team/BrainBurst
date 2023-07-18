@@ -18,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.pancake.brainburst.R
@@ -28,7 +29,6 @@ import com.pancake.brainburst.ui.theme.space24
 import com.pancake.brainburst.ui.theme.space56
 import com.pancake.brainburst.ui.theme.textSize14
 import com.pancake.brainburst.ui.theme.textSize32
-
 @Composable
 fun WelcomeScreen(
     navController: NavController,
@@ -41,11 +41,12 @@ fun WelcomeScreen(
         onClickPlay = navController::navigateToHomeScreen
     )
 }
+@Preview
 
 @Composable
 private fun WelcomeContent(
-    state: WelcomeScreenUIState,
-    onClickPlay: () -> Unit
+    state: WelcomeScreenUIState=WelcomeScreenUIState(),
+    onClickPlay: () -> Unit={}
 ) {
     Column(
         modifier = Modifier

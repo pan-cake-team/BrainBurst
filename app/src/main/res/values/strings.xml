@@ -71,6 +71,8 @@
     <string name="let_s_play">Let\'s PLay</string>
     <string name="your_heights_score">Your heights score</string>
     <string name="connection_failed">Connection failed</string>
+    <string name="no_questions">No Questions</string>
+    <string name="back_to_home">Back To Home</string>
     <string name="answers_is">I think the answers is</string>
     <string name="thank_you">Thank you</string>
     <string name="retry">Retry</string>

@@ -23,7 +23,7 @@ class GameViewModel @Inject constructor(
 
     }
 
-    fun getQuestions() {
+     fun getQuestions() {
         tryToExecute(
             { questions("food_and_drink", "medium", 12) },
             ::onGetQuestionsSuccess,

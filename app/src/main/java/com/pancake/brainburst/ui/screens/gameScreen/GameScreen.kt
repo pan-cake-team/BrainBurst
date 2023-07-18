@@ -20,13 +20,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringArrayResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.pancake.brainburst.R
 import com.pancake.brainburst.ui.screens.composable.FriendHelperDialog
 import com.pancake.brainburst.ui.screens.composable.Loading
-import com.pancake.brainburst.ui.screens.composable.NetworkError
+import com.pancake.brainburst.ui.screens.composable.ErrorScreen
 import com.pancake.brainburst.ui.screens.composable.SpacerVertical16
 import com.pancake.brainburst.ui.screens.gameOver.navigateToGameOverScreen
 import com.pancake.brainburst.ui.screens.gameScreen.composable.ChoiceCard
@@ -48,6 +49,7 @@ fun GameScreen(
 
     GameContent(
         state = state,
+        getQuestions=viewModel::getQuestions,
         goToNextQuestion = viewModel::goToNextQuestion,
         onClickBack = navController::backToHomeScreen,
         onClickSave = {},
@@ -70,6 +72,7 @@ fun GameScreen(
 @Composable
 private fun GameContent(
     state: GameUiState,
+    getQuestions: () -> Unit,
     goToNextQuestion: () -> Unit,
     onClickBack: () -> Unit,
     onClickSave: () -> Unit,
@@ -84,13 +87,18 @@ private fun GameContent(
 ) {
 
     if (state.isError) {
-        NetworkError()
-    }
-    else if( state.isLoading){
+        ErrorScreen(
+            getQuestions, stringResource(R.string.connection_failed),
+            stringResource(R.string.retry)
+        )
+    } else if (state.isLoading) {
         Loading()
-    }
-
-    else {
+    } else if (state.questions.isEmpty()) {
+        ErrorScreen(
+            onClickBack, stringResource(R.string.no_questions),
+            stringResource(R.string.back_to_home)
+        )
+    } else {
 
         val questionSequence: Array<String> = stringArrayResource(R.array.questionـsequence)
         val currentQuestion = state.questions[state.currentQuestionNumber]

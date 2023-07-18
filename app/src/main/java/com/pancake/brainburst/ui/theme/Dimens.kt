@@ -56,7 +56,7 @@ val smallIconButtonSize = 32.dp
 val normalButtonHeight = 36.dp
 val timerStrokeWidth = 2.dp
 val QuestionCounterSize = 40.dp
-val ButtonWidthNetWork = 120.dp
+val ButtonWidthNetWork = 140.dp
 val ButtonHeightNetWork = 40.dp
 
 //endregion

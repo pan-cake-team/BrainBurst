@@ -43,7 +43,7 @@ class TriviaRepositoryImpl @Inject constructor(
             if (result != null) {
                 return result
             } else {
-                throw ErrorType.Network(response.message())
+                throw ErrorType.NoData(response.message())
             }
         } else {
             throw ErrorType.Network(response.message())

@@ -27,6 +27,8 @@ abstract class BaseViewModel<UiState : BaseUiState>(state: UiState) : ViewModel(
                 onSuccess(result)
             } catch (e: ErrorType.Network) {
                 onError(BaseErrorUiState.Disconnected(e.message.toString()))
+            }catch (e: ErrorType.NoData) {
+                onError(BaseErrorUiState.NoData(e.message.toString()))
             }catch (error: Throwable) {
                 onError(BaseErrorUiState.NoFoundError(error.message.toString()))
             }

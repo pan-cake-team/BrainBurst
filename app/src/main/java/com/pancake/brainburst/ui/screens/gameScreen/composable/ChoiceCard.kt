@@ -28,6 +28,8 @@ import com.pancake.brainburst.ui.theme.Type
 import com.pancake.brainburst.ui.theme.space16
 import com.pancake.brainburst.ui.theme.space8
 
+
+
 @Composable
 fun ChoiceCard(
     questionNumber: String,
@@ -61,7 +63,6 @@ fun ChoiceCard(
         animationSpec = tween(durationMillis = durationMillis),
         label = ""
     )
-
 
     Card(
         modifier = modifier
@@ -107,3 +108,4 @@ fun ChoiceCard(
         }
     }
 }
+

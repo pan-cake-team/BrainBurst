@@ -2,10 +2,11 @@ package com.pancake.brainburst.data.source.repository
 
 import com.pancake.brainburst.data.source.local.room.entity.FavoriteQuestionEntity
 import com.pancake.brainburst.data.source.remote.response.QuestionDto
+import com.pancake.brainburst.domain.model.Question
 
 interface TriviaRepository {
 
-    suspend fun addFavoriteQuestion(question: FavoriteQuestionEntity)
+    suspend fun addFavoriteQuestion(question: Question)
 
     suspend fun getAllFavoriteQuestions(): List<FavoriteQuestionEntity>
 

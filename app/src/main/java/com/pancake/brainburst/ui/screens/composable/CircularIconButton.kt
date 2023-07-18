@@ -1,5 +1,6 @@
 package com.pancake.brainburst.ui.screens.composable
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -12,10 +13,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import com.pancake.brainburst.R
+import com.pancake.brainburst.ui.screens.gameScreen.QuestionUiState
 import com.pancake.brainburst.ui.theme.LightWhite300
 import com.pancake.brainburst.ui.theme.LightWhite500
 import com.pancake.brainburst.ui.theme.space40
@@ -47,6 +50,27 @@ fun CircularIconButton(
                 .fillMaxSize()
         )
     }
+
+}
+
+
+@Composable
+fun CircularIconSave(
+    size: Dp = space40,
+    drawableRes: Painter,
+    onClick: (QuestionUiState) -> Unit,
+    question: QuestionUiState
+) {
+
+    val content = LocalContext.current
+    CircularIconButton(
+        size = size,
+        drawableRes = drawableRes,
+        onClick = {
+            onClick(question)
+            Toast.makeText(content, "The question has been saved.", Toast.LENGTH_SHORT).show()
+        },
+    )
 
 }
 

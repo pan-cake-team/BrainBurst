@@ -32,6 +32,7 @@ import com.pancake.brainburst.ui.screens.home.composable.HeaderHobbies
 import com.pancake.brainburst.ui.screens.home.composable.HeaderHomeScreen
 import com.pancake.brainburst.ui.screens.home.composable.Hobbies
 import com.pancake.brainburst.ui.screens.home.composable.HomeBottomSheet
+import com.pancake.brainburst.ui.screens.savedQuestions.navigateToSaveScreen
 import com.pancake.brainburst.ui.theme.Brand500
 import com.pancake.brainburst.ui.theme.lightBackgroundColor
 import kotlinx.coroutines.launch
@@ -90,6 +91,7 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = hiltView
             tags = viewModel.state.value.hobbiesSelected.joinToString(",")
             displayBottomSheet()
         },
+        onStarClicked = {navController.navigateToSaveScreen()},
         bottomSheetState = bottomSheetState,
     )
 }
@@ -106,6 +108,7 @@ private fun HomeContent(
     onDismiss: () -> Unit,
     onPlayClick: () -> Unit,
     bottomSheetState: SheetState,
+    onStarClicked: () -> Unit,
 ) {
 
     HomeBottomSheet(
@@ -127,7 +130,8 @@ private fun HomeContent(
             HeaderHomeScreen(
                 pagerState = pagerState,
                 categories = state.categories,
-                onClick = onCategoryClick
+                onClick = onCategoryClick,
+                onStarClicked = onStarClicked
             )
 
             SpacerVertical32()

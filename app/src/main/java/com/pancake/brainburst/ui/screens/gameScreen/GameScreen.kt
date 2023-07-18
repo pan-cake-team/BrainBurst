@@ -49,7 +49,7 @@ fun GameScreen(
         state = state,
         goToNextQuestion = viewModel::goToNextQuestion,
         onClickBack = navController::backToHomeScreen,
-        onClickSave = {},
+        onClickSave = viewModel::onSaveQuestion,
         onClickReplace = viewModel::onReplaceQuestion,
         onClickCall = viewModel::onCallFriend,
         onFriendHelperDismiss = viewModel::onHideFriendHelpDialog,
@@ -71,7 +71,6 @@ private fun GameContent(
     state: GameUiState,
     goToNextQuestion: () -> Unit,
     onClickBack: () -> Unit,
-    onClickSave: () -> Unit,
     onClickReplace: () -> Unit,
     onClickCall: () -> Unit,
     onClickDeleteAnswer: () -> Unit,
@@ -79,12 +78,13 @@ private fun GameContent(
     onGameFinish: (score: Int, isWin: Boolean) -> Unit,
     onTimerOut: () -> Unit,
     onTimerUpdate: () -> Unit,
-    onFriendHelperDismiss: () -> Unit
+    onFriendHelperDismiss: () -> Unit,
+    onClickSave: (QuestionUiState) -> Unit
 ) {
 
     if (state.isLoading) {
         Loading()
-    } else {
+    } else if (state.currentQuestionNumber < state.questions.size) {
 
         val questionSequence: Array<String> = stringArrayResource(R.array.questionـsequence)
         val currentQuestion = state.questions[state.currentQuestionNumber]
@@ -110,7 +110,7 @@ private fun GameContent(
 
                     QuestionNumber(
                         currentQuestionNumber = state.currentQuestionNumber,
-                        totalQuestionNumber = state.questions.size,
+                        totalQuestionNumber = state.questions.size - 1,
                     )
 
 
@@ -125,7 +125,7 @@ private fun GameContent(
                     QuestionCard(
                         timer = state.timer,
                         helpTool = state.helpTool,
-                        question = currentQuestion.question,
+                        question = currentQuestion,
                         onClickBack = onClickBack,
                         onClickSave = onClickSave,
                         onClickReplace = onClickReplace,
@@ -149,7 +149,7 @@ private fun GameContent(
                     correctAnswer = currentQuestion.correctAnswer,
                     answer = currentQuestion.answers[index],
                     isClicked = state.isAnsweredOrTimeFinished,
-                    onSelectedAnswer = onSelectedAnswer
+                    onSelectedAnswer = onSelectedAnswer,
                 )
             }
         }
@@ -196,6 +196,8 @@ private fun GameContent(
 
         }
 
+    } else {
+        onTimerOut()
     }
 
 }

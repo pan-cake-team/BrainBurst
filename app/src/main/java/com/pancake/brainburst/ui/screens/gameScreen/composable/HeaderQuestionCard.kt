@@ -9,6 +9,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.pancake.brainburst.R
 import com.pancake.brainburst.ui.screens.composable.CircularIconButton
+import com.pancake.brainburst.ui.screens.composable.CircularIconSave
+import com.pancake.brainburst.ui.screens.gameScreen.QuestionUiState
 import com.pancake.brainburst.ui.theme.BrainBurstTheme
 import com.pancake.brainburst.ui.theme.smallIconButtonSize
 
@@ -16,7 +18,8 @@ import com.pancake.brainburst.ui.theme.smallIconButtonSize
 @Composable
 fun HeaderQuestionCard(
     onClickBack: () -> Unit,
-    onClickSave: () -> Unit,
+    onClickSave: (QuestionUiState) -> Unit,
+    question: QuestionUiState,
 ) {
     Row(
         modifier = Modifier.fillMaxWidth(),
@@ -27,10 +30,11 @@ fun HeaderQuestionCard(
             size = smallIconButtonSize,
             onClick = onClickBack
         )
-        CircularIconButton(
+        CircularIconSave(
             drawableRes = painterResource(id = R.drawable.ic_star),
             size = smallIconButtonSize,
-            onClick = onClickSave
+            onClick = onClickSave,
+            question = question
         )
     }
 }
@@ -39,7 +43,7 @@ fun HeaderQuestionCard(
 @Composable
 private fun HeaderQuestionCardPreview() {
     BrainBurstTheme {
-        HeaderQuestionCard({}, {})
+        HeaderQuestionCard({}, {}, QuestionUiState())
     }
 
 }

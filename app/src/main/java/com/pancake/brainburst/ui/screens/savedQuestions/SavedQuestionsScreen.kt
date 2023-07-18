@@ -59,7 +59,7 @@ fun SavedQuestionScreen(
     SavedQuestionContent(
         state = state,
         onClickQuestion = viewModel::onClickQuestion,
-        onClickBack = { navController.popBackStack() }
+        onClickBack = { navController.backToHomeScreen() }
     )
 }
 

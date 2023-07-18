@@ -38,6 +38,7 @@ fun HeaderHomeScreen(
     pagerState: PagerState,
     categories: List<CategoryUiState>,
     onClick: (category: String) -> Unit,
+    onStarClicked: () -> Unit,
 ) {
     Box(
         modifier = Modifier
@@ -63,7 +64,7 @@ fun HeaderHomeScreen(
                     .padding(space16)
             ) {
                 IconButtonSmall(
-                    onClick = { },
+                    onClick = onStarClicked,
                     iconColor = MaterialTheme.colorScheme.onPrimary,
                     imageVector = Icons.Rounded.Star,
                     modifier = Modifier

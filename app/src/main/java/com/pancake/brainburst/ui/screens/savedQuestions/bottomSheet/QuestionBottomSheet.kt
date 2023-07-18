@@ -47,6 +47,7 @@ fun QuestionBottomSheetContent(
     onDismiss: () -> Unit,
     state: FavoriteQuestionModel,
 ) {
+
     when {
         bottomSheetState.isVisible -> {
             ModalBottomSheet(
@@ -74,7 +75,7 @@ fun QuestionBottomSheetContent(
                         items(count = state.answers.size) {
                             val isCorrect = state.answers[it] == state.rightAnswer
                             AnswerCard(
-                                letter = state.answers[it],
+                                letter = letters(it),
                                 text = state.answers[it],
                                 isCorrectAnswer = isCorrect
                             )
@@ -84,6 +85,10 @@ fun QuestionBottomSheetContent(
             }
         }
     }
+}
+
+fun letters(index: Int): String{
+    return listOf("A", "B", "C", "D")[index]
 }
 
 

@@ -1,9 +1,11 @@
 package com.pancake.brainburst.ui.screens.gameScreen
 
 import android.util.Log
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.pancake.brainburst.domain.model.Question
 import com.pancake.brainburst.domain.usecase.QuestionsUseCase
+import com.pancake.brainburst.domain.usecase.SavedQuestionLocalUseCase
 import com.pancake.brainburst.ui.base.BaseErrorUiState
 import com.pancake.brainburst.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,8 +17,12 @@ import kotlin.math.log
 
 @HiltViewModel
 class GameViewModel @Inject constructor(
+    savedStateHandle: SavedStateHandle,
     private val questions: QuestionsUseCase
+    private val savedQuestionLocal: SavedQuestionLocalUseCase
 ) : BaseViewModel<GameUiState>(GameUiState()) {
+
+    private val args: GameArgs = GameArgs(savedStateHandle)
 
     init {
         getQuestions()
@@ -29,12 +35,26 @@ class GameViewModel @Inject constructor(
             ::onGetQuestionsSuccess,
             ::onGetQuestionsError
         )
+    private fun getQuestions() {
+        val category = args.categories.takeIf { it != "no" } ?: ""
+        val tag = args.tags.takeIf { it != "no" } ?: ""
+        viewModelScope.launch {
+            val questions = questions(category,
+                args.difficulty?.lowercase() ?: "",
+                tags = tag)
+            onGetQuestionsSuccess(questions)
+        }
+    }
+
+    fun onSaveQuestion(question: QuestionUiState){
+       viewModelScope.launch {
+           savedQuestionLocal(question.toQuestion())
+       }
     }
 
     private fun onGetQuestionsSuccess(questions: List<Question>) {
 
         val questionUiState = questions.toQuestionsUiState()
-        Log.d("TAG", "onGetQuestionsSuccess: $questionUiState")
         _state.update { state ->
             state.copy(
                 isLoading = false,

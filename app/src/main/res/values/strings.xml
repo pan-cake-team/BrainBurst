@@ -42,7 +42,7 @@
 
     <string name="easy">Easy</string>
     <string name="medium">Medium</string>
-    <string name="difficult">Difficult</string>
+    <string name="difficult">Hard</string>
     <string name="your_highest_score">Your highest score</string>
     <string name="crown_star">crown star</string>
 

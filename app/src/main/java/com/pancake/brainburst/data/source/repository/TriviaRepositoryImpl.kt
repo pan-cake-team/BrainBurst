@@ -6,6 +6,8 @@ import com.pancake.brainburst.data.source.local.room.entity.FavoriteQuestionEnti
 import com.pancake.brainburst.data.source.remote.network.TriviaService
 import com.pancake.brainburst.data.source.remote.response.QuestionDto
 import com.pancake.brainburst.domain.model.ErrorType
+import com.pancake.brainburst.domain.mapper.toFavoriteQuestionEntity
+import com.pancake.brainburst.domain.model.Question
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -15,8 +17,9 @@ class TriviaRepositoryImpl @Inject constructor(
 
 ) : TriviaRepository {
 
-    override suspend fun addFavoriteQuestion(question: FavoriteQuestionEntity) {
-        return dao.addFavoriteQuestion(question)
+    override suspend fun addFavoriteQuestion(question: Question) {
+        Log.v("hassan", question.toFavoriteQuestionEntity().toString())
+        return dao.addFavoriteQuestion(question.toFavoriteQuestionEntity())
     }
 
     override suspend fun getAllFavoriteQuestions(): List<FavoriteQuestionEntity> {
@@ -25,11 +28,36 @@ class TriviaRepositoryImpl @Inject constructor(
     override suspend fun getQuestions(
         categories: String,
         difficulty: String,
-        limit: Int
+        limit: Int,
+        tags: String
     ): List<QuestionDto> {
         return wrapResponseWithErrorHandler {
             triviaService.getQuestions(
+                categories, limit, difficulty, tags
+            )
+        }
+    }
+
+    override suspend fun getQuestionsWithoutTags(
+        categories: String,
+        difficulty: String,
+        limit: Int
+    ): List<QuestionDto> {
+        return wrapResponseWithErrorHandler {
+            triviaService.getQuestionsWithoutTags(
                 categories, limit, difficulty
+            )
+        }
+    }
+
+    override suspend fun getQuestionsWithoutCategory(
+        difficulty: String,
+        limit: Int,
+        tags: String
+    ): List<QuestionDto> {
+        return wrapResponseWithErrorHandler {
+            triviaService.getQuestionsWithoutCategory(
+                limit, difficulty, tags
             )
         }
     }

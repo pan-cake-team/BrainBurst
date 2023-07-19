@@ -5,8 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class FavoriteQuestionEntity(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int,
+    @PrimaryKey(autoGenerate = true) val id: Int?,
     val question: String,
     val answers: List<String>,
     val rightAnswer: String,

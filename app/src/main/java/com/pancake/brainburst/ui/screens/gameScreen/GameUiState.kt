@@ -1,6 +1,7 @@
 package com.pancake.brainburst.ui.screens.gameScreen
 
 import com.pancake.brainburst.ui.base.BaseErrorUiState
+import com.pancake.brainburst.domain.model.Question
 import com.pancake.brainburst.ui.base.BaseUiState
 
 data class GameUiState(
@@ -45,6 +46,14 @@ data class QuestionUiState(
 data class AnswerUiState(
     var text: String = "",
     var isEnable: Boolean = true
+)
+
+fun QuestionUiState.toQuestion() = Question(
+    category = "",
+    id = this.id,
+    correctAnswer = this.correctAnswer,
+    question = this.question,
+    answers = this.answers.map { it.text }
 )
 
 

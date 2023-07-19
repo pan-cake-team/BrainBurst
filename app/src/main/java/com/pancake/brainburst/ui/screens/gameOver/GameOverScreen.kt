@@ -52,7 +52,7 @@ fun GameOverScreen(
     val state by viewModel.state.collectAsState()
     GameOverContent(
         state = state,
-        onClickNext = navController::navigateToHomeScreen,
+        onClickPlayMore = navController::navigateToHomeScreen,
         onClickExit = navController::navigateToHomeScreen,
     )
 }
@@ -60,7 +60,7 @@ fun GameOverScreen(
 @Composable
 private fun GameOverContent(
     state: GameOverUiState,
-    onClickNext: () -> Unit,
+    onClickPlayMore: () -> Unit,
     onClickExit: () -> Unit
 ) {
     Column(
@@ -116,7 +116,7 @@ private fun GameOverContent(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(space56),
-            onClick = onClickNext
+            onClick = {onClickPlayMore()}
         )
         VerticalSpacer(height = space16)
         ButtonPrimary(
@@ -127,7 +127,7 @@ private fun GameOverContent(
                 .border(1.dp, Brand500, RoundedCornerShape(space16)),
             textColor = Brand500,
             buttonColor = LightBackground,
-            onClick = onClickExit
+            onClick = {onClickExit()}
         )
         VerticalSpacer(height = space40)
     }

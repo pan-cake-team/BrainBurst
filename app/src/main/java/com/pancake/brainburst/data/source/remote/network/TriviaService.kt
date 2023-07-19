@@ -7,23 +7,26 @@ import retrofit2.http.Query
 
 interface TriviaService {
 
-    @GET("tags")
-    suspend fun getAllTags()
-
-    @GET("totals-per-tag")
-    suspend fun getTotalNumberOfQuestionsPerTag()
-
-    @GET("question/{id}")
-    suspend fun getQuestionById(id: String)
-
-    @GET("questions")
-    suspend fun getRandomQuestions()
-
     @GET("questions")
     suspend fun getQuestions(
         @Query("categories") categories: String,
         @Query("limit") limit: Int,
-        @Query("difficulty") difficulty: String,
+        @Query("difficulties") difficulty: String,
+        @Query("tags") tags: String
+    ): Response<List<QuestionDto>>
+
+    @GET("questions")
+    suspend fun getQuestionsWithoutTags(
+        @Query("categories") categories: String,
+        @Query("limit") limit: Int,
+        @Query("difficulties") difficulty: String,
+    ): Response<List<QuestionDto>>
+
+    @GET("questions")
+    suspend fun getQuestionsWithoutCategory(
+        @Query("limit") limit: Int,
+        @Query("difficulties") difficulty: String,
+        @Query("tags") tags: String
     ): Response<List<QuestionDto>>
 
 }

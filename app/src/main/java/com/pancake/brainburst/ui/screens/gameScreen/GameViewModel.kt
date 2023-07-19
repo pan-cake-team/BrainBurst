@@ -18,7 +18,7 @@ import kotlin.math.log
 @HiltViewModel
 class GameViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    private val questions: QuestionsUseCase
+    private val questions: QuestionsUseCase,
     private val savedQuestionLocal: SavedQuestionLocalUseCase
 ) : BaseViewModel<GameUiState>(GameUiState()) {
 
@@ -30,21 +30,22 @@ class GameViewModel @Inject constructor(
     }
 
      fun getQuestions() {
-        tryToExecute(
-            { questions("food_and_drink", "medium", 12) },
-            ::onGetQuestionsSuccess,
-            ::onGetQuestionsError
-        )
-    private fun getQuestions() {
-        val category = args.categories.takeIf { it != "no" } ?: ""
-        val tag = args.tags.takeIf { it != "no" } ?: ""
-        viewModelScope.launch {
-            val questions = questions(category,
-                args.difficulty?.lowercase() ?: "",
-                tags = tag)
-            onGetQuestionsSuccess(questions)
-        }
-    }
+
+         val category = args.categories.takeIf { it != "no" } ?: ""
+         val tag = args.tags.takeIf { it != "no" } ?: ""
+         tryToExecute(
+             {
+                 questions(
+                     category,
+                     args.difficulty?.lowercase() ?: "",
+                     tags = tag
+                 )
+             },
+             ::onGetQuestionsSuccess,
+             ::onGetQuestionsError
+         )
+     }
+
 
     fun onSaveQuestion(question: QuestionUiState){
        viewModelScope.launch {

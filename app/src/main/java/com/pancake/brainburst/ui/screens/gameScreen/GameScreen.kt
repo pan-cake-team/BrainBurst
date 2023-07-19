@@ -98,8 +98,8 @@ private fun GameContent(
             onClickBack, stringResource(R.string.no_questions),
             stringResource(R.string.back_to_home)
         )
-    } else {
-    } else if (state.currentQuestionNumber < state.questions.size) {
+    }
+     else if (state.currentQuestionNumber < state.questions.size) {
 
         val questionSequence: Array<String> = stringArrayResource(R.array.questionـsequence)
         val currentQuestion = state.questions[state.currentQuestionNumber]

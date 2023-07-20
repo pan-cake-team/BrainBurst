@@ -15,7 +15,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.pancake.brainburst.ui.theme.smallIconButton
 
 
@@ -24,13 +23,14 @@ fun IconButtonSmall(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     iconColor: Color = MaterialTheme.colorScheme.primary,
+    background: Color? = null,
     imageVector: ImageVector,
 ) {
     IconButton(
         onClick = { onClick() },
         modifier = modifier
             .clip(CircleShape)
-            .background(iconColor.copy(alpha = 0.2f))
+            .background(background ?: iconColor.copy(alpha = 0.2f))
             .height(smallIconButton)
             .width(smallIconButton),
     ) {

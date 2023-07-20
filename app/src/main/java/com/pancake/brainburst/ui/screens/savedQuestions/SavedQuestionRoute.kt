@@ -1,5 +1,6 @@
 package com.pancake.brainburst.ui.screens.savedQuestions
 
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -12,11 +13,8 @@ fun NavController.navigateToSaveScreen() {
     navigate(ROUTE)
 }
 
-fun NavController.backToHomeScreen() {
-    popBackStack()
-}
-
-fun NavGraphBuilder.savedScreen(navController: NavHostController) {
+@OptIn(ExperimentalMaterial3Api::class)
+fun NavGraphBuilder.savedQuestionScreen(navController: NavHostController) {
     composable(ROUTE) { SavedQuestionScreen(navController) }
 }
 

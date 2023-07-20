@@ -7,7 +7,7 @@ import androidx.navigation.compose.composable
 import com.pancake.brainburst.ui.screens.gameOver.gameOverRoute
 import com.pancake.brainburst.ui.screens.gameScreen.gameScreen
 import com.pancake.brainburst.ui.screens.home.homeScreen
-import com.pancake.brainburst.ui.screens.savedQuestions.SavedQuestionScreen
+import com.pancake.brainburst.ui.screens.savedQuestions.savedQuestionScreen
 import com.pancake.brainburst.ui.screens.welecome.WelcomeScreen
 
 @Composable
@@ -21,7 +21,7 @@ fun BrainNavGraph(navController: NavHostController) {
 
         gameScreen(navController)
 
-        composable(BrainDestination.SavedQuestion) { SavedQuestionScreen(navController) }
+        savedQuestionScreen(navController)
 
         gameOverRoute(navController)
     }

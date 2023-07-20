@@ -1,4 +1,4 @@
-package com.pancake.brainburst.ui.screens.savedQuestions.bottomSheet
+package com.pancake.brainburst.ui.screens.savedQuestions.composable
 
 
 import androidx.compose.foundation.background

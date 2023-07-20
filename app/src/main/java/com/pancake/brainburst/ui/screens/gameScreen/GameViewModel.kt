@@ -9,11 +9,10 @@ import com.pancake.brainburst.domain.usecase.SavedQuestionLocalUseCase
 import com.pancake.brainburst.ui.base.BaseErrorUiState
 import com.pancake.brainburst.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlin.math.log
 
 @HiltViewModel
 class GameViewModel @Inject constructor(
@@ -54,7 +53,6 @@ class GameViewModel @Inject constructor(
     }
 
     private fun onGetQuestionsSuccess(questions: List<Question>) {
-
         val questionUiState = questions.toQuestionsUiState()
         _state.update { state ->
             state.copy(
@@ -91,10 +89,6 @@ class GameViewModel @Inject constructor(
 
     fun onSelectedAnswer(answerSelected: String) {
         val isAnswerCorrect = isAnswerCorrectSelected(answerSelected)
-        Log.v(
-            "ameerxyz",
-            "onSelectedAnswer  Answer:-> $answerSelected , isAnswerCorrect:->$isAnswerCorrect"
-        )
         _state.update { state ->
             state.copy(
                 isLoading = false,
@@ -107,11 +101,15 @@ class GameViewModel @Inject constructor(
 
         }
         stopTimer()
-        if (!isAnswerCorrect) {
-            Log.v(
-                "ameerxyz", "isAnswerCorrect not Correct"
-            )
-            onGameFinish()
+        if (isAnswerCorrect) {
+
+            viewModelScope.launch {
+                delay(3000)
+                checkNextStep()
+            }
+
+        } else {
+            onLostGameFinish()
         }
 
     }
@@ -122,10 +120,16 @@ class GameViewModel @Inject constructor(
     }
 
 
-    fun goToNextQuestion() {
+    private fun checkNextStep() {
+
         if (_state.value.isLastQuestion()) {
-            onGameFinish()
+            onWinGameFinish()
+        } else {
+            goToNextQuestion()
         }
+    }
+
+    private fun goToNextQuestion() {
         _state.update { state ->
             state.copy(
                 isLoading = false,
@@ -153,7 +157,6 @@ class GameViewModel @Inject constructor(
     }
 
     fun onTimeUpdate() {
-        Log.v("Ameerxzy", "${_state.value.timer.currentTime}")
         if (_state.value.timer.currentTime > 0) {
             _state.update { state ->
                 state.copy(
@@ -163,7 +166,7 @@ class GameViewModel @Inject constructor(
                 )
             }
         } else {
-            onGameFinish()
+            onLostGameFinish()
         }
 
 
@@ -185,8 +188,12 @@ class GameViewModel @Inject constructor(
 
     }
 
-    private fun onGameFinish() {
-        _state.update { it.copy(isGameFinish = true) }
+    private fun onLostGameFinish() {
+        _state.update { it.copy(isGameFinish = true, stateGame = GameStatus.LOST) }
+    }
+
+    private fun onWinGameFinish() {
+        _state.update { it.copy(isGameFinish = true, stateGame = GameStatus.Win) }
     }
 
     private fun stopTimer() {

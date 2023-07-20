@@ -25,9 +25,9 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.pancake.brainburst.R
+import com.pancake.brainburst.ui.screens.composable.ErrorScreen
 import com.pancake.brainburst.ui.screens.composable.FriendHelperDialog
 import com.pancake.brainburst.ui.screens.composable.Loading
-import com.pancake.brainburst.ui.screens.composable.ErrorScreen
 import com.pancake.brainburst.ui.screens.composable.SpacerVertical16
 import com.pancake.brainburst.ui.screens.gameOver.navigateToGameOverScreen
 import com.pancake.brainburst.ui.screens.gameScreen.composable.ChoiceCard
@@ -49,8 +49,7 @@ fun GameScreen(
 
     GameContent(
         state = state,
-        getQuestions=viewModel::getQuestions,
-        goToNextQuestion = viewModel::goToNextQuestion,
+        getQuestions = viewModel::getQuestions,
         onClickBack = navController::backToHomeScreen,
         onClickSave = viewModel::onSaveQuestion,
         onClickReplace = viewModel::onReplaceQuestion,
@@ -58,29 +57,21 @@ fun GameScreen(
         onFriendHelperDismiss = viewModel::onHideFriendHelpDialog,
         onClickDeleteAnswer = viewModel::onClickDeleteAnswer,
         onSelectedAnswer = viewModel::onSelectedAnswer,
-        onGameFinish = { score, isWin ->
-//            navController.navigateToWinScreen(score, isWin)
-        },
-        onTimerOut = {
-            navController.navigateToGameOverScreen(state.score, false)
-        },
+        onGameFinish = navController::navigateToGameOverScreen,
         onTimerUpdate = viewModel::onTimeUpdate,
-
-        )
+    )
 }
 
 @Composable
 private fun GameContent(
     state: GameUiState,
     getQuestions: () -> Unit,
-    goToNextQuestion: () -> Unit,
     onClickBack: () -> Unit,
     onClickReplace: () -> Unit,
     onClickCall: () -> Unit,
     onClickDeleteAnswer: () -> Unit,
     onSelectedAnswer: (answerSelected: String) -> Unit,
     onGameFinish: (score: Int, isWin: Boolean) -> Unit,
-    onTimerOut: () -> Unit,
     onTimerUpdate: () -> Unit,
     onFriendHelperDismiss: () -> Unit,
     onClickSave: (QuestionUiState) -> Unit
@@ -98,8 +89,7 @@ private fun GameContent(
             onClickBack, stringResource(R.string.no_questions),
             stringResource(R.string.back_to_home)
         )
-    }
-     else if (state.currentQuestionNumber < state.questions.size) {
+    } else {
 
         val questionSequence: Array<String> = stringArrayResource(R.array.questionـsequence)
         val currentQuestion = state.questions[state.currentQuestionNumber]
@@ -124,16 +114,16 @@ private fun GameContent(
                 ) {
 
                     QuestionNumber(
-                        currentQuestionNumber = state.currentQuestionNumber,
-                        totalQuestionNumber = state.questions.size - 1,
+                        currentQuestionNumber = state.currentQuestionNumber + 1,
+                        totalQuestionNumber = state.questions.size,
                     )
 
-
+                    Text(text = state.questions[state.currentQuestionNumber].correctAnswer)
                     SpacerVertical16()
 
                     QuestionProgressBar(
                         maxTarget = state.questions.size,
-                        currentTarget = state.currentQuestionNumber
+                        currentTarget = state.currentQuestionNumber + 1
                     )
 
                     Text(text = currentQuestion.correctAnswer)
@@ -179,17 +169,10 @@ private fun GameContent(
                     correctMediaPlayer.start()
                     delay(3000)
                     correctMediaPlayer.release()
-                    if (state.currentQuestionNumber == state.questions.size) {
-                        onGameFinish(state.score, true)
-                    } else {
-                        goToNextQuestion()
-                    }
                 }
 
             }
-            if (!state.isAnswerSelected) {
-                onGameFinish(state.score, false)
-            }
+
         }
 
         LaunchedEffect(state.isTimerRunning) {
@@ -202,17 +185,20 @@ private fun GameContent(
         }
 
         LaunchedEffect(state.isGameFinish) {
-            if (state.isGameFinish) {
+
+            if (state.isWin()) {
+                onGameFinish(state.score, true)
+            }
+
+            if (state.isLost()) {
                 wrongMediaPlayer.start()
                 delay(1000)
                 wrongMediaPlayer.release()
-                onTimerOut()
+                onGameFinish(state.score, false)
             }
 
         }
 
-    } else {
-        onTimerOut()
     }
 
 }

@@ -1,12 +1,13 @@
 package com.pancake.brainburst.ui.screens.gameScreen
 
-import com.pancake.brainburst.ui.base.BaseErrorUiState
 import com.pancake.brainburst.domain.model.Question
+import com.pancake.brainburst.ui.base.BaseErrorUiState
 import com.pancake.brainburst.ui.base.BaseUiState
 
 data class GameUiState(
+    val stateGame: GameStatus = GameStatus.NOT_FINISH,
     val isLoading: Boolean = true,
-    val error: BaseErrorUiState?=null,
+    val error: BaseErrorUiState? = null,
     val isError: Boolean = false,
     val score: Int = 0,
     val isGameFinish: Boolean = false,
@@ -17,12 +18,15 @@ data class GameUiState(
     val isAnswerSelected: Boolean = false,
     val isUpdateStateQuestion: Boolean = false,
     val isFriendHelperDialogVisible: Boolean = false,
-    val currentQuestionNumber: Int = 1,
+    val currentQuestionNumber: Int = 0,
     var replacedQuestion: QuestionUiState = QuestionUiState(),
     val helpTool: HelpToolUiState = HelpToolUiState(),
     var questions: List<QuestionUiState> = emptyList(),
 ) : BaseUiState {
-    fun isLastQuestion() = currentQuestionNumber == questions.size
+    fun isLastQuestion() = currentQuestionNumber + 1 == questions.size
+    fun isWin() = stateGame == GameStatus.Win && isGameFinish
+    fun isLost() = stateGame == GameStatus.LOST && isGameFinish
+
 }
 
 data class TimerUiState(
@@ -47,6 +51,8 @@ data class AnswerUiState(
     var text: String = "",
     var isEnable: Boolean = true
 )
+
+enum class GameStatus { Win, LOST, NOT_FINISH }
 
 fun QuestionUiState.toQuestion() = Question(
     category = "",

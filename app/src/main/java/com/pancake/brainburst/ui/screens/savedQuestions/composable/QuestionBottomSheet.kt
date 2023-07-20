@@ -52,7 +52,9 @@ fun QuestionBottomSheetContent(
         bottomSheetState.isVisible -> {
             ModalBottomSheet(
                 modifier = Modifier.fillMaxSize(),
-                onDismissRequest = onDismiss, sheetState = bottomSheetState
+                onDismissRequest = onDismiss,
+                sheetState = bottomSheetState,
+                containerColor = LightBackground
             ) {
                 Column(
                     modifier = Modifier

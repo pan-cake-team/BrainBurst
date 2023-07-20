@@ -20,6 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.pancake.brainburst.R
 import com.pancake.brainburst.ui.screens.home.composable.IconButtonSmall
 import com.pancake.brainburst.ui.theme.Type
+import com.pancake.brainburst.ui.theme.lightBackgroundColor
 import com.pancake.brainburst.ui.theme.space16
 import com.pancake.brainburst.ui.theme.space4
 
@@ -28,6 +29,7 @@ fun AppBar(
     modifier: Modifier = Modifier,
     @StringRes idTitleStringRes: Int,
     onClickBack: (() -> Unit)?,
+
 ) {
 
     Row(
@@ -41,7 +43,7 @@ fun AppBar(
             IconButtonSmall(
                 onClick = onClickBack,
                 iconColor = MaterialTheme.colorScheme.onBackground,
-                background = MaterialTheme.colorScheme.background,
+                background = lightBackgroundColor,
                 imageVector = Icons.Rounded.ArrowBack,
             )
 

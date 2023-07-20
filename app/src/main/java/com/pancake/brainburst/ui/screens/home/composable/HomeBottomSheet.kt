@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.SheetState
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,11 +19,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.pancake.brainburst.R
 import com.pancake.brainburst.ui.screens.composable.DifficultyCard
+import com.pancake.brainburst.ui.screens.composable.SpacerVertical32
 import com.pancake.brainburst.ui.theme.Brand500
 import com.pancake.brainburst.ui.theme.Green500
-import com.pancake.brainburst.ui.theme.LightSecondary
+import com.pancake.brainburst.ui.theme.LightBackground
 import com.pancake.brainburst.ui.theme.Red500
-import com.pancake.brainburst.ui.theme.Type
 import com.pancake.brainburst.ui.theme.space16
 import com.pancake.brainburst.ui.theme.space32
 import com.pancake.brainburst.ui.theme.space8
@@ -45,7 +44,9 @@ fun HomeBottomSheet(
 
         ModalBottomSheet(
             modifier = Modifier,
-            onDismissRequest = onDismiss, sheetState = bottomSheetState
+            containerColor = LightBackground,
+            onDismissRequest = onDismiss,
+            sheetState = bottomSheetState
         ) {
             Box(modifier = Modifier) {
                 Column(

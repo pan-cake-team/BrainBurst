@@ -43,7 +43,6 @@ import kotlinx.coroutines.launch
 fun HomeScreen(navController: NavController, viewModel: HomeViewModel = hiltViewModel()) {
     val state by viewModel.state.collectAsState()
     val pagerState = rememberPagerState(initialPage = 0)
-    val systemUiController = rememberSystemUiController()
     val coroutineScope = rememberCoroutineScope()
     val bottomSheetState = rememberModalBottomSheetState()
     var category: String by remember {
@@ -66,7 +65,6 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = hiltView
     HomeContent(
         state = state,
         pagerState = pagerState,
-        systemUiController = systemUiController,
         onClickHobby = viewModel::onClickHobby,
         onClickDifficulty = { difficulty ->
             navController.navigateToGameScreen(
@@ -101,7 +99,6 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = hiltView
 private fun HomeContent(
     state: HomeUiState,
     pagerState: PagerState,
-    systemUiController: SystemUiController,
     onClickHobby: (bobby: String) -> Unit,
     onClickDifficulty: (difficulty: String) -> Unit,
     onCategoryClick: (category: String) -> Unit,
@@ -127,6 +124,7 @@ private fun HomeContent(
             horizontalAlignment = Alignment.Start, verticalArrangement = Arrangement.Top
         ) {
 
+
             HeaderHomeScreen(
                 pagerState = pagerState,
                 categories = state.categories,
@@ -147,11 +145,7 @@ private fun HomeContent(
 
 
         }
-        SideEffect {
-            systemUiController.setStatusBarColor(
-                color = Brand500,
-            )
-        }
+
     }
 }
 

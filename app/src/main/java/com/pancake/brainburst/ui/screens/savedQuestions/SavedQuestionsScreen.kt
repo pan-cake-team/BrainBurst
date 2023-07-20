@@ -1,7 +1,9 @@
 package com.pancake.brainburst.ui.screens.savedQuestions
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -18,10 +20,12 @@ import androidx.navigation.NavController
 import com.pancake.brainburst.R
 import com.pancake.brainburst.domain.model.FavoriteQuestionModel
 import com.pancake.brainburst.ui.screens.composable.AppBar
+import com.pancake.brainburst.ui.screens.composable.SpacerVertical16
 import com.pancake.brainburst.ui.screens.home.backToHomeScreen
-import com.pancake.brainburst.ui.screens.savedQuestions.composable.QuestionBottomSheetContent
 import com.pancake.brainburst.ui.screens.savedQuestions.composable.ItemSaveQuestionCard
+import com.pancake.brainburst.ui.screens.savedQuestions.composable.QuestionBottomSheetContent
 import com.pancake.brainburst.ui.screens.savedQuestions.state.SavedQuestionsUiState
+import com.pancake.brainburst.ui.theme.LightBackground
 import com.pancake.brainburst.ui.theme.space16
 import com.pancake.brainburst.ui.theme.space24
 import com.pancake.brainburst.ui.theme.space8
@@ -61,7 +65,10 @@ private fun SavedQuestionContent(
 ) {
 
     LazyColumn(
-        modifier = Modifier.padding(horizontal = space16),
+        modifier = Modifier
+            .fillMaxSize()
+            .background(LightBackground)
+            .padding(horizontal = space16),
         verticalArrangement = Arrangement.spacedBy(space8),
         contentPadding = PaddingValues(vertical = space24)
     ) {
@@ -70,6 +77,7 @@ private fun SavedQuestionContent(
                 idTitleStringRes = R.string.saved_questions,
                 onClickBack = onClickBack,
             )
+            SpacerVertical16()
         }
         items(state.questions) {
             ItemSaveQuestionCard(

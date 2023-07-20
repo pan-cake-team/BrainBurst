@@ -1,10 +1,11 @@
 package com.pancake.brainburst.ui.screens.home.composable
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -16,9 +17,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -26,7 +25,11 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.calculateCurrentOffsetForPage
 import com.pancake.brainburst.R
+import com.pancake.brainburst.ui.screens.composable.SpacerVertical16
+import com.pancake.brainburst.ui.screens.composable.SpacerVertical32
 import com.pancake.brainburst.ui.screens.home.CategoryUiState
+import com.pancake.brainburst.ui.theme.Brand500
+import com.pancake.brainburst.ui.theme.Type
 import com.pancake.brainburst.ui.theme.space16
 import com.pancake.brainburst.ui.theme.space8
 import com.pancake.brainburst.ui.theme.zero
@@ -45,33 +48,34 @@ fun HeaderHomeScreen(
             .fillMaxWidth()
             .height(300.dp)
     ) {
-        Image(
-            modifier = Modifier
-                .fillMaxWidth(),
-            painter = painterResource(id = R.drawable.background_home_shape),
-            contentScale = ContentScale.FillWidth,
-            contentDescription = null,
-        )
+
         Column(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.Start,
             verticalArrangement = Arrangement.Top
         ) {
 
-            Box(
+            SpacerVertical16()
+            Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(space16)
+                    .padding(horizontal = space16),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
             ) {
+                Text(
+                    text = stringResource(id = R.string.home),
+                    style = Type.Headline,
+                )
+                Spacer(modifier = Modifier.weight(1f))
                 IconButtonSmall(
                     onClick = onStarClicked,
-                    iconColor = MaterialTheme.colorScheme.onPrimary,
+                    iconColor = Brand500,
                     imageVector = Icons.Rounded.Star,
-                    modifier = Modifier
-                        .align(Alignment.TopEnd)
                 )
             }
 
+            SpacerVertical32()
             Text(
                 modifier = Modifier.padding(space16, zero, zero, space16),
                 text = stringResource(id = R.string.play_by_category),

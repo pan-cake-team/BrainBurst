@@ -77,4 +77,5 @@
     <string name="thank_you">Thank you</string>
     <string name="retry">Retry</string>
     <string name="saved_questions">Saved Questions</string>
+    <string name="home">Home</string>
 </resources>

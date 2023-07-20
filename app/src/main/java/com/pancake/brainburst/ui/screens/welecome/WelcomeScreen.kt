@@ -1,6 +1,7 @@
 package com.pancake.brainburst.ui.screens.welecome
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -24,6 +25,7 @@ import androidx.navigation.NavController
 import com.pancake.brainburst.R
 import com.pancake.brainburst.ui.screens.home.navigateToHomeScreen
 import com.pancake.brainburst.ui.theme.Cyan300
+import com.pancake.brainburst.ui.theme.LightBackground
 import com.pancake.brainburst.ui.theme.NerkoOne
 import com.pancake.brainburst.ui.theme.space24
 import com.pancake.brainburst.ui.theme.space56
@@ -50,7 +52,8 @@ private fun WelcomeContent(
 ) {
     Column(
         modifier = Modifier
-            .fillMaxSize(),
+            .fillMaxSize()
+            .background(LightBackground),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Spacer(modifier = Modifier.weight(0.3f))

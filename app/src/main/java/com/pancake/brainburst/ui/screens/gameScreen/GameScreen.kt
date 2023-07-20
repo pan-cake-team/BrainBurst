@@ -118,7 +118,7 @@ private fun GameContent(
                         totalQuestionNumber = state.questions.size,
                     )
 
-                    Text(text = state.questions[state.currentQuestionNumber].correctAnswer)
+//                    Text(text = state.questions[state.currentQuestionNumber].correctAnswer)
                     SpacerVertical16()
 
                     QuestionProgressBar(
@@ -126,7 +126,7 @@ private fun GameContent(
                         currentTarget = state.currentQuestionNumber + 1
                     )
 
-                    Text(text = currentQuestion.correctAnswer)
+//                    Text(text = currentQuestion.correctAnswer)
                     QuestionCard(
                         timer = state.timer,
                         helpTool = state.helpTool,
